@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter_Display_Shortcode
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 //form prefix

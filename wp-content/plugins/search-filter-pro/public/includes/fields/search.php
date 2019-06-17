@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter_Field_Search
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 class Search_Filter_Field_Search extends Search_Filter_Field_Base {

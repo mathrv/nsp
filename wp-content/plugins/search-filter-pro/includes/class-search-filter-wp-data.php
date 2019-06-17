@@ -180,28 +180,58 @@ class Search_Filter_Wp_Data
 
 
     }
-    public static function is_taxonomy_archive_of_post_type($post_type)
+	public static function get_post_types_by_taxonomy( $tax = 'category' ){
+		$out = array();
+		$post_types = get_post_types();
+		foreach( $post_types as $post_type ){
+
+			if (!isset(self::$post_types[$post_type]))
+			{
+				self::$post_types[$post_type] = array();
+			}
+
+			if (!isset(self::$post_types[$post_type]['taxonomies']))
+			{
+				self::$post_types[$post_type]['taxonomies'] = get_object_taxonomies( $post_type );
+			}
+
+			$taxonomies = self::$post_types[$post_type]['taxonomies'];
+			if( in_array( $tax, $taxonomies ) ){
+				$out[] = $post_type;
+			}
+		}
+		return $out;
+	}
+
+    public static function is_taxonomy_archive_of_post_type($post_type, $single = true)
     {
-        if(!self::is_taxonomy_archive())
-        {
+        if(!self::is_taxonomy_archive()) {
             return false;
         }
 
-        if (!isset(self::$post_types[$post_type]))
-        {
+        if (!isset(self::$post_types[$post_type])) {
             self::$post_types[$post_type] = array();
         }
 
-        if (!isset(self::$post_types[$post_type]['taxonomies']))
-        {
+        if (!isset(self::$post_types[$post_type]['taxonomies'])) {
             self::$post_types[$post_type]['taxonomies'] = get_object_taxonomies( $post_type );
         }
 
+
         global $searchandfilter;
         $term = $searchandfilter->get_queried_object();
-        $taxonomy_name = $term->taxonomy;
+	    $is_taxonomy_archive = false;
 
-        $is_taxonomy_archive = in_array( $taxonomy_name, self::$post_types[$post_type]['taxonomies'] );
+        if(isset($term->taxonomy)){
+	        $taxonomy_name = $term->taxonomy;
+
+	        $tax_post_types = self::get_post_types_by_taxonomy($taxonomy_name);
+
+	        //make sure this tax is not shared unless single is false(we need for woocommerce, because all taxes are shared betweeen 2 post types - variations and products
+			if((( 1 === count($tax_post_types)) && ($single)) || (!$single)){
+				$is_taxonomy_archive = in_array( $taxonomy_name, self::$post_types[$post_type]['taxonomies'] );
+			}
+        }
 
         return $is_taxonomy_archive;
     }

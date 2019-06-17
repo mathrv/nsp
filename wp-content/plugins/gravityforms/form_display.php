@@ -69,13 +69,8 @@ class GFFormDisplay {
 
 		GFCommon::log_debug( "GFFormDisplay::process_form(): Source page number: {$source_page_number}. Target page number: {$target_page}." );
 
-		//Loading files that have been uploaded to temp folder
-		$files = GFCommon::json_decode( stripslashes( RGForms::post( 'gform_uploaded_files' ) ) );
-		if ( ! is_array( $files ) ) {
-			$files = array();
-		}
-
-		RGFormsModel::$uploaded_files[ $form_id ] = $files;
+		// Set files that have been uploaded to temp folder
+		$files = GFFormsModel::set_uploaded_files( $form_id );
 
 		$saving_for_later = rgpost( 'gform_save' ) ? true : false;
 
@@ -273,18 +268,19 @@ class GFFormDisplay {
 		/* Setup default review page parameters. */
 		$review_page = array(
 			'content'        => '',
+			'cssClass'       => '',
 			'is_enabled'     => false,
 			'nextButton'     => array(
-					'type'     => 'text',
-					'text'     => __( 'Review Form', 'gravityforms' ),
-					'imageUrl' => '',
-					'imageAlt' => '',
+				'type'     => 'text',
+				'text'     => __( 'Review Form', 'gravityforms' ),
+				'imageUrl' => '',
+				'imageAlt' => '',
 			),
 			'previousButton' => array(
-					'type'     => 'text',
-					'text'     => __( 'Previous', 'gravityforms' ),
-					'imageUrl' => '',
-					'imageAlt' => '',
+				'type'     => 'text',
+				'text'     => __( 'Previous', 'gravityforms' ),
+				'imageUrl' => '',
+				'imageAlt' => '',
 			),
 		);
 
@@ -472,7 +468,7 @@ class GFFormDisplay {
 						}
 						break;
 					case 'consent':
-						$text        = esc_html( $field->checkboxLabel );
+						$text        = $field->checkboxLabel;
 						$description = GFFormsModel::get_latest_form_revisions_id( $form['id'] );
 
 						$fields[ $field->id . '.1' ] = wp_hash( 1 );
@@ -1091,8 +1087,8 @@ class GFFormDisplay {
 				$scroll_position = array( 'default' => '', 'confirmation' => '' );
 
 				if ( $anchor['scroll'] !== false ) {
-					$scroll_position['default']      = is_numeric( $anchor['scroll'] ) ? 'jQuery(document).scrollTop(' . intval( $anchor['scroll'] ) . ');' : "jQuery(document).scrollTop(jQuery('#gform_wrapper_{$form_id}').offset().top);";
-					$scroll_position['confirmation'] = is_numeric( $anchor['scroll'] ) ? 'jQuery(document).scrollTop(' . intval( $anchor['scroll'] ) . ');' : "jQuery(document).scrollTop(jQuery('{$anchor['id']}').offset().top);";
+					$scroll_position['default']      = is_numeric( $anchor['scroll'] ) ? 'jQuery(document).scrollTop(' . intval( $anchor['scroll'] ) . ');' : "jQuery(document).scrollTop(jQuery('#gform_wrapper_{$form_id}').offset().top - mt);";
+					$scroll_position['confirmation'] = is_numeric( $anchor['scroll'] ) ? 'jQuery(document).scrollTop(' . intval( $anchor['scroll'] ) . ');' : "jQuery(document).scrollTop(jQuery('{$anchor['id']}').offset().top - mt);";
 				}
 
 				$iframe_style = defined( 'GF_DEBUG' ) && GF_DEBUG ? 'display:block;width:600px;height:300px;border:1px solid #eee;' : 'display:none;width:0px;height:0px;';
@@ -1114,6 +1110,7 @@ class GFFormDisplay {
 							"var is_confirmation = jQuery(this).contents().find('#gform_confirmation_wrapper_{$form_id}').length > 0;" .
 							"var is_redirect = contents.indexOf('gformRedirect(){') >= 0;" .
 							'var is_form = form_content.length > 0 && ! is_redirect && ! is_confirmation;' .
+							"var mt = parseInt(jQuery('html').css('margin-top'), 10) + parseInt(jQuery('body').css('margin-top'), 10) + 100;" .
 							'if(is_form){' .
 								"jQuery('#gform_wrapper_{$form_id}').html(form_content.html());" .
 				                "if(form_content.hasClass('gform_validation_error')){jQuery('#gform_wrapper_{$form_id}').addClass('gform_validation_error');} else {jQuery('#gform_wrapper_{$form_id}').removeClass('gform_validation_error');}" .
@@ -1263,7 +1260,7 @@ class GFFormDisplay {
 				$button_input = "<input type='{$input_type}' id='{$button_input_id}' class='{$class}' value='" . esc_attr( $button_text ) . "' {$tabindex} {$onclick} />";
 			}
 		} else {
-			$imageUrl     = $button['imageUrl'];
+			$imageUrl = esc_url( $button['imageUrl'] );
 			$class .= ' gform_image_button';
 			$button_input = "<input type='image' src='{$imageUrl}' id='{$button_input_id}' class='{$class}' alt='{$alt}' {$tabindex} {$onclick} />";
 		}
@@ -1278,7 +1275,7 @@ class GFFormDisplay {
 		$button_input = self::get_form_button( $form['id'], "gform_submit_button_{$form['id']}", $form['button'], __( 'Submit', 'gravityforms' ), 'gform_button', __( 'Submit', 'gravityforms' ), 0 );
 		$button_input = gf_apply_filters( array( 'gform_submit_button', $form_id ), $button_input, $form );
 
-		$save_button = rgars( $form, 'save/enabled' ) ? self::get_form_button( $form_id, "gform_save_{$form_id}", $form['save']['button'], rgars( $form, 'save/button/text' ), 'gform_save_link', rgars( $form, 'save/button/text' ), 0, "jQuery(\"#gform_save_{$form_id}\").val(1);" ) : '';
+		$save_button = rgars( $form, 'save/enabled' ) ? self::get_form_button( $form_id, "gform_save_{$form_id}_footer", $form['save']['button'], rgars( $form, 'save/button/text' ), 'gform_save_link', rgars( $form, 'save/button/text' ), 0, "jQuery(\"#gform_save_{$form_id}\").val(1);" ) : '';
 
 		/**
 		 * Filters the save and continue link allowing the tag to be customized
@@ -1952,8 +1949,6 @@ class GFFormDisplay {
 		 */
 		gf_do_action( array( 'gform_pre_enqueue_scripts', $form['id'] ), $form, $ajax );
 
-		$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
-
 		if ( ! get_option( 'rg_gforms_disable_css' ) ) {
 
 			wp_enqueue_style( 'gforms_reset_css' );
@@ -2033,6 +2028,10 @@ class GFFormDisplay {
 		// to be available to users even when GF is not using it
 		wp_enqueue_script( 'jquery' );
 
+		if ( wp_script_is( 'gform_gravityforms' ) ) {
+			wp_localize_script( 'gform_gravityforms', 'gf_global', GFCommon::gf_global( false, true ) );
+		}
+
 	}
 
 	private static $printed_scripts = array();
@@ -2111,11 +2110,11 @@ class GFFormDisplay {
 			wp_enqueue_script( $script );
 		}
 
-		wp_print_scripts( $scripts );
-
 		if ( wp_script_is( 'gform_gravityforms' ) ) {
-			echo '<script type="text/javascript"> ' . GFCommon::gf_global( false ) . ' </script>';
+			wp_localize_script( 'gform_gravityforms', 'gf_global', GFCommon::gf_global( false, true ) );
 		}
+
+		wp_print_scripts( $scripts );
 
 	}
 
@@ -2172,6 +2171,7 @@ class GFFormDisplay {
 		$dependents        = '';
 		$fields_with_logic = array();
 		$default_values    = array();
+		$field_dependents  = array();
 
 		foreach ( $form['fields'] as $field ) {
 
@@ -2213,7 +2213,7 @@ class GFFormDisplay {
 
 			//get parameter value if pre-populate is enabled
 			if ( $field->allowsPrepopulate ) {
-				if ( $input_type == 'checkbox' ) {
+				if ( $input_type == 'checkbox' || $input_type == 'multiselect' ) {
 					$field_val = RGFormsModel::get_parameter_value( $field->inputName, $field_values, $field );
 					if ( ! is_array( $field_val ) ) {
 						$field_val = explode( ',', $field_val );
@@ -2221,7 +2221,7 @@ class GFFormDisplay {
 				} elseif ( is_array( $inputs ) ) {
 					$field_val = array();
 					foreach ( $inputs as $input ) {
-						$field_val["input_{$input['id']}"] = RGFormsModel::get_parameter_value( rgar( $input, 'name' ), $field_values, $field );
+						$field_val[ $input['id'] ] = RGFormsModel::get_parameter_value( rgar( $input, 'name' ), $field_values, $field );
 					}
 				} elseif ( $input_type == 'time' ) { // maintained for backwards compatibility. The Time field now has an inputs array.
 					$parameter_val = RGFormsModel::get_parameter_value( $field->inputName, $field_values, $field );
@@ -2265,16 +2265,26 @@ class GFFormDisplay {
 					$is_prepopulated    = is_array( $field_val ) ? in_array( $choice['value'], $field_val ) : $choice['value'] == $field_val;
 					$is_choice_selected = rgar( $choice, 'isSelected' ) || $is_prepopulated;
 
-					if ( $is_choice_selected && $input_type == 'select' ) {
-						$price = GFCommon::to_number( rgar( $choice, 'price' ) ) == false ? 0 : GFCommon::to_number( rgar( $choice, 'price' ) );
-						$val   = $is_pricing_field && $field->type != 'quantity' ? $choice['value'] . '|' . $price : $choice['value'];
-						$default_values[ $field->id ] = $val;
-					} elseif ( $is_choice_selected ) {
-						if ( ! isset( $default_values[ $field->id ] ) ) {
-							$default_values[ $field->id ] = array();
+					if ( $is_choice_selected ) {
+						// Select
+						if ( $input_type == 'select' ) {
+							$price                        = GFCommon::to_number( rgar( $choice, 'price' ) ) == false ? 0 : GFCommon::to_number( rgar( $choice, 'price' ) );
+							$val                          = $is_pricing_field && $field->type != 'quantity' ? $choice['value'] . '|' . $price : $choice['value'];
+							$default_values[ $field->id ] = $val;
 						}
-
-						$default_values[ $field->id ][] = "choice_{$form['id']}_{$field->id}_{$choice_index}";
+						else {
+							if ( ! isset( $default_values[ $field->id ] ) ) {
+								$default_values[ $field->id ] = array();
+							}
+							// Multiselect
+							if ( $input_type == 'multiselect' ) {
+								$default_values[ $field->id ][] = $choice['value'];
+							}
+							// Checkboxes & Radio Buttons
+							else {
+								$default_values[ $field->id ][] = "choice_{$form['id']}_{$field->id}_{$choice_index}";
+							}
+						}
 					}
 					$choice_index ++;
 				}
@@ -2452,11 +2462,6 @@ class GFFormDisplay {
 
 		$script_string = '';
 
-		// temporary solution for output gf_global obj until wp min version raised to 3.3
-		if ( wp_script_is( 'gform_gravityforms' ) ) {
-			$gf_global_script = "if(typeof gf_global == 'undefined') " . GFCommon::gf_global( false );
-		}
-
 		/* rendering initialization scripts */
 		$init_scripts = rgar( self::$init_scripts, $form['id'] );
 
@@ -2559,7 +2564,8 @@ class GFFormDisplay {
 					"	 'truncate': {$truncate}," .
 					"	 'errorStyle' : '{$error_style}'," .
 					"    'displayFormat' : '#input " . esc_js( __( 'of', 'gravityforms' ) ) . ' #max ' . esc_js( __( 'max characters', 'gravityforms' ) ) . "'" .
-					"    } );";
+					"    } );" .
+					"jQuery('#{$input_id}').next( '.ginput_counter' ).attr( 'aria-live', 'polite' );";
 
 				$script .= gf_apply_filters( array( 'gform_counter_script', $form['id'] ), $field_script, $form['id'], $input_id, $max_length, $field );
 			}
@@ -2948,7 +2954,7 @@ class GFFormDisplay {
 				$next_button     = self::get_form_button( $form['id'], "gform_next_button_{$form['id']}_{$field->id}", $field->nextButton, __( 'Next', 'gravityforms' ), 'gform_next_button', $next_button_alt, $field->pageNumber );
 				$next_button     = gf_apply_filters( array( 'gform_next_button', $form['id'] ), $next_button, $form );
 
-				$save_button = rgars( $form, 'save/enabled' ) ? self::get_form_button( $form['id'], "gform_save_{$form['id']}", $form['save']['button'], rgars( $form, 'save/button/text' ), 'gform_save_link', rgars( $form, 'save/button/text' ), 0, "jQuery(\"#gform_save_{$form['id']}\").val(1);" ) : '';
+				$save_button = rgars( $form, 'save/enabled' ) ? self::get_form_button( $form['id'], "gform_save_{$form['id']}_{$field->pageNumber}", $form['save']['button'], rgars( $form, 'save/button/text' ), 'gform_save_link', rgars( $form, 'save/button/text' ), 0, "jQuery(\"#gform_save_{$form['id']}\").val(1);" ) : '';
 
 				/**
 				 * Filters the save and continue link allowing the tag to be customized
@@ -3534,10 +3540,11 @@ class GFFormDisplay {
 		$page_number  = $page_number == 0 ? 2 : $page_number+1;
 
 		/* Create new Page field for review page. */
-		$review_page_break                 = new GF_Field_Page();
-		$review_page_break->id             = $new_field_id;
-		$review_page_break->pageNumber     = $page_number;
-		$review_page_break->nextButton     = rgar( $review_page, 'nextButton' );
+		$review_page_break             = new GF_Field_Page();
+		$review_page_break->id         = $new_field_id;
+		$review_page_break->pageNumber = $page_number;
+		$review_page_break->nextButton = rgar( $review_page, 'nextButton' );
+		$review_page_break->cssClass   = 'gform_review_page ' . rgar( $review_page, 'cssClass', '' );
 
 		/* Add review page break field to form. */
 		$form['fields'][] = $review_page_break;
@@ -3585,7 +3592,7 @@ class GFFormDisplay {
 
 		return array(
 			'scroll' => $anchor,
-			'tag'    => $anchor !== false ? "<a id='gf_{$form_id}' class='gform_anchor' ></a>" : '',
+			'tag'    => $anchor !== false ? "<div id='gf_{$form_id}' class='gform_anchor' tabindex='-1'></div>" : '',
 			'id'     => $anchor !== false ? "#gf_{$form_id}" : ''
 		);
 	}

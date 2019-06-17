@@ -4,8 +4,8 @@
  *
  * @package   Search_Filter_Post_Cache
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 class Search_Filter_Shared { 
@@ -23,13 +23,11 @@ class Search_Filter_Shared {
         add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
         // Activate plugin when new blog is added
-        add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
+        //add_action( 'wpmu_new_blog', array( $this, 'activate_new_site' ) );
 
     }
 	public function create_custom_post_types()
 	{
-		// @TODO: Define your action hook callback here
-		
 		$labels = array(
 		    'name'					=>	__( 'Search &amp; Filter', $this->plugin_slug ),
 			'singular_name'			=>	__( 'Search Form', $this->plugin_slug ),
@@ -141,13 +139,12 @@ class Search_Filter_Shared {
 
 
     /**
-     * Fired when a new site is activated with a WPMU environment.
      *
      * @since    1.0.0
      *
      * @param    int    $blog_id    ID of the new blog.
      */
-    public function activate_new_site( $blog_id ) {
+    /*public function activate_new_site( $blog_id ) {
 
         if ( 1 !== did_action( 'wpmu_new_blog' ) ) {
             return;
@@ -157,6 +154,6 @@ class Search_Filter_Shared {
         self::single_activate();
         restore_current_blog();
 
-    }
+    }*/
 
 }

@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
  
 ?>
@@ -51,7 +51,6 @@
 							   //'public'   => true,
 							   //'publicly_queryable '   => true
 							);
-							
 							
 							$post_types = get_post_types( $args, 'objects' ); 
 							
@@ -123,7 +122,7 @@
 						<input class="checkbox auto_submit" type="checkbox" id="auto_submit" name="auto_submit"<?php $this->set_checked($values['auto_submit']); ?>> 
 					</td>
 				</tr>
-				<tr>
+				<!--<tr>
 					<td>
 						<label for="maintain_state"><?php _e("Maintain Search Form State", $this->plugin_slug ); ?>
 							<span class="hint--top hint--info" data-hint="<?php _e("Prevents the Search Form from resetting when clicking through on to individual search results (modifies permalinks).", $this->plugin_slug ); ?>"><i class="dashicons dashicons-info"></i></span>
@@ -132,7 +131,7 @@
 					<td>
 						<input class="checkbox maintain_state" type="checkbox" id="maintain_state" name="maintain_state"<?php $this->set_checked($values['maintain_state']); ?>> 
 					</td>
-				</tr>
+				</tr>-->
 				
 				
 				<tr>
@@ -214,7 +213,7 @@
             'description'   =>
                 '<p>'.__("Use a regular template from your theme to output your results.", $this->plugin_slug ).'</p>'.
                 '<p><em>'.__("* Templates must use the <a href='http://codex.wordpress.org/The_Loop' target='_blank'>The Loop</a> and not a custom query", $this->plugin_slug ).'</em></p>'.
-                '<p><a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/as-an-archive/" target="_blank">'.__("View the Archive setup instructions", $this->plugin_slug ).'</a></p>',
+                '<p><a href="https://searchandfilter.com/documentation/search-results/as-an-archive/" target="_blank">'.__("View the Archive setup instructions", $this->plugin_slug ).'</a></p>',
             'base'          => 'archive'
         );
 
@@ -223,7 +222,7 @@
             'description'   =>
                 '<p>'.__("Filter results on your Post Type Archives - only one post type must be selected.", $this->plugin_slug ).'</p>'.
                 '<p><em>'.__("* Templates must use the <a href='http://codex.wordpress.org/The_Loop' target='_blank'>The Loop</a> and not a custom query", $this->plugin_slug ).'</em></p>'.
-                '<p><a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/as-a-post-type-archive/" target="_blank">'.__("View the Post Type Archive setup instructions", $this->plugin_slug ).'</a></p>',
+                '<p><a href="https://searchandfilter.com/documentation/search-results/as-a-post-type-archive/" target="_blank">'.__("View the Post Type Archive setup instructions", $this->plugin_slug ).'</a></p>',
             'base'          => 'post_type_archive'
         );
         $display_results_methods['shortcode'] = array(
@@ -231,7 +230,7 @@
             'description'   =>
                 '<p>'.__("Place a results shortcode in any post or theme file to position where the results are displayed.", $this->plugin_slug ).'</p>'.
                 '<p><em>'.__("* You can find your results shortcode in the <strong>Shortcodes</strong> box on this page", $this->plugin_slug ).'</em></p>'.
-                '<p><a href="http://www.designsandcode.com/documentation/search-filter-pro/search-results/using-a-shortcode/" target="_blank">'.__("View the Shortcode setup instructions", $this->plugin_slug ).'</a></p>',
+                '<p><a href="https://searchandfilter.com/documentation/search-results/using-a-shortcode/" target="_blank">'.__("View the Shortcode setup instructions", $this->plugin_slug ).'</a></p>',
 
             'base'          => 'shortcode'
         );
@@ -239,21 +238,21 @@
             'label'         => __('WooCommerce Shop'),
             'description'   =>
                 '<p>'.__("Let WooCommerce handle the display of results and direct all searches to the shop page.", $this->plugin_slug ).'</p>'.
-				'<p><a href="http://www.designsandcode.com/documentation/search-filter-pro/3rd-party/woocommerce/" target="_blank">'.__("View the WooCommerce setup instructions", $this->plugin_slug ).'</a></p>',
+				'<p><a href="https://searchandfilter.com/documentation/3rd-party/woocommerce/" target="_blank">'.__("View the WooCommerce setup instructions", $this->plugin_slug ).'</a></p>',
             'base'          => 'custom_woocommerce_store'
         );
         $display_results_methods['custom_edd_store'] = array(
             'label'         => __('EDD Downloads Page'),
             'description'   =>
                 '<p>'.__("Let Easy Digital Downloads handle the display of results - simply supply the full URL of a page containing your downloads shortcode.", $this->plugin_slug ).'</p>'.
-                '<p><a href="http://www.designsandcode.com/documentation/search-filter-pro/3rd-party/easy-digital-downloads/" target="_blank">'.__("View the Easy Digital Downloads setup instructions", $this->plugin_slug ).'</a></p>',
+                '<p><a href="https://searchandfilter.com/documentation/3rd-party/easy-digital-downloads/" target="_blank">'.__("View the Easy Digital Downloads setup instructions", $this->plugin_slug ).'</a></p>',
 
             'base'          => 'custom_edd_store'
         );
         $display_results_methods['custom'] = array(
             'label'         => __('Custom'),
             'description'   => '<p>'.__("Manually add S&F to an existing query and then simply supply the URL where this can be located.", $this->plugin_slug ).'</p>'.
-				'<p><a href="https://www.designsandcode.com/documentation/search-filter-pro/search-results/custom/" target="_blank">'.__("View the Custom setup instructions", $this->plugin_slug ).'</a></p>',
+				'<p><a href="https://searchandfilter.com/documentation/search-results/custom/" target="_blank">'.__("View the Custom setup instructions", $this->plugin_slug ).'</a></p>',
             'base'          => 'custom'
         );
 
@@ -325,7 +324,7 @@
 							<input type="hidden"  name="results_url" id="results_url_hidden" class="results_url_hidden"  value="<?php echo $values['results_url']; ?>" disabled="disabled" />
 							</p>
 							
-						</div>	
+						</div>
 						</td>
 					</tr>
 					<tr class="tpl_archive_rows">
@@ -530,7 +529,7 @@
 						<div class="display_result_txt_cont notice-alert">
 								<div>
 									<p>
-										<?php _e("Setting up Infinite Scroll will require some knowledge of html/css - <a href=\"http://www.designsandcode.com/documentation/search-filter-pro/search-results/infinite-scroll/\" target=\"_blank\">read the guide here</a>.", $this->plugin_slug ); ?>
+										<?php _e("Setting up Infinite Scroll will require some knowledge of html/css - <a href=\"https://searchandfilter.com/documentation/search-results/infinite-scroll/\" target=\"_blank\">read the guide here</a>.", $this->plugin_slug ); ?>
 									</p>
 								</div>
 						</div>
@@ -896,15 +895,17 @@
 							{
 								$ids_array = array_map("intval" , explode(",", $tval));
 								
-								if(Search_Filter_Helper::has_wpml())
-								{
+								if(Search_Filter_Helper::has_wpml()) {
+
 									$res = array();
-									foreach ($ids_array as $id)
-									{
-										$xlat = Search_Filter_Helper::wpml_object_id($id, $taxonomy->name, false);
+									foreach ($ids_array as $id) {
+
+										$xlat = Search_Filter_Helper::wpml_object_id($id, $taxonomy->name, true);
 										if(!is_null($xlat)) $res[] = $xlat;
 									}
+
 									$ids_array = $res;
+
 								}
 								$ids_string = implode("," , $ids_array);
 							}

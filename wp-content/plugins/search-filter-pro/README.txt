@@ -1,10 +1,10 @@
 === Search & Filter Pro ===
-Contributors: DesignsAndCode
+Contributors: DesignsAndCode, CodeAmp
 Donate link:
 Tags: posts, custom posts, products, category, filter, taxonomy, post meta, custom fields, search, wordpress, post type, post date, author
 Requires at least: 3.5
-Tested up to: 4.7
-Stable tag: 2.3.4
+Tested up to: 4.9
+Stable tag: 2.4.6
 
 Search and Filtering for posts, products and custom posts. Allow your users to Search & Filter by taxonomies, custom fields and more.
 
@@ -57,6 +57,88 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 
 == Changelog ==
 
+= 2.4.6 =
+* Fix - properly disable `maintain search form state` as this was causing potential security issues
+* Fix - a character encoding issue when checking if ajax can be enabled on a particular page
+* Fix - an issue with the sf-option-active class not being removed when using the reset button and submit form is disabled
+* Fix - some issue with sf-option-active not being set correctly on radio buttons in certain circumstances
+* Improvement - add support for pagination without the `page` prefix, ie, the updated Elementor Pro Posts widget uses /%postname%/%pageno%
+* Improvement - set `paged` using `set_query_var` for better compatibility with other plugins
+
+= 2.4.5 =
+* Fix - an issue with noUiSlider when "Display values as" is set to "text" in range fields
+* Fix - an issue with Beaver Builder Themer auto scrolling to results on page load (when using our display method "archive")
+* Fix - an issue with Ajax requests and Polylang
+* Fix - some issues with filtering WC shop in some themes
+
+= 2.4.4 =
+* Fix - an error being thrown when creating new sites in wpmu
+* Fix - return the original IDs of taxonomy terms, when no translated term is found (when using translation plugins) - this allows for taxonomies that are not translated to retain their settings
+* Fix - an issue where some of our 3rd party integrations were not working in ajax requests (very rare)
+* Fix - an issue where the `filter_next_query` shortcode was being ignored in ajax requests
+* Fix - an issue with Ajax URLs not always being set correctly when using PolyLang
+* Updated - noUiSlider to v11.1.0
+* Updated - chosen to v1.8.7
+* New - added a `skip` argument for our `filter_next_query` shortcode, to access those tricky queries
+
+= 2.4.3 =
+* Fix - refix enable_taxonomy_archives variable warnings
+* Fix - an issue with Beaver Builder Themer scrolling to the results on page load (this occured when pagination was set)
+* Fix - silenced (@)set_time_limit as this was throwing warnings on some hosts
+* Update - update the plugin to point to our new domain for auth and updates, searchandfilter.com :)
+
+= 2.4.2 =
+* Fix - removed an unwanted `exit` causing various and seemingly unrelated issues
+
+= 2.4.1 =
+* New - added JS events `sf:ajaxformstart` and `sf:ajaxformfinish` to detect when updating the form has started/finished
+* Improvement - speed improvements to the cache, when saving posts and when rebuilding the entire cache
+* Fix - an issue where filtering on taxonomy archives was not working with WooCommerce
+* Fix - WooCommerce variations were not being taking into consideration in the batch size when rebuilding the cache
+* Fix - an issue with WC not showing category/taxonomy descriptions or sub categories on archives
+* Fix - exclude products from results that are "not in catalog" for WC
+* Fix - an issue where the count was incorrect when using the private publish option with WooCommerce products
+* Fix - changing a search form settings to include product variations, or not, didn't trigger a rebuild of the cache in some cases
+* Fix - some WC issues when converting child IDs to parent IDs
+* Fix - an issue with pagination on taxonomy archives
+* Fix - an issue with ACF where option labels were not being correctly detected
+* Fix - an issue with uninstall not working correctly sometimes
+* Fix - an issue with infinite scroll not activating when the `Only use Ajax on the results page` setting is off
+* Fix - an issue with Polylang when searching posts that are not managed by Polylang
+
+= 2.4.0 =
+* NOTICE - If you are using S&F with Woocommerce Variations and experiencing issues, you may need to rebuild the S&F cache
+* New - change the "no results" message for comboboxes
+* Fix - WooCommerce deprecated `woocommerce_get_page_id` in 3.0
+* Fix - various WooCommerce issues relating to Variations - Woocommerce users' who use variations may need to rebuild S&F cache
+* Fix - correctly set the `sf-option-active` class on multi select items (this includes checkboxes)
+* Fix - properly escape some strings
+* Fix - destroy noUiSlider (if it exists) before init, in case it has been init by another plugin (improved compatibility)
+* Fix - some issues with levels / nesting of hierarchical taxonomies
+* Fix - some issues with polylang and ajax requests
+* Fix - an issue with a number range field not resetting properly
+* Fix - an issue with the range slider in firefox, when ajax was disabled and auto submit was on
+* Fix - an issue with `enable on taxonomy archives` when taxonomies were shared between multiple post types
+* Fix - a PHP error when using multiple date pickers with post meta
+* Fix - the infinite scroll loader will now check the parent it is attached to and use the correct html tag for the loader
+* Fix - an issue with the icon not loading for available fields
+* Fix - an issue with "enable on taxonomy archives" and pagination not working correctly
+* Fix - an issue with min / max values being correctly autodetected for range fields
+* Fix - some issues with rounding & formatting on numeric and slider range fields
+* Fix - range dropdown & radio fields were not respecting the step value when it came to the last / max option
+* Fix - some layout issues in the admin
+* Fix - issues with the later versions of Relevanssi
+* Fix - some issues with refocusing the search box after a search is performed
+* Fix - issues with taxonomy rewrites when using `enable on taxonomy archives`
+* Fix - an issue with the date range fields being auto submitted when only 1 has been selected
+* Fix - an issue with ACF using `get_field_object` - and returning the wrong options depending on language
+* Fix - some issues with the cache building in the background
+* Fix - some issues with ajax filtering with fragment urls
+* Fix - a PHP warning when creating the first search form after install
+* Fix - a PHP warning - incorrect usage of `count`, displaying warnings when saving posts that are to be cached
+* Update - update chosen to v1.8.2
+* Update - update select2 to v4.0.5
+
 = 2.3.4 =
 * Fix - issues in some environments where infinite scroll wasn't activating after a performing search, or getting the page var wrong
 * Fix - infinite scroll offset was not being applied correctly
@@ -92,7 +174,7 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 
 = 2.3.0 =
 * New - Added support for visual composer post grids (free addon plugin required) - create results layouts using visual composer!
-* New - Infinite scroll for all display methods - how to setup - https://www.designsandcode.com/documentation/search-filter-pro/search-results/infinite-scroll/
+* New - Infinite scroll for all display methods - how to setup - https://searchandfilter.com/documentation/search-results/infinite-scroll/
 * New - Added support for ACF relationship fields
 * New - added `none` sort order option for choice meta fields, allowing preservation of the order of options (if set from external plugins)
 * New - added option to specify decimal seperator for number range fields
@@ -158,7 +240,7 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 
 = 2.1.2 =
 * New - Sort order can be displayed as radio buttons
-* New - filters for all URLs used in S&F - this allows for dynamically changing the various URLs for example to force https or similar - http://www.designsandcode.com/documentation/search-filter-pro/action-filter-reference/
+* New - filters for all URLs used in S&F - this allows for dynamically changing the various URLs for example to force https or similar - https://searchandfilter.com/documentation/action-filter-reference/
 * Fix - an issue with `include_children` and allowing the AND operator to be used
 * Fix - an issue with hierarchical lists not being display correctly
 
@@ -247,7 +329,7 @@ Great for searching in your online shop, tested with: WooCommerce and WP eCommer
 * Fix - undefined variable notice in edit search form screen
 
 = 2.0.1 =
-* NOTICE - DO NOT UPDATE UNTIL YOU HAVE READ THE RELEASE NOTES: http://www.designsandcode.com/documentation/search-filter-pro/2-0-upgrade-notes/
+* NOTICE - DO NOT UPDATE UNTIL YOU HAVE READ THE RELEASE NOTES: https://searchandfilter.com/documentation/2-0-upgrade-notes/
 * Version bump so all beta testers get the latest update via the dashboard
 
 = 2.0 =

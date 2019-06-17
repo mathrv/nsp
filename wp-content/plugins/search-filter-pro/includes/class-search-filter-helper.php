@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://www.designsandcode.com
+ * @link       https://searchandfilter.com
  * @since      1.0.0
  *
  * @package   
@@ -161,6 +161,18 @@ class Search_Filter_Helper {
 		return false;
 	}
 	
+	public static function wc_get_page_id($page_name = '')
+	{
+		if(function_exists('wc_get_page_id')) {
+			return wc_get_page_id($page_name);
+		}
+		else if(function_exists('woocommerce_get_page_id')) {
+			return woocommerce_get_page_id($page_name);
+		}
+
+		return false;
+
+	}
 	public static function wpml_object_id($id = 0, $type = '', $return_original = '', $lang_code = '')
 	{
 		$lang_id = 0;
@@ -230,14 +242,23 @@ class Search_Filter_Helper {
     {
         $settings = get_post_meta( $sfid , '_search-filter-settings' , true );
 
-        if(!isset($settings['results_url']))
-        {
-            $settings['results_url'] = get_post_meta( $sfid , '_search-filter-results-url' , true );
+        if(!is_array($settings)){
+        	$settings = array();
         }
 
-        if(!isset($search_form_settings["enable_taxonomy_archives"]))
+        if(!isset($settings['results_url']))
         {
-            $search_form_settings["enable_taxonomy_archives"] = 0;
+	        $settings['results_url'] = '';
+	        $results_url = get_post_meta( $sfid , '_search-filter-results-url' , true );
+
+            if(!empty($results_url)) {
+	            $settings['results_url'] = $results_url;
+            }
+        }
+
+        if(!isset($settings["enable_taxonomy_archives"]))
+        {
+	        $settings["enable_taxonomy_archives"] = 0;
         }
 
         return $settings;
@@ -248,4 +269,36 @@ class Search_Filter_Helper {
 
         return $fields;
     }
+
+	public static function get_option($option_name)
+	{
+		$option = get_option( 'search_filter_' . $option_name );
+
+		if($option === false) {
+			//this means its not been set yet
+			//then init with a default
+			$option = '';
+
+			$defaults = array(
+
+				'cache_speed' => "slow",
+				'cache_use_manual' => 0,
+				'cache_use_background_processes' => 1,
+				'cache_use_transients ' => 0,
+				'load_jquery_i18n' => 0,
+				'lazy_load_js' => 0,
+				'load_js_css' => 1,
+				'combobox_script' => "chosen",
+				'remove_all_data' => 0,
+
+			);
+
+			if(isset($defaults[$option_name])){
+				$option = $defaults[$option_name];
+			}
+		}
+
+
+		return $option;
+	}
 }
