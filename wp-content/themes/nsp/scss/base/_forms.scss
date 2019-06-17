@@ -1,0 +1,15 @@
+.gform_body {
+  .gfield_label { color: $primary; font-family: clan-bold; font-weight: 400;}
+  input.text,
+  input.title,
+  input[type=email],
+  input[type=password],
+  input[type=tel],
+  input[type=text],
+  select,
+  textarea { border:1px solid lighten($text-color, 20%);}
+}
+
+.gform_footer { text-align: center;
+  & > p { text-align: left; margin-bottom: 20px;}
+}

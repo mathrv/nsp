@@ -1,0 +1,13 @@
+.btn-container {
+  &--centered { text-align: center;}
+}
+
+.btn { display: inline-block; padding: 12px 25px; text-align: center; font-family: 'clan-book'; font-size: 15px; line-height: 0.9;border: 1px solid; border-radius: $br-size; text-decoration: none;
+  &--small { padding: 7px 14px; border-radius: $br-size--small; font-size: 16px;}
+}
+
+.gform_button { display: inline-block; padding: 12px 25px !important; text-align: center; font-family: 'clan-book'; font-size: 20px !important; line-height: 0.9;border: 1px solid $primary; border-radius: $br-size !important; text-decoration: none;background-color: $primary; color:white;
+  &:hover { background-color: white; color:$primary; cursor:pointer;}
+  &:focus,
+  &:active { outline:none;}
+}

@@ -1,0 +1,32 @@
+.contact {
+  &__wrapper { background-color: $primary; background-repeat: no-repeat; background-size: 30%; position: relative; overflow: hidden;
+    .container { position: relative; z-index: 2;}
+  }
+  &__parallax-item { display: inline-block; width: 600px; height: 600px; position: absolute; left: 5%; top: 100%; transform:translateY(-50%); opacity:0.5; z-index: 1;}
+  &__content { text-align: center;
+    h3 {color:white; font-family: clan-bold; font-size: $fz--h3;}
+    p { color:white;
+      a { color:white;}
+    }
+  }
+  &__content-text { margin-bottom: 20px;
+    p { font-size: $fz--text--small;}
+  }
+  &__wiki-logo { display: inline-block; max-width: 120px; margin: 0 auto; transform: translateY(-50%);}
+  &__intro { color:white; margin-bottom: 20px;}
+  &__coord { color:white; margin-bottom: 20px;
+    a { color:white;}
+  }
+}
+
+@media screen and (max-width: $medium-screen) {
+  .contact {
+    &__wrapper { background-size: 70%; background-position: left center;}
+  }
+}
+
+@media screen and (max-width: $small-screen) {
+  .contact {
+    &__wiki-logo { transform: translateY(0); margin: 20px 0;}
+  }
+}

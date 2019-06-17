@@ -1,0 +1,50 @@
+// EXEMPLE
+//
+// @font-face {
+//   font-family: 'NOM_DE_LA_TYPO';
+//   font-style: normal;
+//   src: url('fonts/NOM_DE_LA_TYPO.eot');
+//   src: local('NOM_DE_LA_TYPO'), url('fonts/NOM_DE_LA_TYPO.eot') format('embedded-opentype'), url('fonts/NOM_DE_LA_TYPO.woff') format('woff');
+// }
+//
+// .nom-de-la-typo{font-family: 'NOM_DE_LA_TYPO' !important;}
+
+@font-face {
+  font-family: 'clan-book';
+  font-style: normal;
+  font-display: swap;
+  src: url('fonts/ClanWebPro-Book.eot');
+  src: local('clan-book'), url('fonts/ClanWebPro-Book.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Book.woff') format('woff');
+}
+
+.clan-book {font-family: 'clan-book' !important; font-weight: 400;}
+
+@font-face {
+  font-family: 'clan-news';
+  font-style: normal;
+  font-display: swap;
+  src: url('fonts/ClanWebPro-News.eot');
+  src: local('clan-news'), url('fonts/ClanWebPro-News.eot') format('embedded-opentype'), url('fonts/ClanWebPro-News.woff') format('woff');
+}
+
+.clan-news {font-family: 'clan-news' !important; font-weight: 400;}
+
+@font-face {
+  font-family: 'clan-medium';
+  font-style: normal;
+  font-display: swap;
+  src: url('fonts/ClanWebPro-Medium.eot');
+  src: local('clan-medium'), url('fonts/ClanWebPro-Medium.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Medium.woff') format('woff');
+}
+
+.clan-medium {font-family: 'clan-medium' !important; font-weight: 400;}
+
+@font-face {
+  font-family: 'clan-bold';
+  font-style: normal;
+  font-display: swap;
+  src: url('fonts/ClanWebPro-Bold.eot');
+  src: local('clan-bold'), url('fonts/ClanWebPro-Bold.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Bold.woff') format('woff');
+}
+
+.clan-bold {font-family: 'clan-bold' !important;}

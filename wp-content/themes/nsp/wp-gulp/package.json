@@ -1,0 +1,36 @@
+{
+  "name": "Nantes Sous Pression",
+  "templateName": "nsp",
+  "version": "1.0.0",
+  "description": "Thème pour le site Nantes sous pression",
+  "projectVhost": "nsp.kromidev.fr",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nsp",
+  "authorURL": "http://nantes-sous-pression.com/",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "browser-sync": "^2.12.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean-css": "^2.0.6",
+    "gulp-concat": "^2.6.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sass": "4.0.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "jshint": "^2.9.1"
+  },
+  "dependencies": {
+    "gulp-imagemin": "^3.3.0",
+    "gulp-template": "^5.0.0",
+    "gulp-uglify": "^3.0.0",
+    "natives": "1.1.6"
+  }
+}
