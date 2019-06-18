@@ -6,8 +6,8 @@
  * 
  * @package   Search_Filter
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  * 
  * Note: these templates are not full page templates, rather 
  * just an encaspulation of the your results loop which should

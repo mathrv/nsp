@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter_Field_Author
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 class Search_Filter_Field_Author extends Search_Filter_Field_Base {
@@ -40,6 +40,7 @@ class Search_Filter_Field_Author extends Search_Filter_Field_Base {
 			'accessibility_label'		=> '',
 			'exclude'					=> '',
 			'combo_box'					=> '',
+			'no_results_message'		=> '',
 			'show_default_option_sf' 	=> false,
 			'show_count_format_sf' 		=> "inline",
 		);
@@ -95,6 +96,10 @@ class Search_Filter_Field_Author extends Search_Filter_Field_Base {
 			if($args['combo_box']==1)
 			{
 				$attributes['data-combobox'] = '1';
+
+				if(!empty($args['no_results_message'])){
+					$attributes['data-combobox-nrm'] = $args['no_results_message'];
+				}
 			}
 			
 			//finalise input args object
@@ -139,6 +144,10 @@ class Search_Filter_Field_Author extends Search_Filter_Field_Base {
 			{
 				$attributes['data-combobox'] = '1';
 				$attributes['data-placeholder'] = $args['show_option_all_sf'];
+
+				if(!empty($args['no_results_message'])){
+					$attributes['data-combobox-nrm'] = $args['no_results_message'];
+				}
 			}			
 			
 			$attributes['multiple'] = "multiple";

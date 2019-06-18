@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 global $searchandfilter;
 
@@ -21,11 +21,6 @@ class Search_Filter {
 	const VERSION = SEARCH_FILTER_VERSION;
 	
 	/**
-	 * @TODO - Rename "plugin-name" to the name your your plugin
-	 *
-	 * Unique identifier for your plugin.
-	 *
-	 *
 	 * The variable name is used as the text domain when internationalizing strings
 	 * of text. Its value should match the Text Domain file header in the main
 	 * plugin file.
@@ -58,14 +53,15 @@ class Search_Filter {
 
 		$searchandfilter = new Search_Filter_Global($this->plugin_slug);
 
-        $shared = new Search_Filter_Shared(); //this sets up shared (between frontend and admin) attributes (like post types & taxonomies)
+		global $search_filter_shared;
+        $shared = $search_filter_shared; //this sets up shared (between frontend and admin) attributes (like post types & taxonomies)
 
 		// Load public-facing style sheet and JavaScript.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_scripts' ) );
 		
 		// Ajax
-		add_action( 'init', array($this, 'get_results'), 2000 ); /* todo - check consequence of setting this lower (we changed for VC) */
+		add_action( 'init', array($this, 'get_results'), 2000 );
         //add_action( 'init', array($this, 'get_results'), 200 );
 
 		//if(!is_admin())
@@ -82,15 +78,13 @@ class Search_Filter {
         add_action( 'pre_get_posts', array($this, 'custom_query_init'), 10000 );
 
 		$this->display_shortcode = new Search_Filter_Display_Shortcode($this->plugin_slug);
-		$this->third_party = new Search_Filter_Third_Party($this->plugin_slug);
 
-		
+		global $search_filter_third_party;
+		$this->third_party = $search_filter_third_party;
+
+		add_action( 'woocommerce_product_query', array($this, 'setup_wc_query'), 100000 );
+
 		//add_filter('rewrite_rules_array', array($this, 'sf_rewrite_rules'));
-        /*if(!is_admin())
-        {
-		    add_action("pre_get_posts", array($this, "sf_pre_get"));
-        }*/
-
 	}
 
 	function custom_query_init($query)
@@ -146,7 +140,7 @@ class Search_Filter {
 			return;
 		}
 		
-		if(function_exists("is_shop"))
+		/*if(function_exists("is_shop"))
 		{
 			if($this->is_woo_shop($query))
 			{
@@ -170,9 +164,7 @@ class Search_Filter {
 					
 				}
 			}
-		}
-
-
+		}*/
 
 		if(is_post_type_archive()||is_home()||is_tag()||is_tax()||is_category())
 		{//then we know its a post type archive, see if any of our search forms
@@ -190,7 +182,6 @@ class Search_Filter {
                     {//this means its an archive and its already been init
                         return;
                     }
-
 
 					if($search_form_settings['display_results_as']=="post_type_archive")
 					{
@@ -225,44 +216,90 @@ class Search_Filter {
 						}
 						
 					}
-                    else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
+                    /*else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
                     {
                         $post_type = "product";
                         $enable_taxonomy_archives = $search_form_settings["enable_taxonomy_archives"];
 
                         $searchandfilter->set_active_sfid($search_form_id);
 
-                        if(($enable_taxonomy_archives==1) && (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type)))
+                        if(($enable_taxonomy_archives==1) && (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, false)))
                         {
                             $searchandfilter->set_active_sfid($search_form_id);
                             $searchandfilter->get($search_form_id)->query->setup_archive_query($query);
                             return;
                         }
-                    }
+
+
+                    }*/
 				}
 			}
 		}
 	}
-	
+	public function setup_wc_query($query){
+
+		global $searchandfilter;
+
+		//filter the shop page
+		if(function_exists("is_shop")) {
+			if ( $this->is_woo_shop( $query ) ) {
+				foreach ( $this->all_search_form_ids as $search_form_id ) {
+					//as we only want to update "enabled", then load all settings and update only this key
+					$search_form_settings = Search_Filter_Helper::get_settings_meta( $search_form_id );
+
+					if ( isset( $search_form_settings['display_results_as'] ) ) {
+						if ( $search_form_settings['display_results_as'] == "custom_woocommerce_store" ) {
+							$searchandfilter->set_active_sfid( $search_form_id );
+							$searchandfilter->get( $search_form_id )->query->setup_wc_query( $query );
+							return;
+						}
+					}
+				}
+			}
+		}
+
+		//filter WC tax archives
+		if(is_post_type_archive()||is_home()||is_tag()||is_tax()||is_category())
+		{//then we know its a post type archive, see if any of our search forms
+
+			foreach($this->all_search_form_ids as $search_form_id)
+			{
+				//as we only want to update "enabled", then load all settings and update only this key
+				$search_form_settings = Search_Filter_Helper::get_settings_meta($search_form_id);
+
+				if(isset($search_form_settings['display_results_as']))
+				{
+					global $wp_query;
+					if(isset($wp_query->query_vars['sfid']))
+					{//this means its an archive and its already been init
+						return;
+					}
+					else if($search_form_settings['display_results_as']=="custom_woocommerce_store")
+					{
+						$post_type = "product";
+						$enable_taxonomy_archives = $search_form_settings["enable_taxonomy_archives"];
+
+						$searchandfilter->set_active_sfid($search_form_id);
+
+						if(($enable_taxonomy_archives==1) && (Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, false)))
+						{
+							$searchandfilter->set_active_sfid($search_form_id);
+							$searchandfilter->get( $search_form_id )->query->setup_wc_query( $query );
+							return;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	function archive_query_init($wp)
 	{//here we test to see if we have an ID set - which if it is, then this means a user is on a results page, using archive method
 		
 		global $searchandfilter;
 		global $wp_query;
 
-		if(!is_admin())
-		{
-            //var_dump($wp);
-			/*if(isset($wp->query_vars['public_query_vars']))
-            {
-                if(in_array("sfid", $wp->query_vars['public_query_vars']))
-                {
-                    $sfid = (int)$wp->query_vars['sfid'];
-                    $searchandfilter->set_active_sfid($sfid);
-                    $searchandfilter->set($sfid);
-                }
-            }*/
-
+		if(!is_admin()){
 
             if(isset($wp->query_vars['sfid']))
 			{
@@ -270,17 +307,11 @@ class Search_Filter {
 				$searchandfilter->set_active_sfid($sfid);
 				$searchandfilter->set($sfid);
 			}
-			else
-			{//we also want to run this on woocommerce shop pages
-				
-			}
 			
 			//extra stuff
 			//grab any search forms before woocommerce had a chance to modify the query
 			$search_form_query = new WP_Query('post_type=search-filter-widget&fields=ids&post_status=publish&posts_per_page=-1');
 			$this->all_search_form_ids = $search_form_query->get_posts();
-			
-			
 		}
 	}
 	
@@ -620,15 +651,9 @@ class Search_Filter {
 			$file_ext = '.css';
 		}
 		
-		$load_js_css	= get_option( 'search_filter_load_js_css' );
-		
-		if($load_js_css===false)
-		{
-			$load_js_css = 1;
-			
-		}
-		
-		if($load_js_css == 1)
+		$load_js_css	= (int)Search_Filter_Helper::get_option( 'load_js_css' );
+
+		if($load_js_css === 1)
 		{
 			wp_enqueue_style( $this->plugin_slug . '-plugin-styles', plugins_url( 'assets/css/search-filter'.$file_ext, __FILE__ ), array(), self::VERSION );
 		}
@@ -642,7 +667,7 @@ class Search_Filter {
 	public function register_scripts() {
 		
 		global $searchandfilter;
-		
+
 		$file_ext = '.min.js';
 		if(SEARCH_FILTER_DEBUG==true)
 		{
@@ -656,18 +681,9 @@ class Search_Filter {
 		//wp_register_script( $this->plugin_slug . '-plugin-jquery-i18n', '//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/i18n/datepicker-nl.js', array('jquery'), self::VERSION );
 		wp_localize_script($this->plugin_slug . '-plugin-build', 'SF_LDATA', array( 'ajax_url' => admin_url( 'admin-ajax.php' ), 'home_url' => (home_url('/')) ));
 		
-		$lazy_load_js 				= get_option( 'search_filter_lazy_load_js' );
-		$load_js_css 				= get_option( 'search_filter_load_js_css' );
-		
-		if($lazy_load_js===false)
-		{
-			$lazy_load_js = 0;
-		}
-		if($load_js_css===false)
-		{
-			$load_js_css = 1;
-		}
-		
+		$lazy_load_js 				= Search_Filter_Helper::get_option( 'lazy_load_js' );
+		$load_js_css 				= Search_Filter_Helper::get_option( 'load_js_css' );
+
 		if(($lazy_load_js!=1)&&($load_js_css==1))
 		{
 			$this->enqueue_scripts();
@@ -677,18 +693,14 @@ class Search_Filter {
 	}
 	public function enqueue_scripts()
 	{
-		$load_jquery_i18n = get_option( 'search_filter_load_jquery_i18n' );
-		$combobox_script = get_option( 'search_filter_combobox_script' );
-		if($combobox_script=="")
-		{
-			$combobox_script = "chosen";
-		}
-		
+		$load_jquery_i18n = (int)Search_Filter_Helper::get_option( 'load_jquery_i18n' );
+		$combobox_script = Search_Filter_Helper::get_option( 'combobox_script' );
+
 		wp_enqueue_script( $this->plugin_slug . '-plugin-build' );
 		wp_enqueue_script( $this->plugin_slug . '-plugin-'.$combobox_script );
 		wp_enqueue_script( 'jquery-ui-datepicker' ); 
 				
-		if($load_jquery_i18n==1)
+		if($load_jquery_i18n===1)
 		{
 			wp_enqueue_script( $this->plugin_slug . '-plugin-jquery-i18n' );
 		}
@@ -704,8 +716,7 @@ class Search_Filter {
 	 * @since    1.0.0
 	 */
 	public function create_custom_post_types() {
-		// @TODO: Define your action hook callback here
-		
+
 		$labels = array(
 		    'name'					=>	__( 'Search &amp; Filter', $this->plugin_slug ),
 			'singular_name'			=>	__( 'Search Form', $this->plugin_slug ),

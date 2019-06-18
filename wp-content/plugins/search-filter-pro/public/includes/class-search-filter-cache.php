@@ -4,8 +4,8 @@
  *
  * @package   class Search_Filter_Cache
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 class Search_Filter_Cache
@@ -71,69 +71,9 @@ class Search_Filter_Cache
             }
 
             $this->initial_filters = $filters;
-            /*Search_Filter_Helper::start_log("init_filters");
-            $this->init_filters($filters); //filters are taxonomies or post meta - they are stored in the caching DB for fast calls
-            Search_Filter_Helper::finish_log("init_filters");*/
-
         }
     }
 
-    /*private function filter_query_inherited_defaults($args)
-    {
-        if (isset($this->form_settings['inherit_current_post_type_archive'])) {
-            if ($this->form_settings['inherit_current_post_type_archive'] == "1") {
-                if (is_post_type_archive()) {
-                    $post_type_slug = get_post_type();
-
-                    if ($post_type_slug) {
-                        $args['post_type'] = $post_type_slug;
-                        //$args['post_type'] = array($post_type_slug);
-                    }
-
-                } else if (is_home()) {//this is the same as the "posts" archive
-
-                }
-            }
-        }
-
-        if (isset($this->form_settings['inherit_current_taxonomy_archive'])) {
-            if ($this->form_settings['inherit_current_taxonomy_archive'] == "1") {
-                global $searchandfilter;
-                $term = $searchandfilter->get_queried_object();
-
-                if (is_tax()) {
-                    $args['tax_query']['relation'] = "AND";
-                    $args['tax_query'][] = array(
-                        'taxonomy' => $term->taxonomy,
-                        'field' => 'id',
-                        //'terms'    => $this->lang_object_ids(array_map("intval" , array($term->term_id), $key)),
-                        'terms' => array($term->term_id),
-                        'operator' => "IN"
-                    );
-                } else if (is_category()) {
-                    $args['category__in'] = array($term->term_id);
-                } else if (is_tag()) {
-                    $args['tag__in'] = array($term->term_id);
-                }
-
-
-            }
-        }
-
-
-        if (isset($this->form_settings['inherit_current_author_archive'])) {
-            if ($this->form_settings['inherit_current_author_archive'] == "1") {
-                if (is_author()) {
-                    global $searchandfilter;
-                    $author = $searchandfilter->get_queried_object();
-
-                    $args['author'] = $author->ID; //here we set the post types that we want WP to search
-                }
-            }
-        }
-
-        return $args;
-    }*/
 
     //the main function, setup query from the cache based on filters, then allow users to hook in to modify query, then init the count variables - eg "term (22)"
     function init_all_filter_terms()
@@ -145,9 +85,7 @@ class Search_Filter_Cache
     {
         global $wpdb;
 
-        $this->use_transients = get_option( 'search_filter_cache_use_transients' );
-
-        $this->load_only_active_filters = true;
+        $this->use_transients = Search_Filter_Helper::get_option( 'cache_use_transients' );
 
         if (isset($this->form_settings['enable_auto_count'])) {
             if ($this->form_settings['enable_auto_count'] == 1) {
@@ -162,10 +100,8 @@ class Search_Filter_Cache
             }
         }
 
-
         //Search_Filter_Helper::start_log("Total time to complete query prep");
         //Search_Filter_Helper::start_log("----- Total time");
-
 
         //Search_Filter_Helper::start_log("init_filters");
         $this->init_filters($this->initial_filters); //filters are taxonomies or post meta - they are stored in the caching DB for fast calls
@@ -202,9 +138,7 @@ class Search_Filter_Cache
             }
         }
         //Search_Filter_Helper::finish_log("Total time to complete count query");
-
         //Search_Filter_Helper::finish_log("----- Total time", true, true);
-
         //echo "Loop time: ".round($this->const_time, 5)."<hr />";
 
         return $this->query_args;
@@ -213,11 +147,14 @@ class Search_Filter_Cache
 
     public function init_hidden_filters()
     {
-        //var_dump($this->initial_filters);
         global $searchandfilter;
         $display_results_as = $searchandfilter->get($this->sfid)->settings("display_results_as");
         $enable_taxonomy_archives = $searchandfilter->get($this->sfid)->settings("enable_taxonomy_archives");
-        $post_types = array_keys($searchandfilter->get($this->sfid)->settings("post_types"));
+        
+		if(!$searchandfilter->get($this->sfid)->settings("post_types")){
+			return;
+		}
+	    $post_types = array_keys($searchandfilter->get($this->sfid)->settings("post_types"));
 
         if ((($display_results_as == "post_type_archive")||($display_results_as == "custom_woocommerce_store"))&&($enable_taxonomy_archives == 1))
         {
@@ -227,7 +164,12 @@ class Search_Filter_Cache
 
             $post_type = $post_types[0];
 
-            if(Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type))
+            $single = true;
+            if($display_results_as == "custom_woocommerce_store"){
+	            $single = false;
+            }
+
+            if(Search_Filter_Wp_Data::is_taxonomy_archive_of_post_type($post_type, $single))
             {
                 $term = $searchandfilter->get_queried_object();
                 $taxonomy_name = $term->taxonomy;
@@ -273,17 +215,16 @@ class Search_Filter_Cache
 
     public function init_filters($filters)
     {
-        //global $searchandfilter;
 
         foreach ($filters as $filter_name) {
 
+
             $filter_name_get = str_replace(array(" ", "."), "_", $filter_name); //replace space with `_` as this is done anyway - spaces are not allowed in GET variable names, and are automatically converted by server/browser to `_`
 
-            if(!isset($this->filters[$filter_name])) {
+            if(!isset($this->filters[$filter_name]) ) {
 
                 $this->filters[$filter_name] = array();
 
-                //echo "resetting field: $filter_name<hr />";
                 $taxonomy_types = array("tag", "category", "taxonomy");
 
                 $this->filters[$filter_name]['type'] = "choice";
@@ -377,7 +318,6 @@ class Search_Filter_Cache
 
                     if (isset($_GET[$filter_name_get])) {
                         //get the value and parse it - might need to parse different for meta
-
                         $filter_value = sanitize_text_field($_GET[$filter_name_get]);
                         $this->filters[$filter_name]['active_values'] = $this->parse_get_value($filter_value, $filter_name, $this->filters[$filter_name]['source']);
                         $this->filters[$filter_name]['is_active'] = true;
@@ -621,8 +561,6 @@ class Search_Filter_Cache
 
 
             //all the IDs used for setting up queries & counts
-            //echo "setting up term: $term_name ";
-            //echo "<br />";
             if(empty($this->filters[$filter_name]['terms'][$term_name])) {
                 $this->filters[$filter_name]['terms'][$term_name]['cache_result_ids'] = array();
                 $this->filters[$filter_name]['terms'][$term_name]['wp_query_results_ids'] = array();
@@ -779,19 +717,15 @@ class Search_Filter_Cache
             /*$cache_key = 'cached_field_terms_results_'.$this->sfid;
             $cached_field_terms_results = array();
 
-            if($this->use_transients==1)
-            {
+            if($this->use_transients==1){
                 $cached_field_terms_results = Search_Filter_Wp_Cache::get_transient( $cache_key );
             }
 
-            if((!empty($cached_field_terms_results))&&($this->use_transients==1))
-            {
+            if((!empty($cached_field_terms_results))&&($this->use_transients==1)){
                 $this->field_terms_results = $cached_field_terms_results;
             }
-            else
-            {*/
-
-            /* too big for transient on larger sites atm, plus, the query is quite basic already */
+            else {
+                // too big for transient on larger sites atm, plus, the query is quite basic already */
                 $this->field_terms_results = $wpdb->get_results(
                     "
                 SELECT field_name, field_value, result_ids
@@ -799,9 +733,7 @@ class Search_Filter_Cache
                 WHERE $filter_query_sql
                 "
                 );
-
-                /*var_dump($this->field_terms_results);
-
+                /*
                 if($this->use_transients==1) {
                     Search_Filter_Wp_Cache::set_transient( $cache_key, $this->field_terms_results);
                 }
@@ -812,18 +744,7 @@ class Search_Filter_Cache
             $already_init = true;
         }
 
-        /*$treat_child_posts_as_parent = false;
-        if (isset($this->form_settings["treat_child_posts_as_parent"])) {
-            $treat_child_posts_as_parent = (bool)$this->form_settings["treat_child_posts_as_parent"];
-        }
-        */
-        //$treat_child_posts_as_parent = false;
-
-        $parent_convert_ids = array();
         $cache_term_results = array();
-
-
-
 
         foreach ($this->field_terms_results as $term_result) {
             $setup_term = true;
@@ -864,28 +785,28 @@ class Search_Filter_Cache
                         }
                     }
                 }
-            }
-
-
-            if ($setup_term) {
-                $cache_term_results[$term_result->field_name][$field_value] = explode(",", $term_result->result_ids);
-
-                //this captures all the post IDs S&F has found from its tables, can add overhead
-                $register_result_ids = false;
-                if(has_filter('sf_query_cache_register_all_ids')) {
-                    $register_result_ids = apply_filters('sf_query_cache_register_all_ids', $register_result_ids, $this->sfid);
-                }
-                if($register_result_ids==true)
-                {
-                    $this->register_result_ids($cache_term_results[$term_result->field_name][$field_value]);
-                }
 
             }
+            else if($this->is_meta_key($term_result->field_name)) {
+	            //true
+            }
+
+			if ( $setup_term ) {
+
+				$cache_term_results[ $term_result->field_name ][ $field_value ] = explode( ",", $term_result->result_ids );
+
+				//this captures all the post IDs S&F has found from its tables, can add overhead
+				$register_result_ids = false;
+				if ( has_filter( 'sf_query_cache_register_all_ids' ) ) {
+					//check to see if this should be enabled
+					$register_result_ids = apply_filters( 'sf_query_cache_register_all_ids', $register_result_ids, $this->sfid );
+				}
+				if ( $register_result_ids == true ) {
+					$this->register_result_ids( $cache_term_results[ $term_result->field_name ][ $field_value ] );
+				}
+
+			}
         }
-
-
-
-        //var_dump($this->field_terms_results);
 
 
         //if(!$already_init) {
@@ -991,14 +912,24 @@ class Search_Filter_Cache
 
             } else {
 
+
                 /* todo should this be $term_name or "value" */
-                if(!isset($this->filters[$filter_name]['terms'][$term_name]['cache_result_ids'])) {
+
+	            if ($filter['type'] == "date") {
+		            foreach ($field_terms as $term_name => $tval) {
+			            $this->filters[$filter_name]['terms']['value']['cache_result_ids'] = $this->get_cache_number_ids($filter_name, $term_name, $this->filters[$filter_name]);
+		            }
+	            }
+
+
+
+                /*if(!isset($this->filters[$filter_name]['terms'][$term_name]['cache_result_ids'])) {
                     if ($filter['type'] == "date") {
                         foreach ($field_terms as $term_name => $tval) {
                             $this->filters[$filter_name]['terms'][$term_name]['cache_result_ids'] = $this->get_cache_number_ids($filter_name, $term_name, $this->filters[$filter_name]);
                         }
                     }
-                }
+                }*/
             }
 
         }
@@ -1041,6 +972,7 @@ class Search_Filter_Cache
             }
 
             if ($filter['is_active'] == true) {
+
 
                 $field_terms = $filter["terms"];
                 $active_values = $filter["active_values"];
@@ -1090,21 +1022,17 @@ class Search_Filter_Cache
                         }
                     }
 
-
                     $cache_key = 'cached_inactive_result_ids_'.$this->sfid."_".$filter_name;
                     $cached_inactive_result_ids_trans = array();
 
-                    if($this->use_transients==1)
-                    {
+                    if($this->use_transients==1) {
                         $cached_inactive_result_ids_trans = Search_Filter_Wp_Cache::get_transient( $cache_key );
                     }
 
-                    if((!empty($cached_inactive_result_ids_trans))&&($this->use_transients==1))
-                    {
+                    if((!empty($cached_inactive_result_ids_trans))&&($this->use_transients==1)) {
                         $cached_inactive_result_ids = $cached_inactive_result_ids_trans;
                     }
-                    else
-                    {
+                    else {
                         $cached_inactive_result_ids = $this->combine_result_arrays($filter_term_ids, "or");
 
                         if($this->use_transients==1) {
@@ -1160,10 +1088,6 @@ class Search_Filter_Cache
                     $combined_results = $this->array_merge_hash($combined_results, $result_ids); //pass smaller array first due optmisiations
 
                 } else {
-
-                    /* todo */
-                    //$combined_results = array_intersect($combined_results, $result_ids);
-
                     $array_keys = array();
                     $arr_count = count($result_ids);
 
@@ -1176,9 +1100,8 @@ class Search_Filter_Cache
 
             }
         }
-        /* todo */
-        //$combined_results = array_unique($combined_results);
 
+        //$combined_results = array_unique($combined_results);
         $combined_results = array_keys($combined_results);
 
         return $combined_results;
@@ -1392,58 +1315,6 @@ class Search_Filter_Cache
 				",
                 $start_field_name, $end_field_name, $min_value, $max_value, $min_value, $max_value, $min_value, $max_value, $min_value, $max_value
             ) );
-            /*"
-            WHERE
-				(
-					cast(field_value_min AS $cast_type) >= cast(%s as $cast_type) AND
-					cast(field_value_max AS $cast_type) <= cast(%s as $cast_type)
-				)
-				OR
-				(
-					cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-					cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-				)
-				OR
-				(
-					cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-					cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-				)
-
-
-
-
-            SELECT post_id, post_parent_id, field_value_min, field_value_max FROM
-                (SELECT min_table.post_id as post_id, min_table.post_parent_id as post_parent_id, min_table.field_value as field_value_min, max_table.field_value as field_value_max
-                FROM (SELECT post_id, post_parent_id, field_value FROM $this->table_name WHERE field_name = '%s') AS min_table
-                LEFT JOIN (SELECT post_id, field_value FROM $this->table_name WHERE field_name = '%s') AS max_table
-                ON min_table.post_id = max_table.post_id) as range_table
-            WHERE
-            (
-                cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-                cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-            )
-            OR
-            (
-                cast(field_value_min AS $cast_type) >= cast(%s as $cast_type) AND
-                cast(field_value_max AS $cast_type) <= cast(%s as $cast_type)
-            )
-            OR
-            (
-                cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-                cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-            )
-            OR
-            (
-                cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-                cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-            )
-            OR
-            (
-                cast(field_value_min AS $cast_type) <= cast(%s as $cast_type) AND
-                cast(field_value_max AS $cast_type) >= cast(%s as $cast_type)
-            )
-            ",*/
-
         }
 
         $treat_child_posts_as_parent = false;
@@ -1546,11 +1417,10 @@ class Search_Filter_Cache
         $final_filtered_ids = array();
 
         $post__in = array();
-        //no filters have been set, so just use all the Post IDs in the cache
 
+        //no filters have been set, so just use all the Post IDs in the cache
         if((count($filter_ids_choices)==0))
         {//no filters have been set
-
             //$this->post__in = $this->all_post_ids_cached;
             $final_filtered_ids['choice_ids'] = $this->all_post_ids_cached;
         }
@@ -1558,7 +1428,9 @@ class Search_Filter_Cache
         {
             //filter the final result from all post IDs and choice filters
             $final_filtered_ids['choice_ids'] = $this->filter_results_ids($filter_ids_choices, $this->all_post_ids_cached, $this->filter_operator);
+
         }
+
 
         if((count($filter_ids_extra)==0))
         {//no filters have been set
@@ -1572,7 +1444,9 @@ class Search_Filter_Cache
             $final_filtered_ids['extra_ids'] = $this->combine_result_arrays($filter_ids_extra, "and");
         }
 
-        //now we setup the actual query - and apply users' `pre_get_posts`
+
+
+	    //now we setup the actual query - and apply users' `pre_get_posts`
 
         //usually used internally to setup the query
         if(has_filter('sf_edit_query_args')) {
@@ -1591,26 +1465,22 @@ class Search_Filter_Cache
 
             if(isset($user_arr['user_filter'][0]))
             {
-                if($user_arr['user_filter'][0]==false)
+                if($user_arr['user_filter'][0]===false)
                 {
                     $merge_custom_filter = false;
                 }
 
             }
 
-            if($merge_custom_filter==true)
-            {
+            if($merge_custom_filter==true){
                 $final_filtered_ids['extra_ids'] = $this->combine_result_arrays($user_arr, "and");
             }
         }
 
         $count = 0;
-
-
         $this->filter_ids_extra = $final_filtered_ids['extra_ids'];
 
         $post__in = $this->combine_result_arrays($final_filtered_ids, "and");
-
 
         if(has_filter('sf_edit_query_args_after_custom_filter')) {
             $this->query_args = apply_filters('sf_edit_query_args_after_custom_filter', $this->query_args, $this->sfid);
@@ -1620,6 +1490,9 @@ class Search_Filter_Cache
         //now remove excluded post IDs from the included IDs as these overwrite the excluded posts types too
         if(isset($this->query_args['post__not_in']))
         {
+        	if(!is_array($this->query_args['post__not_in'])){
+		        $this->query_args['post__not_in'] = array($this->query_args['post__not_in']);
+	        }
             $post__in = array_diff($post__in, $this->query_args['post__not_in']);
 
             /* todo check if we need to unset Post__not_in */
@@ -1637,12 +1510,14 @@ class Search_Filter_Cache
             $post__in = array(0); //force no search results on query if no post IDs are included
         }
 
-        if(has_filter("sf_query_cache_post__in"))
+
+	    if(has_filter("sf_query_cache_post__in"))
         {
             $post__in = apply_filters('sf_query_cache_post__in', $post__in, $this->sfid);
         }
 
-        //setup the query args for the main search query
+
+	    //setup the query args for the main search query
         $expand_args = array(
             'post__in'      				=> $post__in
         );
@@ -1676,9 +1551,8 @@ class Search_Filter_Cache
 
         $count_vars_trans = array();
         if(($this->use_transients==1)&&($query_str==""))
-        {
+        {//this works by ignoring taxonomy archives if they are set, because the taxonomy archive still sets `query_str`
             $count_vars_trans = Search_Filter_Wp_Cache::get_transient( $cache_key );
-            //var_dump($count_vars_trans);
         }
 
         if((!empty($count_vars_trans))&&($count_vars_trans!==false)&&($query_str=="")&&($this->use_transients==1))
@@ -1687,18 +1561,10 @@ class Search_Filter_Cache
             return;
         }
 
-
         $this->count_data['current_filtered_result_ids'] = array();
         $this->count_data['current_unfiltered_result_ids'] = array();
 
         //now setup the counts for the filters
-
-
-        /*$start_time = microtime(true);
-        $end_time = microtime(true);
-        $total_time = $end_time - $start_time;
-        $this->const_time += $total_time;*/
-
 
         //Search_Filter_Helper::start_log("set_count_filtered_post_ids");
         $this->set_count_filtered_post_ids();//get the IDs of the full result set of the current search
@@ -1756,12 +1622,13 @@ class Search_Filter_Cache
             $combine_results['cached_ids']  = $filter['cached_inactive_result_ids'];
             $combine_results['filtered_ids']  = $this->count_data['current_filtered_result_ids'];
 
-            //echo "<pre>";
-            //echo "cached IDS: $filter_name | ".count($filter['cached_result_ids'])." | ".count($filter['cached_inactive_result_ids'])." | "."<br />\n";
-            //var_dump($filter['cached_result_ids']);
-            //echo "</pre>";
-            $this->filters[$filter_name]['wp_query_active_result_ids'] = $this->combine_result_arrays($combine_results, "and");
+	        //so we need to combine these two, but cached_ids use variations etc, but the `filtered_ids` are from live query, which means they've already been converted to parent...
+	        /*if(has_filter("sf_query_cache_count_id_numbers")) {
+		        $combine_results['cached_ids'] = apply_filters('sf_query_cache_count_id_numbers', $combine_results['cached_ids'], $this->sfid);
+	        }
+	        */
 
+	        $this->filters[$filter_name]['wp_query_active_result_ids'] = $this->combine_result_arrays($combine_results, "and");
 
             /*$combine_results = array();
             $combine_results['cached_ids']  = $filter['cached_inactive_result_ids'];
@@ -1769,16 +1636,11 @@ class Search_Filter_Cache
 
             $this->filters[$filter_name]['wp_query_result_ids_unfiltered'] = $this->combine_result_arrays($combine_results, "and");
             */
-
-
-            //}
             //}
         }
-
     }
 
     /* hacky !? - was the only way to stop woocommerce modifying some queries */
-
     public function hard_remove_filters()
     {
         $remove_posts_clauses = false;
@@ -1839,14 +1701,13 @@ class Search_Filter_Cache
     }
     public function set_count_filtered_post_ids()
     {
-        //echo "------------------------<br />";
-        //echo "Starting all_filtered_post_ids WP_Query...<br />";
         //$time_start = microtime(true);
 
         //set args so we can grab the IDs of the full query (ie minus pagination)
         $expand_args = array(
             'posts_per_page' 			=> -1,
             'paged' 					=> 1,
+            //'post_status' 				=> array("publish"),
             'fields' 					=> "ids",
 
             'orderby' 					=> "", //remove sorting
@@ -1862,26 +1723,19 @@ class Search_Filter_Cache
             'update_post_term_cache' 	=> false
 
         );
-        $query_args = array_merge($this->query_args, $expand_args);
 
-        // The Query
-        //var_dump($GLOBALS['wp_filter']);
-        /*remove_filter('posts_clauses');
-        remove_filter('posts_where');*/
+        $query_args = array_merge($this->query_args, $expand_args);
 
         //$this->hard_remove_filters();
         //Search_Filter_Helper::start_log("set_count_filtered_post_ids");
-        //$this->init_filters($filters); //filters are taxonomies or post meta - they are stored in the caching DB for fast calls
-
         $query_arr = new WP_Query( $query_args );
         //Search_Filter_Helper::finish_log("set_count_filtered_post_ids");
         //$this->hard_restore_filters();
 
         if ( $query_arr->have_posts() ){
-
             $this->count_data['current_filtered_result_ids'] = $query_arr->posts;
-
         }
+
 
         //$time_end = microtime(true);
         //$total_time = $time_end - $time_start;
@@ -1900,6 +1754,7 @@ class Search_Filter_Cache
         //set args so we can grab the IDs of the full query (ie minus pagination)
         $expand_args = array(
             'posts_per_page' 			=> -1,
+            //'post_status' 				=> array("publish"),
             'paged' 					=> 1,
             'fields' 					=> "ids",
             'post__in'      			=> array(),
@@ -1918,12 +1773,14 @@ class Search_Filter_Cache
 
         );
 
+
         $query_args = array_merge($this->query_args, $expand_args);
+
 
         //$this->hard_remove_filters();
 
         // The Query
-        //Search_Filter_Helper::start_log("QUERYYYYY (set_count_unfiltered_post_ids)");
+        //Search_Filter_Helper::start_log("QUERY (set_count_unfiltered_post_ids)");
         $cache_key = 'count_unfiltered_post_ids_'.$this->sfid;
 
         $query_trans = array();
@@ -1932,31 +1789,23 @@ class Search_Filter_Cache
             $query_trans = Search_Filter_Wp_Cache::get_transient( $cache_key );
         }
 
-        //var_dump($query_trans);
         if((!empty($query_trans))&&($this->use_transients==1))
         {
             $query = $query_trans;
         }
         else
         {
+
             $query = new WP_Query( $query_args );
-
-            /*if(has_filter('sf_query')) {
-                $query = apply_filters('sf_query', $query, $this->sfid);
-            }*/
-
 
             if($this->use_transients==1) {
                 Search_Filter_Wp_Cache::set_transient( $cache_key, $query);
             }
         }
 
-        //Search_Filter_Helper::finish_log("QUERYYYYY (set_count_unfiltered_post_ids)");
         //$this->hard_restore_filters();
-
+	    //echo "\r\nLast SQL-Query: {$query->request}";
         if ( $query->have_posts() ){
-
-            //$this->count_data['current_unfiltered_result_ids'] = $query->posts;
 
             //now this is used for displaying a ton of relations types, but we need to integrate things like price and meta here so the counts update accordingly
             //we don't need to do this for the "filtered_result_ids" becuase the query has been applied to them and includes range/date restrictions
@@ -1966,8 +1815,6 @@ class Search_Filter_Cache
             $extras_result_array['filter_ids_extra'] = $this->filter_ids_extra;
 
             $this->count_data['current_unfiltered_result_ids'] = $this->combine_result_arrays($extras_result_array, "and");
-
-
         }
 
 
@@ -2002,7 +1849,6 @@ class Search_Filter_Cache
 
         foreach($this->filters as $filter_name => $filter)
         {
-
             $field_terms = $filter["terms"];
             $term_result_ids = array();
 
@@ -2023,11 +1869,13 @@ class Search_Filter_Cache
                 }
                 //}
 
-                $loopcount = 0;
+                //$loopcount = 0;
                 foreach($field_terms as $term_name => $term)
                 {
+                	//echo $filter_name. " | ".$term_name." | ".$this->filter_operator." | ".$filter['term_operator']."\r\n";
                     if($filters_active)
                     {
+
                         if($this->filter_operator=="or")
                         {
 
@@ -2068,17 +1916,11 @@ class Search_Filter_Cache
                                 $combined_results['unfiltered_results'] = $results_incl_current_field;
 
                                 $term_result_ids = $this->combine_result_arrays($combined_results, "and");
-
-                                /*$combined_results = array();
-                                $combined_results['cache_result_ids'] = $term['cache_result_ids'];
-                                $combined_results['unfiltered_results'] = $this->filters[$filter_name]['wp_query_result_ids'];
-
-                                $term_result_ids = $this->combine_result_arrays($combined_results, "and");*/
-
                             }
                         }
                         else if($this->filter_operator=="and")
                         {
+
                             if($filter['term_operator']=="or")
                             {
                                 $combined_results = array();
@@ -2086,9 +1928,6 @@ class Search_Filter_Cache
                                 $combined_results['cache_result_ids'] = $term['cache_result_ids'];
                                 $combined_results['unfiltered_results'] = $results_excl_current_field;
 
-                                /*echo "---------------------------------------";
-                                echo count($results_excl_current_field);
-                                echo "<br />";*/
                                 $term_result_ids = $this->combine_result_arrays($combined_results, "and");
                             }
                             else if($filter['term_operator']=="and")
@@ -2101,6 +1940,8 @@ class Search_Filter_Cache
                                 $combined_results['filtered_results'] = $filter['wp_query_active_result_ids']; //combine with the IDS for this field
 
                                 $term_result_ids = $this->combine_result_arrays($combined_results, "and");
+
+
                             }
                         }
 
@@ -2112,67 +1953,36 @@ class Search_Filter_Cache
                         $combined_results['cache_result_ids'] = $term['cache_result_ids'];
                         //$combined_results['filtered_results'] = $this->count_data['current_filtered_result_ids'];
                         $combined_results['filtered_results'] = $filter['wp_query_inactive_result_ids']; //combine with the IDS for this field
-
                         $term_result_ids = $this->combine_result_arrays($combined_results, "and");
-
                     }
 
-
-
-                    /* - this is the numeric and date filters - DONT NEEEEED, we won't be showing the count, and this function is only for count! Numbers have been updated arleady because the main search is already affected...
+                    /* - this is the numeric and date filters - DONT NEED, we won't be showing the count, and this function is only for count! Numbers have been updated arleady because the main search is already affected...
                     ** ************ we are applying this filter on every field adding in valuable time, we
-                    **************** should be applying this once, before we calculate these filters - either directly on the result set or possibly on the fields themeselves
+                    **************** should be applying this once, before we calculate these filters - either directly on the result set or possibly on the fields themselves
 
                     //then we do one more calculation based on a group of items using "AND" - these are fields like price range or date range which you ALWAYs want applied to the results
-                    //$term_result_ids
-
                     $extras_result_array = array();
                     $extras_result_array['term_result_ids'] = $term_result_ids;
                     $extras_result_array['filter_ids_extra'] = $this->filter_ids_extra;
-
                     $term_result_ids = $this->combine_result_arrays($extras_result_array, "and");
+                    *********************** */
 
-                    ***********************
-                    */
-
-                    if(has_filter("sf_query_cache_count_ids"))
-                    {
-                        //echo "$filter_name | $term_name<br />";
-                        /*$del_val = 13;
-                        $del_search = array_search($del_val, $term_result_ids);
-                        //echo "del search: ".$del_search."\r\n";
-                        if($del_search !== false)
-                        {
-                            unset($term_result_ids[$del_search]);
-                        }*/
-
-                        //var_dump($term_result_ids);
-                        $term_result_ids = apply_filters('sf_query_cache_count_ids', $term_result_ids, $this->sfid);
-                    }
-
+	                if(has_filter("sf_query_cache_count_ids")) {
+		                $term_result_ids = apply_filters('sf_query_cache_count_ids', $term_result_ids, $this->sfid);
+	                }
 
                     $term_results = count($term_result_ids);
-
-                    //
 
                     $count = $term_results;
 
                     $this->filters[$filter_name]['terms'][$term_name]['count'] = $count;
-
-
-                    //$loopcount++;
-                    //echo "Did loop: $loopcount | $term_name ($count)<br />";
-
                 }
             }
             else
             {
                 //then we need to combine the extras with the filters using AND
-
                 //$filter_ids_extra[$filter_name] = $filter['cached_result_ids'];
             }
-
-
         }
 
         $this->set_count_table();
@@ -2292,15 +2102,6 @@ class Search_Filter_Cache
 
         global $wpdb;
 
-        /*$field_terms_result = $wpdb->get_results(
-            "
-            SELECT DISTINCT field_value
-            FROM $this->table_name
-            WHERE sfid = {$this->sfid}
-                AND field_name = '$field_name'
-            "
-        );*/
-
         $field_col_select = "field_value";
         if($source=="taxonomy")
         {
@@ -2321,6 +2122,14 @@ class Search_Filter_Cache
     }
 
     public function is_meta_value($key)
+    {
+        if(substr( $key, 0, 5 )===SF_META_PRE)
+        {
+            return true;
+        }
+        return false;
+    }
+		public function is_meta_key($key)
     {
         if(substr( $key, 0, 5 )===SF_META_PRE)
         {

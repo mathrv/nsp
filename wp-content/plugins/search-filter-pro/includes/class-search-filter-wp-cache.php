@@ -15,7 +15,7 @@ class Search_Filter_Wp_Cache
     public static $cache_option_name = 'search-filter-cache';
     public static $use_transients = -1;
 
-    public static function set_transient($transient_key, $data)
+    public static function set_transient($transient_key, $data, $lifespan = null)
     {
         self::update_transient_keys($transient_key);
 
@@ -23,10 +23,6 @@ class Search_Filter_Wp_Cache
         {
             return;
         }
-
-        /*echo "<pre>set_transient: $transient_key\n";
-        echo self::create_transient_key($transient_key);
-        echo "</pre>";*/
 
         //only set transients if the cache has completed..
         $update_transient = false;
@@ -45,22 +41,13 @@ class Search_Filter_Wp_Cache
         }
 
         if($update_transient) {
-            return set_transient(self::create_transient_key($transient_key), $data, self::get_transient_lifespan());
+        	if($lifespan===null){
+        		$lifespan = self::get_transient_lifespan();
+	        }
+            return set_transient(self::create_transient_key($transient_key), $data, $lifespan);
         }
 
         return false;
-
-
-        /*$result = wp_cache_get( 'my_result', 'test' );
-        if ( false === $result ) {
-            wp_cache_set( 'my_result', "aaa", "test", -1);
-        }
-        else
-        {
-            echo $result."<br />";
-        }*/
-
-
     }
 
     public static function get_transient($transient_key)
@@ -72,18 +59,8 @@ class Search_Filter_Wp_Cache
             return;
         }
 
-        /*echo "<pre>get_transient: $transient_key\n";
-        echo self::create_transient_key($transient_key);
-        var_dump(get_transient(self::create_transient_key($transient_key)));
-        echo "</pre>";*/
-
         return get_transient(self::create_transient_key($transient_key));
 
-        /*
-        $data = wp_cache_get( $transient_key, 'search-filter' );
-        //var_dump($data);
-        //echo "</pre>";
-        return $data;*/
     }
 
 
@@ -128,12 +105,13 @@ class Search_Filter_Wp_Cache
     public static function init_transient_keys($override = false)
     {
         if(self::$use_transients===-1) {
-            self::$use_transients = (int)get_option('search_filter_cache_use_transients');
+            self::$use_transients = (int)Search_Filter_Helper::get_option('cache_use_transients');
         }
 
         if((self::$use_transients===1)||($override==true)) {
             if (empty(self::$transient_keys)) {
                 $transient_keys = get_option(self::$transient_keys_key);
+
                 if (!empty($transient_keys)) {
                     self::$transient_keys = $transient_keys;
                 }

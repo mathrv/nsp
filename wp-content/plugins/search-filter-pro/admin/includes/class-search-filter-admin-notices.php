@@ -4,20 +4,12 @@
  * 
  * @package   Search_Filter_Post_Data_Validation
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
 
 /**
- * Plugin class. This class should ideally be used to work with the
- * administrative side of the WordPress site.
- *
- * If you're interested in introducing public-facing
- * functionality, then refer to `class-plugin-name.php`
- *
- * @TODO: Rename this class to a proper name for your plugin.
- *
- * @package Plugin_Name_Admin
+ * @package Search_Filter_Admin_Notices
  * @author  Your Name <email@example.com>
  */
 class Search_Filter_Admin_Notices {

@@ -4,8 +4,8 @@
  * 
  * @package   Search_Filter_Author_Walker
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
  
 class Search_Filter_Author_Object_Walker {
@@ -83,7 +83,7 @@ class Search_Filter_Author_Object_Walker {
 		foreach ( $authors as $author_id ) {
 			
 			$author = get_userdata( $author_id );
-			//var_dump($author);
+
 			if ( $exclude_admin && 'admin' == $author->display_name )
 				continue;
 

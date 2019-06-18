@@ -4,19 +4,17 @@
  * 
  * @package   Search_Filter_Taxonomy_Walker
  * @author    Ross Morsali
- * @link      http://www.designsandcode.com/
- * @copyright 2015 Designs & Code
+ * @link      https://searchandfilter.com
+ * @copyright 2018 Search & Filter
  */
- 
+
 class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 
 	
 	private $type = '';
 	private $auto_count = 0;
 	private $defaults = array();
-	private $multidepth = 0; //manually calculate depth on multiselects
-	private $multilastid = 0;
-	private $multilastdepthchange = 0;
+	private $depth_track = array();
 	private $elementno = 0; //internal counter of which element we are on
     private $term_rewrite_depth = 0;
     private $parents_names = array();
@@ -31,17 +29,15 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 	}
 	
 	function display_element( $element, &$children_elements, $max_depth, $depth=0, $args, &$output ) {
-		
+
 		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
-	
-	
+
+
 	function start_el( &$output, $taxonomy_term, $depth = 0, $args = array(), $id = 0 )
 	{
 		global $searchandfilter;
-		
-		//extract($args);
-		
+
 		$sfid = $args['sfid'];
 		$defaults = $args['defaults'];
 		$hide_empty = $args['hide_empty'];
@@ -53,8 +49,7 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 		$searchform = $searchandfilter->get($sfid);
 		$this->auto_count = $searchform->settings("enable_auto_count");
 		$this->auto_count_deselect_emtpy = $searchform->settings("auto_count_deselect_emtpy");
-		
-		
+
 		$field_name = $args['sf_name'];
 		
 		//insert a default "select all" or "choose category: " at the start of the options
@@ -116,36 +111,52 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 		{
 			$option_count = intval($taxonomy_term->count);
 		}
-		
+
+
+		$current_depth = 0;
 		if($args['hierarchical']==1)
 		{
-			// Custom  depth calculations! :/ 
-			if($taxonomy_term->parent == 0)
-			{//then this has no parent so reset depth
-				$this->multidepth = 0;
+
+
+			if($taxonomy_term->parent == 0) {
+				//then this has no parent so reset depth
+				$current_depth = 0;
+				//and reset the array tracking the parent IDs of this tree
+				$this->depth_track = array( $taxonomy_term_id ); //reset the chain
+
 			}
-			else if($taxonomy_term->parent == $this->multilastid)
-			{
-				$this->multidepth++;
-				$this->multilastdepthchange = $this->multilastid;
-			}
-			else if($taxonomy_term->parent == $this->multilastdepthchange)
-			{//then this is also a child with the same parent so don't change depth
-				
-			}
-			else
-			{//then this has a different parent so must be lower depth
-				if($this->multidepth>0)
-				{
-					$this->multidepth--;
-					
-					$this->multilastdepthchange = $taxonomy_term->parent;
+			else {
+
+				//check to see if the parent ID is somewhere in the depth tracker
+				//array_search( $taxonomy_term->parent, $this->depth_track, true );
+				$depth_length = count($this->depth_track);
+
+				$found_parent_depth = array_search( $taxonomy_term->parent, $this->depth_track );
+
+				if($found_parent_depth !== false ) {
+
+					$current_depth = $found_parent_depth + 1;
+
+					//then we found a parent, but it was at the end of the chain, so we need to extend it by
+					$this->depth_track[$current_depth] =  $taxonomy_term_id;
+
+
+				} else {
+					//depth does not yet exist, so add it
+					//array_push($this->depth_track, $current_depth);
 				}
+
+				//if the last item had the same parent ID as the previous item, then the depth stays the same
+				/*if($this->depth_track[$depth_length-1] == $taxonomy_term->parent) {
+
+				} else if($this->depth_track[$depth_length-1] == $taxonomy_term->parent) {
+
+
+				}*/
 			}
 		}
 
-
-        $this->parents_names[$this->multidepth] = $taxonomy_term->slug;
+        $this->parents_names[$current_depth] = $taxonomy_term->slug;
 
 		if((intval($hide_empty)!=1)||($option_count!=0))
 		{
@@ -153,7 +164,7 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 			$option->value = $taxonomy_term_slug;
 			//$option->selected_value = $taxonomy_term_id; //we want to match defaults based on ID
 			$option->label = $taxonomy_term_name;
-			$option->depth = $this->multidepth;
+			$option->depth = $current_depth;
 			$option->count = $option_count;
 
             //we only want to grab the term rewrite template once for each depth
@@ -164,7 +175,7 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
             }
 
 			//add classes
-			$option->attributes['class'] = SF_CLASS_PRE."level-".$this->multidepth.' '.SF_ITEM_CLASS_PRE.$taxonomy_term_id;
+			$option->attributes['class'] = SF_CLASS_PRE."level-".$current_depth.' '.SF_ITEM_CLASS_PRE.$taxonomy_term_id;
 			
 			if ( !empty($show_count) )
 			{
@@ -181,31 +192,62 @@ class Search_Filter_Taxonomy_Object_Walker extends Walker_Category {
 			//always last, after everything init
 			array_push($this->options, $option);
 		}
-		
+
 		$this->options_obj->set($this->options);
-		
-		$this->multilastid = $taxonomy_term_id;
-				
+
 		$output = '';
 	}
     private function get_term_link_template($term, $term_names)
     {
         $taxonomy_name = $term->taxonomy;
+
         $term_slug = $term->slug;
-        $term_link = get_term_link($term);
+	    //is_taxonomy_hierarchical
+        $term_link = get_term_link($term, $taxonomy_name);
         //$term_template_link = str_replace($taxonomy_name, "[taxonomy]", $term_link);
         $term_template_link = $term_link;
 
-        $term_index = 0;
-        foreach($term_names as $term_name)
-        {
-            $term_template_link = str_replace($term_name, "[$term_index]", $term_template_link);
-            $term_index++;
+		//sort the array by string length, preserving indexes
+	    uasort($term_names, array($this, 'sortStringByLength'));
+
+		$home_url_removed = false;
+	    if (strpos($term_template_link, home_url()) === 0) {
+		    $term_template_link = substr($term_template_link, strlen(home_url()));
+		    $home_url_removed = true;
+	    }
+
+	    //we need to loop[ through these terms in order
+        foreach($term_names as $term_index => $term_name){
+        	//echo $term_index. " ";
+            //$term_template_link = str_replace($term_name, "[$term_index]", $term_template_link);
+            //$term_template_link = preg_replace('/'.preg_quote($term_name).'/', "[$term_index]", $term_template_link, 1);
+	        $term_template_link = $this->str_lreplace($term_name, "[$term_index]", $term_template_link);
+            //$term_index++;
         }
+
         $term_template_link = str_replace($term_slug, "[term]", $term_template_link);
+
+	    if ($home_url_removed ===  true){
+		    $term_template_link = home_url().$term_template_link;
+	    }
 
         return $term_template_link;
     }
+	public function sortStringByLength($a,$b){
+		return strlen($b)-strlen($a);
+	}
+	function str_lreplace($search, $replace, $subject)
+	{
+		$pos = strrpos($subject, $search);
+
+		if($pos !== false)
+		{
+			$subject = substr_replace($subject, $replace, $pos, strlen($search));
+		}
+
+		return $subject;
+	}
+
 	function end_el( &$output, $page, $depth = 0, $args = array() )
 	{
 		
