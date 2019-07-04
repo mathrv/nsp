@@ -193,6 +193,16 @@ function normalize ($string) {
     return strtr($string, $table);
 }
 
+/**
+ * Remove ancient Custom Fields Metabox because it's slow and most often useless anymore
+ * ref: https://core.trac.wordpress.org/ticket/33885
+ */
+function jb_remove_post_custom_fields_now() {
+	foreach ( get_post_types( '', 'names' ) as $post_type ) {
+		remove_meta_box( 'postcustom' , $post_type , 'normal' );
+	}
+}
+add_action( 'admin_menu' , 'jb_remove_post_custom_fields_now' );
 
 //    ###     ######  ########     #######  ########  ######## ####  #######  ##    ##  ######     ########     ###     ######   ########
 //   ## ##   ##    ## ##          ##     ## ##     ##    ##     ##  ##     ## ###   ## ##    ##    ##     ##   ## ##   ##    ##  ##
@@ -246,6 +256,326 @@ if( function_exists('acf_add_options_page') ) {
 	));
 }
 
+
+//  ######  ########  ########
+// ##    ## ##     ##    ##
+// ##       ##     ##    ##
+// ##       ########     ##
+// ##       ##           ##
+// ##    ## ##           ##
+//  ######  ##           ##
+
+function cptui_register_my_cpts() {
+
+	/**
+	 * Post Type: Événements.
+	 */
+
+	$labels = array(
+		"name" => __( "Événements", "nsp" ),
+		"singular_name" => __( "Événement", "nsp" ),
+		"menu_name" => __( "Événements", "nsp" ),
+		"all_items" => __( "Tous les événements", "nsp" ),
+		"add_new" => __( "Ajouter un événement", "nsp" ),
+		"add_new_item" => __( "Ajouter un nouvel événement", "nsp" ),
+		"edit_item" => __( "Modifier l'événement", "nsp" ),
+		"new_item" => __( "Nouvel événement", "nsp" ),
+		"view_item" => __( "Voir l'événement", "nsp" ),
+		"view_items" => __( "Voir les événements", "nsp" ),
+		"search_items" => __( "Recherche un événement", "nsp" ),
+		"featured_image" => __( "Vignette de l'événement", "nsp" ),
+		"set_featured_image" => __( "Définir la vignette", "nsp" ),
+		"remove_featured_image" => __( "Supprimer la vignette", "nsp" ),
+		"use_featured_image" => __( "Définir comme vignette", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "Événements", "nsp" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "events", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "events", $args );
+
+	/**
+	 * Post Type: Partenaires.
+	 */
+
+	$labels = array(
+		"name" => __( "Partenaires", "nsp" ),
+		"singular_name" => __( "Partenaire", "nsp" ),
+		"menu_name" => __( "Partenaires", "nsp" ),
+		"all_items" => __( "Tous les partenaires", "nsp" ),
+		"add_new" => __( "Ajouter un partenaire", "nsp" ),
+		"add_new_item" => __( "Ajouter un nouveau partenaire", "nsp" ),
+		"edit_item" => __( "Modifier le partenaire", "nsp" ),
+		"new_item" => __( "Nouveau partenaire", "nsp" ),
+		"view_item" => __( "Voir le partenaire", "nsp" ),
+		"view_items" => __( "Voir les partenaires", "nsp" ),
+		"search_items" => __( "Rechercher unpartenaire", "nsp" ),
+		"featured_image" => __( "Logo partenaire", "nsp" ),
+		"set_featured_image" => __( "Définir le logo partenaire", "nsp" ),
+		"remove_featured_image" => __( "Supprimer le logo partenaire", "nsp" ),
+		"use_featured_image" => __( "Définir comme logo partenaire", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "Partenaires", "nsp" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "partners", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "thumbnail" ),
+	);
+
+	register_post_type( "partners", $args );
+
+	/**
+	 * Post Type: Participants.
+	 */
+
+	$labels = array(
+		"name" => __( "Participants", "nsp" ),
+		"singular_name" => __( "Participant", "nsp" ),
+		"menu_name" => __( "Participants", "nsp" ),
+		"all_items" => __( "Tous les participants", "nsp" ),
+		"add_new" => __( "Ajouter un participant", "nsp" ),
+		"add_new_item" => __( "Ajouter un nouveau participant", "nsp" ),
+		"edit_item" => __( "Modifier le participant", "nsp" ),
+		"new_item" => __( "Nouveau participant", "nsp" ),
+		"view_item" => __( "Voir le participant", "nsp" ),
+		"view_items" => __( "Voir les participants", "nsp" ),
+		"search_items" => __( "Rechercher un participant", "nsp" ),
+		"featured_image" => __( "Logo du particiapant", "nsp" ),
+		"set_featured_image" => __( "Définir le logo du participant", "nsp" ),
+		"remove_featured_image" => __( "Supprimer le logo du participant", "nsp" ),
+		"use_featured_image" => __( "Définir comme logo du participant", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "Participants", "nsp" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "participants", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "participants", $args );
+
+  /**
+	 * Post Type: FAQs.
+	 */
+
+	$labels = array(
+		"name" => __( "FAQs", "nsp" ),
+		"singular_name" => __( "FAQ", "nsp" ),
+		"menu_name" => __( "Faqs", "nsp" ),
+		"all_items" => __( "Faqs", "nsp" ),
+		"add_new" => __( "Ajouter", "nsp" ),
+		"add_new_item" => __( "Ajouter une nouvelle FAQ", "nsp" ),
+		"edit_item" => __( "Modifier FAQ", "nsp" ),
+		"new_item" => __( "Nouvelle FAQ", "nsp" ),
+		"view_item" => __( "Voir FAQ", "nsp" ),
+		"view_items" => __( "voir FAQs", "nsp" ),
+		"search_items" => __( "Rechercher une FAQ", "nsp" ),
+		"not_found" => __( "Introuvable", "nsp" ),
+		"not_found_in_trash" => __( "Introuvable dans la corbeille", "nsp" ),
+		"featured_image" => __( "Image liée à la FAQ", "nsp" ),
+		"set_featured_image" => __( "Lier une image", "nsp" ),
+		"remove_featured_image" => __( "Supprimer l'image liée", "nsp" ),
+		"use_featured_image" => __( "Utiliser en tant qu'image liée", "nsp" ),
+		"archives" => __( "Archives", "nsp" ),
+		"insert_into_item" => __( "Ajouter dans la FAQ", "nsp" ),
+		"items_list" => __( "Liste FAQ", "nsp" ),
+		"attributes" => __( "Attributs FAQ", "nsp" ),
+		"name_admin_bar" => __( "FAQ", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "FAQs", "nsp" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"delete_with_user" => false,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "faq", "with_front" => true ),
+		"query_var" => true,
+		"menu_position" => 30,
+		"menu_icon" => "dashicons-excerpt-view",
+		"supports" => array( "title", "editor", "thumbnail" ),
+	);
+
+	register_post_type( "faq", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts' );
+
+
+// ########    ###    ##     ##  #######  ##    ##  #######  ##     ## #### ########  ######
+//    ##      ## ##    ##   ##  ##     ## ###   ## ##     ## ###   ###  ##  ##       ##    ##
+//    ##     ##   ##    ## ##   ##     ## ####  ## ##     ## #### ####  ##  ##       ##
+//    ##    ##     ##    ###    ##     ## ## ## ## ##     ## ## ### ##  ##  ######    ######
+//    ##    #########   ## ##   ##     ## ##  #### ##     ## ##     ##  ##  ##             ##
+//    ##    ##     ##  ##   ##  ##     ## ##   ### ##     ## ##     ##  ##  ##       ##    ##
+//    ##    ##     ## ##     ##  #######  ##    ##  #######  ##     ## #### ########  ######
+
+function cptui_register_my_taxes() {
+
+	/**
+	 * Taxonomy: Catégories de participants.
+	 */
+
+	$labels = array(
+		"name" => __( "Catégories de participants", "nsp" ),
+		"singular_name" => __( "Catégories de participant", "nsp" ),
+		"menu_name" => __( "Catégories", "nsp" ),
+		"all_items" => __( "Toutes les catégories", "nsp" ),
+		"edit_item" => __( "Modifier la catégorie", "nsp" ),
+		"view_item" => __( "Voir la catégorie", "nsp" ),
+		"update_item" => __( "Mettre à jour le nom de la catégorie", "nsp" ),
+		"add_new_item" => __( "Ajouter une nouvelle catégorie", "nsp" ),
+		"new_item_name" => __( "Nom de la nouvelle catégorie", "nsp" ),
+		"parent_item" => __( "Catégorie parente", "nsp" ),
+		"search_items" => __( "Recherche de catégorie", "nsp" ),
+		"popular_items" => __( "Catégorie populaire", "nsp" ),
+		"separate_items_with_commas" => __( "Séparer les catégorie par des virgules", "nsp" ),
+		"add_or_remove_items" => __( "Ajouter ou supprimer des catégories", "nsp" ),
+		"choose_from_most_used" => __( "Choisir parmi les plus utilisées", "nsp" ),
+		"not_found" => __( "Non trouvée", "nsp" ),
+		"items_list_navigation" => __( "Navigation de la liste des sélections", "nsp" ),
+		"items_list" => __( "Liste des catégories", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "Catégories de participants", "nsp" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => true,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'participants_cat', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"rest_base" => "participants_cat",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"show_in_quick_edit" => false,
+		);
+	register_taxonomy( "participants_cat", array( "participants" ), $args );
+
+	/**
+	 * Taxonomy: Catégories d'événements.
+	 */
+
+	$labels = array(
+		"name" => __( "Catégories d'événements", "nsp" ),
+		"singular_name" => __( "Catégorie d'événement", "nsp" ),
+		"menu_name" => __( "Catégories", "nsp" ),
+		"all_items" => __( "Toutes les catégories", "nsp" ),
+		"edit_item" => __( "Modifier la catégorie", "nsp" ),
+		"view_item" => __( "Voir la catégorie", "nsp" ),
+		"update_item" => __( "Mettre à jour le nom de la catégorie", "nsp" ),
+		"add_new_item" => __( "Ajouter une nouvelle catégorie", "nsp" ),
+		"new_item_name" => __( "Nom de la nouvelle catégorie", "nsp" ),
+		"parent_item" => __( "Catégorie parente", "nsp" ),
+		"search_items" => __( "Recherche de catégorie", "nsp" ),
+		"popular_items" => __( "Catégorie populaire", "nsp" ),
+		"separate_items_with_commas" => __( "Séparer les catégories par des virgules", "nsp" ),
+		"add_or_remove_items" => __( "Ajouter ou supprimer des catégories", "nsp" ),
+		"choose_from_most_used" => __( "Choisir parmi les plus utilisées", "nsp" ),
+		"not_found" => __( "Non trouvée", "nsp" ),
+		"items_list_navigation" => __( "Navigation de la liste des catégories", "nsp" ),
+		"items_list" => __( "Liste des catégories", "nsp" ),
+	);
+
+	$args = array(
+		"label" => __( "Catégories d'événements", "nsp" ),
+		"labels" => $labels,
+		"public" => true,
+		"publicly_queryable" => true,
+		"hierarchical" => true,
+		"show_ui" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"query_var" => true,
+		"rewrite" => array( 'slug' => 'event_cat', 'with_front' => true, ),
+		"show_admin_column" => false,
+		"show_in_rest" => true,
+		"rest_base" => "event_cat",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"show_in_quick_edit" => false,
+		);
+	register_taxonomy( "event_cat", array( "events" ), $args );
+
+  /**
+	 * Taxonomy: Catégories de FAQ.
+	 */
+
+
+}
+add_action( 'init', 'cptui_register_my_taxes' );
+
+
+
 //  ######  ##     ##  #######  ########  ########  ######   #######  ########  ########  ######
 // ##    ## ##     ## ##     ## ##     ##    ##    ##    ## ##     ## ##     ## ##       ##    ##
 // ##       ##     ## ##     ## ##     ##    ##    ##       ##     ## ##     ## ##       ##
@@ -274,108 +604,37 @@ function faq() {
     // On rempli le tableau de questions
     $aQuestions = $q->posts;
 
-    // On crée un tableau pour y stocker les catégories uniques
-    $aQuestionsCategories = [];
-
-    // Pour chaque question
-    foreach($aQuestions as $oQuestion) {
-
-      // On récupère la catégorie
-      $aQuestionCategories = get_the_terms($oQuestion->ID, 'faq_cat');
-
-
-      // On stocke les catégories dans le tableau
-      foreach ($aQuestionCategories as $oCategory) {
-        array_push($aQuestionsCategories, $oCategory->slug);
-      }
-    }
-    // On reduit le tableau en ne gardant que les catégories uniques
-    $aQuestionsCategories = array_unique($aQuestionsCategories);
-    $wikiLogo = get_field('logo_wiki_u_color','options');
     // On crée le DOM de la FAQ
     $faq = '<section id="faq" class="faq__wrapper content-section content-section--watched js-parallax-item js-faq js-watch-section-entry" data-image-src="'.get_stylesheet_directory_uri().'/img/connected-dots-bg-blanc.svg" data-horizontal-pos="right" data-offset="200">';
       $faq .= '<div class="container">';
-      $faq .= '<h2 class="faq__title section-title section-title--faq">'.__('FAQ','wiki-university').'</h2>';
-      $faq .= '<div class="faq__header">';
-        $faq .= '<img class="faq__header-logo" src="'.wp_get_attachment_url($wikiLogo).'" alt="" />';
-        $faq .= '<div class="btn-container btn-container--centered">';
-          $faq .= '<a href="'.get_permalink(138).'" class="btn btn--small btn--primary">'.__('Poser une question sur le projet','wiki-university').'</a>';
-          $faq .= '<p class="faq__header-legend">'.__('Vous pouvez également chercher des réponses parmi les thématiques ci-dessous :','wiki-university').'</p>';
-        $faq .= '</div>';
-      $faq .= '</div>';
-      $faq .= '<ul class="faq__nav-container">';
+        //
+        $faq .= '<div class="faq__questions-container">';
+          // On set un compteur à zero pour capter le premier groupe de question
+          $i = 0;
+          $faq .= '<div class="faq__questions-list-container">';
 
-        // On set un compteur à zero pour capter la première catégorie
-        $i = 0;
-
-        // Pour chaque catégorie
-        foreach ($aQuestionsCategories as $category) {
-
-          // On recupère l'objet de la catégorie avec son slug
-          $oCategory = get_term_by('slug', $category, 'faq_cat');
-
-          // On ajoute la classe active à la première
-          if ($i === 0) {
-            $faq .= '<li class="faq__nav-item active js-faq-container-toggle" data-cat="'.$oCategory->slug.'"><a href="#" class="faq__nav-link">'.$oCategory->name.'</a></li>';
-            $i++;
-          } else {
-            $faq .= '<li class="faq__nav-item js-faq-container-toggle" data-cat="'.$oCategory->slug.'"><a href="#" class="faq__nav-link">'.$oCategory->name.'</a></li>';
-          }
-        }
-      $faq .= '</ul>'; // Fin nav FAQ
-
-      //
-      $faq .= '<div class="faq__questions-container">';
-
-      // On set un compteur à zero pour capter le premier groupe de question
-      $i = 0;
-
-      // Pour chaque catégorie
-      foreach ($aQuestionsCategories as $category) {
-
-        // On recupère l'objet de la catégorie avec son slug
-        $oCategory = get_term_by('slug', $category, 'faq_cat');
-        $categoryThumbnailID = get_field('faq_cat_thumbnail','faq_cat_'.$oCategory->term_id);
-
-        // On ajoute la classe active à la première
-        if ($i == 0) {
-          $faq .= '<div class="faq__category-container active js-category-container" data-cat="'.$category.'">';
-          $i++;
-        } else {
-          $faq .= '<div class="faq__category-container js-category-container" data-cat="'.$category.'">';
-        }
-            $faq .= '<div class="faq__thumbnail-container">';
-              if (isset($categoryThumbnailID) && !empty($categoryThumbnailID)) {
-                $faq .= wp_get_attachment_image($categoryThumbnailID,'large');
+            // Pour chaque questions
+            $i = 0;
+            foreach($aQuestions as $oQuestion) {
+              if ($i == 0) {
+                $active = 'active';
+              } else {
+                $active = '';
               }
-            $faq .= '</div>';
-            $faq .= '<div class="faq__questions-list-container">';
-
-              // Pour chaque questions
-              $i = 0;
-              foreach($aQuestions as $oQuestion) {
-                if ($i == 0) {
-                  $active = 'active';
-                } else {
-                  $active = '';
-                }
-                // On récupère le tableau de catégorie associées
-                $oQuestionCat = get_the_terms($oQuestion->ID, 'faq_cat');
-                // Si la question fait partie de la catégorie en cours on l'affiche
-                if (has_term($category,'faq_cat',$oQuestion )) {
-                  // On crée le DOM de la question
-                  $faq .= '<div class="faq__question js-question '.$active.'">';
-                    $faq .= '<h3 class="faq__question-title js-question-title"><a href="#" class="js-question-toggle">'.$oQuestion->post_title.'</a></h3>';
-                    $faq .= '<div class="faq__question-content js-question-content '.$active.'">'.apply_filters('the_content',$oQuestion->post_content).'</div>';
-                  $faq .= '</div>';
-                }
-                $i++;
+              // On récupère le tableau de catégorie associées
+              $oQuestionCat = get_the_terms($oQuestion->ID, 'faq_cat');
+              // Si la question fait partie de la catégorie en cours on l'affiche
+              if (has_term($category,'faq_cat',$oQuestion )) {
+                // On crée le DOM de la question
+                $faq .= '<div class="faq__question js-question '.$active.'">';
+                  $faq .= '<h3 class="faq__question-title js-question-title"><a href="#" class="js-question-toggle">'.$oQuestion->post_title.'</a></h3>';
+                  $faq .= '<div class="faq__question-content js-question-content '.$active.'">'.apply_filters('the_content',$oQuestion->post_content).'</div>';
+                $faq .= '</div>';
               }
-            $faq .= '</div>'; // Fin questions list container
-          $faq .= '</div>'; // Fin category container
-      }
-
-      $faq .= '</div>'; // Fin Quesiton container
+              $i++;
+            }
+          $faq .= '</div>'; // Fin questions list container
+        $faq .= '</div>'; // Fin Quesiton container
       $faq .= '</div>'; //fin .container
     $faq .= '</section>'; // Fin FAQ
 
