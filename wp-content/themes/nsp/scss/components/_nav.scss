@@ -1,0 +1,54 @@
+#menu {
+    background-color: $primary;
+    height: 100px;
+    padding: 1.5rem 2rem;
+    color: $secondary;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+    z-index: 1999;
+
+    .menu-title {
+        margin-right: 2rem;
+
+        h1 {
+          font-family: 'Roboto', sans-serif;
+          font-size: 1.2rem;
+          line-height: 30px;
+          font-weight: 100;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    .menu {
+        flex-grow: 1;
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+
+            li {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 0.8rem;
+                line-height: 40px;
+                font-weight: 600;
+
+                a {
+                    color: inherit;
+                }
+            }
+        }
+    }
+}
+
+#content {
+    margin-top: 68px;
+}

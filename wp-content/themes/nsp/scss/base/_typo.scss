@@ -1,4 +1,4 @@
-h1 { line-height: 1.1; font-size: 19px; color: $primary; font-family: clan-bold;
+h1 { line-height: 1.1; font-size: 19px; font-family: clan-bold;
   ~ h3 {
     font-size: $fz--text; color: $primary;
   }
@@ -9,4 +9,21 @@ h3 { line-height: 1.3; }
 p{ font-size: $fz--text; line-height: 1.5; font-family: 'verdana'; color:$text-color; padding-bottom: 10px;
   em {font-style: italic;}
   &:last-of-type { padding-bottom: 0;}
+}
+
+
+.f-primary {
+  color: $primary;
+}
+
+.f-white {
+	color:  white;
+}
+
+.f-secondary {
+	color: $secondary;
+}
+
+.f-bolder {
+	font-weight: 600;
 }
