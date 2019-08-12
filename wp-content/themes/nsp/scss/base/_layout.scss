@@ -19,3 +19,47 @@
 .flex-j-sb {
 	justify-content: space-between;
 }
+
+.flex-a-fs {
+	align-items: flex-start;
+}
+
+.nsp-background {
+	background-image: url('img/nsp/vague.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: 1530px;
+	display: flex;
+	justify-content: space-around;
+	position: relative;
+
+	&-logo {
+		background-image: url('img/nsp/verre.png');
+		background-repeat: no-repeat;
+		height: 870px;
+		width: 70%;
+		position: relative;
+
+		.logo {
+			position: absolute;
+			left: 50%;
+			top: 5rem;
+			transform: translateX(-50%);
+		}
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		margin-top: 5rem;
+		margin-bottom: 2rem;
+	}
+
+	&-content {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		background-color: white;
+		padding: 5rem;
+	}
+}

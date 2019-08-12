@@ -1,9 +1,34 @@
-        <a href="#" class="back-top js-back-top hide" aria-label="Retour en haut de page"></a>
-      </div><!-- fin #content-wrapper -->
-      <footer id="footer" class="footer-copyright__wrapper">
-        <div class="container">
-          <div id="copyright" class="footer-copyright__copyright">
-            <p>&copy; <?php echo esc_html( date_i18n( __( 'Y', 'blankslate' ) ) ); ?> -&nbsp;Nantes Beer Club</p>
+  <a href="#" class="back-top js-back-top hide" aria-label="Retour en haut de page"></a>
+</div><!-- fin #content-wrapper -->
+      <footer id="footer" class="footer">
+        <div class="">
+          <div class="footer-questions">
+            <div class="footer-questions-texte">
+                <h2>Des questions ?</h2>
+                <div>
+                  <button>Contact</button>
+                  <button>Faq</button>
+                  <button>Infos pratique</button>
+                </div>
+            </div>
+            <div class="footer-questions-img">
+              <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/verre-footer.png">
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div class="footer-bottom-logos">
+              <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoNbc.svg">
+              &
+              <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoCafard.svg">
+            </div>
+            <div>
+              <a href="">Mentions Légales</a>
+              <a href="">Plan du site</a>
+              <a href="">Contact</a>
+            </div>
+            <div>
+              <p>&copy; <?php echo esc_html( date_i18n( __( 'Y', 'blankslate' ) ) ); ?> -&nbsp;Nantes Beer Club</p>
+            </div>            
           </div>
         </div>
       </footer>

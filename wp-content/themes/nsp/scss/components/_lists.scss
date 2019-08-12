@@ -1,0 +1,72 @@
+.nsp-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+
+	&-element {
+		width: 48%;
+		// height: 385px;
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 5rem;
+		// background-color: grey;
+
+		&:hover {
+			.nsp-list-element-logo {
+				opacity: 0.1;
+			}
+		}
+
+		&-logo {
+			max-width: 100%;
+			width: 100%;
+			height: auto;
+			display: block;
+		}
+
+		&-content {
+			position: absolute;
+			width: 90%;
+			height: 90%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+			opacity: 1;
+
+			&:hover {
+				border: 2px solid $secondary;
+				box-sizing: border-box;
+				opacity: 1;
+
+				.btn {
+					border: none;
+				}
+
+				p {
+					display: block;
+					color: $secondary;
+					text-transform: uppercase;
+					margin-left: 4rem;
+				}
+			}
+
+			a.btn {
+				height: 100%;
+				align-self: flex-end;
+			}
+
+			p {
+				display: none;
+			}
+		}
+	}
+}

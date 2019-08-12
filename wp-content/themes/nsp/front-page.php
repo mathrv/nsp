@@ -1,8 +1,8 @@
 <?php get_header(); ?>
 <main id="content">
-	<div class="nsp-home-presentation">
-		<div class="nsp-home-presentation-logo">
-			<img src= "<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/logo.png"/>
+	<div class="nsp-background nsp-home-presentation">
+		<div class="nsp-background-logo">
+			<img class="logo" src= "<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/logo.png"/>
 		</div>
 		<div class="nsp-home-presentation-texte"> 
 			<div class="f-light f-primary">
@@ -23,7 +23,7 @@
 		<div class="nsp-home-presentation-participants">
 			<div class="nsp-home-presentation-participants-header">
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/groupeverres.png">
-				<a href="" class="btn btn-pink">
+				<a href="<?php echo get_the_permalink(11); ?>" class="btn btn-pink">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
 				</a>
 			</div>
@@ -34,7 +34,7 @@
 					<p>Distributeurs</p>
 					<p>Foodtruck</p>
 					<p>Autres</p>
-					<a href="<php echo get_the_permalink(13); ?>" class="btn btn-blue">
+					<a href="<?php echo get_the_permalink(15); ?>" class="btn btn-blue">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg">
 					</a>
 				</div>
@@ -58,7 +58,24 @@
 					<div class="blue">Jeudi</div>
 					<div class="blue">Vendredi</div>
 				</div>
-				<a href="" class="btn btn-blue">
+				<a href="<?php echo get_the_permalink(13); ?>" class="btn btn-blue">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg">					
+				</a>
+			</div>
+			<div class="flex flex-j-sb nsp-home-programme-fond-block">
+				<div class="nsp-home-programme-fond-block-description">
+					<h3 class="f-primary f-light">La pression</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+				</div>
+				<div class="nsp-home-programme-fond-block-jours">
+					<div class="yellow">Samedi</div>
+					<div class="yellow">Dimanche</div>
+					<div class="yellow">Billetterie</div>
+					<div class="yellow"></div>
+				</div>
+				<a href="<?php echo get_the_permalink(13); ?>" class="btn btn-blue">
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg">					
 				</a>
 			</div>
