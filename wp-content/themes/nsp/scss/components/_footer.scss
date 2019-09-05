@@ -1,4 +1,31 @@
 .footer {
+	h2 {
+		text-transform: uppercase;
+		font-size: 2.8rem;
+		margin-bottom: 4rem;
+	}
+
+	&-partenaires {
+		padding: 4rem;
+		font-family: 'Open Sans';
+		font-weight: 800;
+		text-align: center;
+
+		@media(max-width: 1060px) {
+			padding: 1rem 0;
+			p {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-between;
+			}
+
+			a {
+				width: 50%;
+
+			}
+		}
+	}
+
 	&-questions {
 		display: flex;
 		align-items: flex-start;
@@ -6,14 +33,59 @@
 		&-texte {
 			background-color: $primary;
 			width: 80%;
-			padding: 10rem;
+			padding: 7.2rem;
 			text-align: center;
+			font-family: 'Open Sans';
+			font-weight: 800;
+
+			@media(max-width: 1060px) {
+				width: 100%;
+			}
 
 			h2 {
 				color: white;
 				text-transform: uppercase;
 				font-size: 2.8rem;
 				margin-bottom: 4rem;
+			}
+
+			div {
+				display: flex;
+				justify-content: space-between;
+
+				@media(max-width: 1060px) {
+					flex-wrap: wrap;
+					justify-content: center;
+
+					a {
+						align-self: center;
+						margin-bottom: 1rem;
+						margin-right: 1rem;
+					}
+				}
+			}
+		}
+
+		&-img {
+			@media(max-width: 1060px) {
+				display: none;
+			}
+		}
+	}
+
+	&-bottom { 
+		max-height: 80px;
+		padding: 4rem;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		&-logos {
+			display: flex;
+			align-items: center;
+
+			img {
+				max-height: 80px;
 			}
 		}
 	}

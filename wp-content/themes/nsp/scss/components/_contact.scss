@@ -30,3 +30,84 @@
     &__wiki-logo { transform: translateY(0); margin: 20px 0;}
   }
 }
+
+.gform_wrapper {
+  form {
+    display: flex;
+    font-family: 'Roboto Slab' !important;
+
+    .gform_body {
+      width: 80%;
+
+      ul {
+        position: relative;
+      }
+
+      .contact-subject {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 45%;
+        select {
+          width: 100%;
+          background-color: $secondary;
+          color: white;
+
+          &:focus {
+            outline: none;
+          }
+        }
+      }
+
+      .contact-message {
+        position: absolute;
+        right: 0;
+        top: 2rem;
+        width: 45%;
+      }
+    }
+
+    .gform_footer {
+      width: 20%;
+    }
+
+    input[type=text] {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $primary;
+      font-family: 'Roboto Slab' !important;
+      color: $primary !important;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    textarea {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    textarea.large {
+      height: 230px;
+    }
+
+    .gform_button.button {
+      height: 260px;
+      width: 75px;
+      border: 2px solid;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      writing-mode: vertical-lr;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: $primary;
+        color: white;
+      }
+    }
+  }
+}

@@ -2,9 +2,10 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	width: 80%;
+	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 4rem;
 
 	&-element {
 		width: 48%;
@@ -12,13 +13,23 @@
 		position: relative;
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-start;
+		align-items: center;
 		margin-bottom: 5rem;
-		// background-color: grey;
+		background-color: #F3F4F6;
+		padding: 1rem;
 
 		&:hover {
+			cursor: pointer;
+
 			.nsp-list-element-logo {
-				opacity: 0.1;
+				opacity: 0.08;
+				width: 85%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+			.btn {
+				display: none;
 			}
 		}
 
@@ -27,6 +38,14 @@
 			width: 100%;
 			height: auto;
 			display: block;
+
+			img {
+			    max-width: 80%;
+			    height: auto;
+			    margin-left: auto;
+			    margin-right: auto;
+			    display: block;
+			}
 		}
 
 		&-content {
@@ -55,7 +74,10 @@
 					display: block;
 					color: $secondary;
 					text-transform: uppercase;
-					margin-left: 4rem;
+					width: 100%;
+					text-align: center;
+					font-size: 2rem;
+					font-family: 'Open Sans';
 				}
 			}
 

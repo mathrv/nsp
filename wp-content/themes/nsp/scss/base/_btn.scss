@@ -17,8 +17,33 @@
 	width: 75px;
 	border: 2px solid;
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
+
+	p {
+		display: none;
+
+		@media (max-width: 1260px) {
+			display: block;
+			writing-mode: vertical-lr;
+			text-transform: uppercase;
+			transform: rotate(180deg);
+			align-self: center;
+			padding: 0;
+		}
+	}
+
+	&:hover {
+		p {
+			display: block;
+			writing-mode: vertical-lr;
+			text-transform: uppercase;
+			transform: rotate(180deg);
+			align-self: center;
+			padding: 0;
+		}
+	}
 
 	&-pink {
 		border-color: $secondary;
@@ -28,5 +53,36 @@
 	&-blue {
 		border-color: $primary;
 		color: $primary;
+	}
+
+	&-white {
+		border-color: white;
+		color: white;
+	}
+}
+
+
+.btn.display-mobile {
+	p {
+		display: block;
+		writing-mode: vertical-lr;
+		text-transform: uppercase;
+		transform: rotate(180deg);
+		align-self: center;
+		padding: 0;
+	}
+}
+
+.btn.btn-link {
+	width: 260px;
+	height: 75px;
+	text-transform: uppercase;
+	font-weight: 800;
+
+	&:hover {
+		border-color: $secondary;
+		background-color: $secondary;
+		color: white !important;
+		text-decoration: none;
 	}
 }

@@ -1,6 +1,7 @@
 #menu {
     background-color: $primary;
     height: 100px;
+    max-width: 2265px;
     padding: 1.5rem 2rem;
     color: $secondary;
     position: fixed;
@@ -16,7 +17,6 @@
         margin-right: 2rem;
 
         h1 {
-          font-family: 'Roboto', sans-serif;
           font-size: 1.2rem;
           line-height: 30px;
           font-weight: 100;
@@ -33,16 +33,39 @@
 
         ul {
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
 
             li {
-                font-family: 'Open Sans', sans-serif;
-                font-size: 0.8rem;
+                font-family: 'Roboto', sans-serif;
+                font-size: 1rem;
                 line-height: 40px;
-                font-weight: 600;
+                font-weight: 300;
 
                 a {
                     color: inherit;
+                }
+            }
+        }
+
+        ul.sub-menu {
+            display: none;
+        }
+
+        .menu-item-has-children {
+            position: relative;
+            &:hover {
+                ul.sub-menu {
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: wrap;
+                    position: absolute;
+                    width: max-content;
+
+                    li {
+                        background-color: $primary;
+                        color: $secondary;
+                        padding: 1rem;
+                    }
                 }
             }
         }
@@ -51,4 +74,46 @@
 
 #content {
     margin-top: 68px;
+}
+
+@media screen and (max-width: 1025px) {
+    #responsive-menu-container {
+        width: 100% !important;
+        // top: 45px !important;
+        transition: transform 0.5s;
+        text-align: left;
+        background: $primary !important;
+        bottom: inherit !important;
+
+        .responsive-menu-item-link {
+            background-color: $primary !important;
+            border: none !important;
+        }
+
+        li.responsive-menu-item,
+        .responsive-menu-item-link {
+            text-align: center;
+            font-family: 'Open Sans' !important;
+            color: $secondary !important;
+            font-size: 1rem !important;
+        }
+    }
+
+    button#responsive-menu-button {
+        background: transparent !important;
+    }
+
+    .responsive-menu-open #responsive-menu-container.slide-top {
+        top: 6rem;
+    }
+
+    li.responsive-menu-item a .responsive-menu-subarrow {
+        background-color: transparent !important;
+        border: none !important;
+        left: 55%;
+        height: 31px !important;
+        line-height: 45px !important;
+        color: $secondary !important;
+
+    }
 }

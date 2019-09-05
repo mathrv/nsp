@@ -13,15 +13,15 @@ p{ font-size: $fz--text; line-height: 1.5; font-family: 'verdana'; color:$text-c
 
 
 .f-primary {
-  color: $primary;
+  color: $primary !important;
 }
 
 .f-white {
-	color:  white;
+	color:  white !important;
 }
 
 .f-secondary {
-	color: $secondary;
+	color: $secondary !important;
 }
 
 .f-bolder {

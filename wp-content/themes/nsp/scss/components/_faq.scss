@@ -4,6 +4,11 @@
   display: flex;
   align-items: flex-start;
 
+  @media(max-width: 1020px) {
+    padding: 2rem 0;
+    flex-wrap: wrap;
+  }
+
   &:last-child {
     border-bottom: none;
   }
@@ -12,10 +17,24 @@
     width: 50%;
     font-size: 2rem;
     font-weight: 400;
+    padding-right: 1rem;
+
+    @media(max-width: 1020px) {
+      width: 100%;
+    }
   }
 
   p {
     padding-top: 0.8rem;
     color: $primary;
+    width: 50%;
+    font-family: 'Roboto Slab';
+    font-size: 1rem;
+  }
+
+  ul {
+    padding-top: 0.8rem;
+    color: $primary;
+    width: 50%; 
   }
 }

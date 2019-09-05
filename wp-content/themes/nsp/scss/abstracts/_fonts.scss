@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
+// @import url('../../fonts/Adelle_Sans/');
+// @include font-face("Adelle Heavy", font-files("../../fonts/Adelle_Sans/AdelleSans-Heavy.otf"));
+
+
+@font-face {
+    font-family: 'adelle heavy';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AdelleSans-Heavy'), url('fonts/adelle_sans/adellesans-heavy.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'adelle';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AdelleSans-Book'), url('fonts/adelle_sans/adellesans-book.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'LemonTuesday';
+    font-style: normal;
+    font-weight: normal;
+    src: local('LemonTuesday'), url('fonts/Lemon_Tuesday/LemonTuesday.otf') format('truetype');
+}
 
 .f-bold {
   font-family: 'Roboto', sans-serif;
@@ -7,7 +33,22 @@
 }
 
 .f-light {
+  font-weight: 300;
+}
+
+
+.f-roboto {
+  font-family: 'Roboto Slab', serif;
+}
+
+.f-open {
   font-family: 'Open Sans', sans-serif;
-  font-size: 2rem;
-  line-height: 40px;
+}
+
+.f-adelle {
+  font-family: 'adelle';
+}
+
+.f-lemon {
+  font-family: 'LemonTuesday';
 }

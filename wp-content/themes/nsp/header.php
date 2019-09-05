@@ -26,7 +26,7 @@
     <div class="wrapper">
       <nav id="menu" class="active">
         <div class="menu-title">
-            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="Retour à l'accueil"><h1>NANTES SOUS PRESSION</h1></a>
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="Retour à l'accueil"><h1 class="f-open">NANTES SOUS PRESSION</h1></a>
         </div>
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
       </nav>
