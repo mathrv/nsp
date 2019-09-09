@@ -95,8 +95,12 @@
 				<div class="flex flex-as-fe flex-j-sb nsp-home-programme-fond-block-links">
 					<div class="nsp-home-programme-fond-block-jours f-roboto">
 						<div class="yellow"><a href="<?php echo get_the_permalink(15); ?>">Participants<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a></div>
-						<div class="yellow"><a href="" target="_blank">Billetterie<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div><div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a></div>
+
 						<div class="yellow"><a href="<?php echo get_the_permalink(109); ?>">Concours<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a></div>
+
+						<div class="yellow">
+						<!-- 	<a href="" target="_blank">Billetterie<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div><div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a> -->
+						</div>
 						<div class="yellow"></div>
 					</div>
 					<a href="<?php echo get_the_permalink(13); ?>" class="btn btn-blue">
