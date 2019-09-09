@@ -62,3 +62,11 @@ if ( $query->have_posts() )
 <?php
 }
 ?>
+
+<?php if ( !$query->have_posts() )
+{
+	?>
+	<div class="no-article f-lemon f-primary">Pas de pression, ça arrive bientôt...</div>
+<?php
+}
+?>
