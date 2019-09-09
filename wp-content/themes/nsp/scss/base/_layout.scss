@@ -63,7 +63,7 @@
 		position: relative;
 		padding-bottom: 2rem;
 
-		@media(max-width: 1060px) {
+		@media(max-width: 1260px) {
 			width: 100%;
 			background-position: center;
 			background-position-y: -5rem;
@@ -172,7 +172,7 @@
 		&-content {
 			width: 50%;
 
-			@media(max-width: 1060px) {
+			@media(max-width: 1260px) {
 				width: 100%
 			}
 
@@ -218,7 +218,7 @@
 			height: auto;
 			right: -10rem;
 
-			@media(max-width: 1060px) {
+			@media(max-width: 1260px) {
 				position: initial;
 				text-align: center;
 				width: 100%;
@@ -229,7 +229,7 @@
 				width: 80%;
 				height: auto;
 
-				@media(max-width: 1060px) {
+				@media(max-width: 1260px) {
 					width: 60%;
 				}
 			}
@@ -247,7 +247,7 @@
 	justify-content: space-around;
 	position: relative;
 
-	@media(max-width: 1060px) {
+	@media(max-width: 1260px) {
 		height: auto;
 	}
 }

@@ -65,17 +65,6 @@
                         text-decoration: none;
                     }
                 }
-
-                &:last-child {
-                    background-color: $primary-light;
-
-                    a {
-                        letter-spacing: 2px;
-                        &:hover {
-                            color: $primary;
-                        }
-                    }
-                }
             }
         }
 
