@@ -2,7 +2,6 @@
     background-color: $primary;
     height: 100px;
     max-width: 2265px;
-    padding: 1.5rem 2rem;
     color: $secondary;
     position: fixed;
     width: 100%;
@@ -10,16 +9,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 100px;
     z-index: 1999;
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
 
     .menu-title {
         margin-right: 2rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 2rem;
 
         h1 {
           font-size: 1.2rem;
           line-height: 30px;
-          font-weight: 100;
+          font-weight: 800;
         }
 
         a {
@@ -30,19 +35,46 @@
 
     .menu-menu-1-container {
         flex-grow: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
 
         ul {
+            width: 100%;
             display: flex;
             justify-content: space-around;
+            align-items: center;
+            height: 100%;
 
             li {
-                font-family: 'Roboto', sans-serif;
+                font-family: 'Roboto Slab', sans-serif;
                 font-size: 1rem;
                 line-height: 40px;
-                font-weight: 300;
+                font-weight: 600;
+                color: white;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                padding: 0 1rem;
 
                 a {
                     color: inherit;
+
+                    &:hover {
+                        color: $secondary;
+                        text-decoration: none;
+                    }
+                }
+
+                &:last-child {
+                    background-color: $primary-light;
+
+                    a {
+                        letter-spacing: 2px;
+                        &:hover {
+                            color: $primary;
+                        }
+                    }
                 }
             }
         }
@@ -60,11 +92,26 @@
                     flex-wrap: wrap;
                     position: absolute;
                     width: max-content;
+                    margin-left: -1rem;
+                    height: auto;
+                    top: 100px;
+                    box-shadow: 3px -1px 15px 1px rgba(0, 0, 0, 0.7); 
 
                     li {
-                        background-color: $primary;
-                        color: $secondary;
+                        background-color: $secondary;
+                        color: white;
                         padding: 1rem;
+                        height: auto;
+                        width: 100%;
+
+                        a {
+                            padding: 0 1rem;
+                        }
+
+                        a:hover {
+                            color: $primary;
+                            border: 2px solid $primary;
+                        }
                     }
                 }
             }
@@ -101,6 +148,7 @@
 
     button#responsive-menu-button {
         background: transparent !important;
+        margin-top: 0.5rem !important;
     }
 
     .responsive-menu-open #responsive-menu-container.slide-top {

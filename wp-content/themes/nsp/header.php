@@ -15,12 +15,6 @@
   <div id="main-wrapper" class="hfeed">
     <header id="header" class="header js-header-container">
       <div class="container header__wrapper">
-<!--         <div id="branding" class="header__logo">
-          <a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_html( get_bloginfo( 'name' ) ); ?>" rel="home" aria-label="Retour à l'accueil"></a>
-        </div> -->
-<!--         <nav id="menu" class="header__menu js-menu">
-          <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
-        </nav> -->
       </div>
     </header>
     <div class="wrapper">
@@ -29,4 +23,14 @@
             <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="Retour à l'accueil"><h1 class="f-open">NANTES SOUS PRESSION</h1></a>
         </div>
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+        <div class="header-rs">
+          <a href="https://www.facebook.com/NantesSousPression/">
+            <img class="hide-hover" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/facebook-white.png">
+            <img class="show-hover" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/facebook-pink.png">
+          </a>
+          <a href="https://www.instagram.com/nantessouspression/">
+            <img class="hide-hover" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/insta-white.png">
+            <img class="show-hover" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/insta-pink.png">
+          </a>
+        </div>
       </nav>
