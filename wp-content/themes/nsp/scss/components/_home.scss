@@ -282,10 +282,11 @@
 										display: block;
 										border: none;
 										position: absolute;
-										right: 0;
+										right: 10px;
 										top: 50%;
 										transform: translateY(-50%);
 										width: fit-content;
+										padding: 0;
 
 										p {
 											writing-mode: vertical-lr;
