@@ -26,16 +26,20 @@
           </div>
           <div class="footer-bottom">
             <div class="footer-bottom-logos">
-              <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoNbc.svg">
+              <a href="https://www.helloasso.com/associations/nantes-beer-club" target="_blank">
+                <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoNbc.svg">
+              </a>
               &
-              <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoCafard.svg">
+              <a href="http://www.assocafardnahum.com/" target="_blank">
+                <img src="<?php echo get_stylesheet_directory_uri();?>/img/nsp/logoCafard.svg">
+              </a>
             </div>
-            <div>
-              <a href="">Mentions Légales</a>
+            <div class="footer-bottom-links">
+              <a href="<?php echo get_the_permalink(136); ?>">Mentions Légales</a>
               <a href="">Plan du site</a>
               <a href="<?php echo get_the_permalink(19); ?>">Contact</a>
             </div>
-            <div>
+            <div class="footer-bottom-copyright">
               <p>&copy; <?php echo esc_html( date_i18n( __( 'Y', 'blankslate' ) ) ); ?> -&nbsp;Nantes Beer Club</p>
             </div>            
           </div>

@@ -77,16 +77,39 @@
 		max-height: 80px;
 		padding: 4rem;
 		display: flex;
-		justify-content: space-around;
+		justify-content: space-between;
 		align-items: center;
 
 		&-logos {
 			display: flex;
 			align-items: center;
 
+			a {
+				margin-right: 1rem;
+				margin-left: 1rem;
+			}
+
 			img {
 				max-height: 80px;
 			}
+		}
+
+		&-links {
+			a {
+				font-family: 'Roboto Slab';
+				margin-right: 1rem;
+				color: $primary;
+
+				&:hover {
+					cursor: pointer;
+					text-decoration: underline;
+				}
+			}
+		}
+
+		&-copyright {
+			font-family: 'Roboto Slab';
+			color: $primary;
 		}
 	}
 }
