@@ -1,0 +1,32 @@
+.asso {
+	margin-bottom: 5rem;
+	margin-top: 5rem;
+
+	@media(max-width: 1060px) {
+		flex-wrap: wrap;
+	}
+
+	p {
+		padding-left: 5rem;
+		padding-right: 2rem;
+		font-size: 1rem;
+
+		@media(max-width: 1060px) {
+			width: 80%;
+			padding-left: 0;
+			align-self: center;
+		}
+	}
+
+	button {
+		@media(max-width: 1060px) {
+			width: 20%;
+		}
+	}
+
+	div {
+		@media(max-width: 1060px) {
+			width: 100%;
+		}
+	}
+}

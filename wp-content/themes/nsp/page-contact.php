@@ -1,17 +1,17 @@
 <?php get_header(); ?>
-<main id="content">
 
-  <!-- On crée le DOM de la section Wiki movies. -->
-    <section id="contact" class="contact content-section">
-      <div class="container container--small">
-        <h1 class="page-title section-title section-title--primary"><?php _e('Contactez-nous !','wiki-university'); ?></h2>
+<main id="content">
+  <div class="nsp-background">
+    <div class="nsp-background-logo">
+      <h1 class="f-primary f-light"><?php the_title(); ?></h1>
+      <div class="nsp-background-content">
         <div class="wysiwyg">
           <?php the_content(); ?>
         </div>
         <?php echo do_shortcode('[gravityform id="1" title="false" description="false"]'); ?>
       </div>
-  </section>
-  <!-- Fin .wiki-movies__container -->
+    </div>
+  </div>
 
 </main>
 <?php get_footer(); ?>

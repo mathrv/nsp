@@ -1,0 +1,28 @@
+<?php get_header(); ?>
+	<main id="content">
+	<div class="nsp-background">
+		<div class="nsp-background-logo">
+			<h1 class="f-primary f-light"><?php the_title(); ?></h1>
+			<div class="nsp-background-content">
+		
+
+				<?php if ( have_posts() ) : ?>
+					<?php while ( have_posts() ) : the_post(); ?>
+						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+							<div class="entry-content">
+						 		<?php echo do_shortcode('[searchandfilter id="52"]'); ?>
+						 		<?php echo do_shortcode('[searchandfilter id="52" show="results"]'); ?>
+								<div class="entry-links"><?php wp_link_pages(); ?></div>
+							</div>
+						</article>
+						<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>
+					<?php endwhile; ?>
+				<?php endif; ?>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	</main>
+<?php get_footer(); ?>

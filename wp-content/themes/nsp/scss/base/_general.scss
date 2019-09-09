@@ -29,3 +29,22 @@
 .back-top { position: fixed; bottom: 100px; right: 0; width: 40px;height: 40px; background: $primary url('img/arrow-up-white.svg') center no-repeat; background-size: 50%; z-index: 100; transform:translateX(0); transition:transform .3s linear;
   &.hide { transform:translateX(100%);}
 }
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+main {
+	width: 100%;
+}
+
+#main-wrapper {
+	max-width: 2265px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+    cursor: pointer !important;
+}

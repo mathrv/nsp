@@ -1,50 +1,54 @@
-// EXEMPLE
-//
-// @font-face {
-//   font-family: 'NOM_DE_LA_TYPO';
-//   font-style: normal;
-//   src: url('fonts/NOM_DE_LA_TYPO.eot');
-//   src: local('NOM_DE_LA_TYPO'), url('fonts/NOM_DE_LA_TYPO.eot') format('embedded-opentype'), url('fonts/NOM_DE_LA_TYPO.woff') format('woff');
-// }
-//
-// .nom-de-la-typo{font-family: 'NOM_DE_LA_TYPO' !important;}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap');
+// @import url('../../fonts/Adelle_Sans/');
+// @include font-face("Adelle Heavy", font-files("../../fonts/Adelle_Sans/AdelleSans-Heavy.otf"));
+
 
 @font-face {
-  font-family: 'clan-book';
-  font-style: normal;
-  font-display: swap;
-  src: url('fonts/ClanWebPro-Book.eot');
-  src: local('clan-book'), url('fonts/ClanWebPro-Book.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Book.woff') format('woff');
+    font-family: 'adelle heavy';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AdelleSans-Heavy'), url('fonts/adelle_sans/adellesans-heavy.otf') format('truetype');
 }
-
-.clan-book {font-family: 'clan-book' !important; font-weight: 400;}
 
 @font-face {
-  font-family: 'clan-news';
-  font-style: normal;
-  font-display: swap;
-  src: url('fonts/ClanWebPro-News.eot');
-  src: local('clan-news'), url('fonts/ClanWebPro-News.eot') format('embedded-opentype'), url('fonts/ClanWebPro-News.woff') format('woff');
+    font-family: 'adelle';
+    font-style: normal;
+    font-weight: normal;
+    src: local('AdelleSans-Book'), url('fonts/adelle_sans/adellesans-book.otf') format('truetype');
 }
-
-.clan-news {font-family: 'clan-news' !important; font-weight: 400;}
 
 @font-face {
-  font-family: 'clan-medium';
-  font-style: normal;
-  font-display: swap;
-  src: url('fonts/ClanWebPro-Medium.eot');
-  src: local('clan-medium'), url('fonts/ClanWebPro-Medium.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Medium.woff') format('woff');
+    font-family: 'LemonTuesday';
+    font-style: normal;
+    font-weight: normal;
+    src: local('LemonTuesday'), url('fonts/Lemon_Tuesday/LemonTuesday.otf') format('truetype');
 }
 
-.clan-medium {font-family: 'clan-medium' !important; font-weight: 400;}
-
-@font-face {
-  font-family: 'clan-bold';
-  font-style: normal;
-  font-display: swap;
-  src: url('fonts/ClanWebPro-Bold.eot');
-  src: local('clan-bold'), url('fonts/ClanWebPro-Bold.eot') format('embedded-opentype'), url('fonts/ClanWebPro-Bold.woff') format('woff');
+.f-bold {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 30px;
 }
 
-.clan-bold {font-family: 'clan-bold' !important;}
+.f-light {
+  font-weight: 300;
+}
+
+
+.f-roboto {
+  font-family: 'Roboto Slab', serif;
+}
+
+.f-open {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.f-adelle {
+  font-family: 'adelle';
+}
+
+.f-lemon {
+  font-family: 'LemonTuesday';
+}

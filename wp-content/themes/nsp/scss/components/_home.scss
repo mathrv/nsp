@@ -1,0 +1,342 @@
+.nsp {
+	&-home {
+		&-presentation {
+			@media (max-width: 1260px) {
+				flex-wrap: wrap;
+			}
+
+			&-texte {
+				padding-top: 10rem;
+
+				span {
+					font-size: 4rem;
+				}
+				
+				@media (max-width: 1260px) {
+					position: absolute;
+					top: 30rem;
+					font-size: 5rem;
+					margin-left: 2rem;
+					margin-right: 2rem;
+				}
+
+				div:nth-child(1) {
+					p {
+						// @media (max-width: 1260px) {
+							font-size: 2.5rem;
+							font-weight: 800 !important;
+
+							&:after {
+								width: 35%;
+							    height: 5px;
+							    background-color: $primary;
+							    display: block;
+							    content: '';
+							}
+						// }
+					}
+				}
+
+				div:nth-child(2) {
+					p {
+						// @media (max-width: 1260px) {
+							font-size: 2.5rem;
+
+							&:after {
+								width: 70%;
+							    height: 3px;
+							    background-color: $primary;
+							    display: block;
+							    content: '';
+							}
+						// }
+					}
+				}
+			}
+
+			.nsp-background-logo {
+				background-position: top;
+
+				@media (max-width: 1260px) {
+					width: 100%;
+					height: 815px;
+				}
+			}
+
+			&-asso {
+				background-color: $secondary;
+				position: absolute;
+				right: 0;
+				width: 60%;
+				top: 45rem;
+				padding: 5rem;
+				z-index: 2;
+
+				@media (max-width: 1260px) {
+					position: initial;
+					width: 100%;
+					margin-top: 15rem;
+					display: flex;
+					justify-content: space-between;
+					padding: 5rem 2rem;
+
+					a {
+						margin-right: 3rem;
+					}
+				}
+				
+				h2 {
+					text-transform: uppercase;
+					font-size: 4.5rem;
+					line-height: normal;
+				}
+
+				p {
+					font-family: 'Roboto Slab';
+					color: $primary;
+				}
+			}
+
+			&-participants {
+				background-color: $primary;
+				color: white;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 60%;
+
+				@media (max-width: 1260px) {
+					position: initial;
+					width: 100%;
+				}
+
+				&-header {
+					display: flex;
+					align-items: center;
+					padding-top: 1rem;
+
+					@media (max-width: 1260px) {
+						img {
+							margin-left: auto;
+							margin-right: auto;
+							margin-top: 2rem;
+						}
+					}
+
+					a {
+						margin-left: 5rem
+					}
+				}
+
+				&-texte {
+					padding: 9rem 8rem 5rem 8rem;
+					margin-left: 5rem;
+					position: relative;
+
+					@media (max-width: 1260px) {
+						padding: 3rem 2rem 4rem 2rem;
+						margin-left: 0;
+						display: flex;
+
+						a {
+							margin-right: 4rem;
+						}
+					}
+
+
+					h2 {
+						text-transform: uppercase;
+						font-size: 3.5rem;
+						margin-bottom: 2rem;
+					}
+				}
+
+				&-item {
+					display: flex;
+					flex-wrap: wrap;
+
+					@media (max-width: 1260px) {
+						flex-direction: column;
+					}
+
+					a.btn {
+						position: absolute;
+						right: -10rem;
+						top: 7rem;
+					}
+
+					p {
+						margin-bottom: 2rem;
+						width: 50%;
+						color: white;
+						text-transform: uppercase;
+
+						&:hover {
+							a {
+								text-decoration: none;
+								color: $secondary;
+								cursor: pointer;
+							}
+						}
+
+						@media (max-width: 1260px) {
+							margin-bottom: 1rem;
+						}
+					}
+				}
+			}
+		}
+
+		&-programme {
+			background-color: white;
+			border: 20px solid $secondary;
+			box-sizing: border-box;
+
+			.nsp-home-programme-fond {
+				background-image: url('img/nsp/fond-programme.png');
+				background-size: cover;
+				background-repeat: no-repeat;
+				display: block;
+				width: 100%;
+				height: 1088px;
+				margin: 4rem 0 6rem 0;
+
+				@media (max-width: 1260px) {
+					height: inherit;
+					background-size: inherit;
+				}
+
+				h2 {
+					text-transform: uppercase;
+					font-size: 3.5rem;
+					padding-top: 4rem;
+					margin-left: 20rem;
+
+					@media (max-width: 1260px) {
+						margin-left: 0;
+						text-align: center;
+					}
+				}
+
+				&-block {
+					margin-top: 8rem;
+
+					@media (max-width: 1260px) {
+						flex-wrap: wrap;
+						margin-top: 1rem;
+						flex-direction: column;
+					}
+
+					&-description {
+						width: 60%;
+						padding: 2rem;
+
+						h3 {
+							font-size: 2.5rem;
+						}
+
+						@media (max-width: 1260px) {
+							// width: 100%;
+						}
+					}
+
+					&-links {
+						width: 50%;
+					}
+
+					&-jours {
+						display: flex;
+						flex-wrap: wrap;
+						width: 80%;
+
+						@media (max-width: 1260px) {
+							flex-direction: column;
+							width: 100%;
+							margin-right: 1.5rem;
+						}
+
+						div {
+							width: 50%;
+							padding: 1rem;
+							color: white;
+							font-size: 1.1rem;
+
+							a {
+								display: block;
+								width: 100%;
+								height: 100%;
+								padding: 2rem 1rem 3rem 1rem;
+								font-size: 1.3rem;
+								position: relative;
+
+								.show-hover {
+									display: none;
+								}
+
+								&:hover {
+									text-decoration: none;
+									border: 2px solid $primary;
+									color: white;
+
+									.show-hover {
+										display: block;
+										border: none;
+										position: absolute;
+										right: 0;
+										top: 50%;
+										transform: translateY(-50%);
+										width: fit-content;
+
+										p {
+											writing-mode: vertical-lr;
+											text-transform: uppercase;
+											transform: rotate(180deg);
+										}
+									}
+								}
+							}
+
+							@media (max-width: 1260px) {
+								width: 100%;
+							}
+
+							&:nth-child(1) {
+								border-right: 1px solid white;
+								border-bottom: 1px solid white;
+
+								@media (max-width: 1260px) {
+									border-right: none;
+								}
+							}
+
+							&:nth-child(2) {
+								border-bottom: 1px solid white;
+							}
+
+							&:nth-child(3) {
+								border-right: 1px solid white;
+
+								@media (max-width: 1260px) {
+									border-right: none;
+									border-bottom: 1px solid white;
+								}
+							}
+
+							&.blue {
+								background-color: $primary-light;
+							}
+
+							&.yellow {
+								background-color: $yellow;
+							}
+						}
+					}
+
+					a.btn-blue {
+						margin-right: 0.5rem;
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,13 +1,88 @@
-.btn-container {
-  &--centered { text-align: center;}
+// .btn-container {
+//   &--centered { text-align: center;}
+// }
+
+// .btn { display: inline-block; padding: 12px 25px; text-align: center; font-family: 'clan-book'; font-size: 15px; line-height: 0.9;border: 1px solid; border-radius: $br-size; text-decoration: none;
+//   &--small { padding: 7px 14px; border-radius: $br-size--small; font-size: 16px;}
+// }
+
+// .gform_button { display: inline-block; padding: 12px 25px !important; text-align: center; font-family: 'clan-book'; font-size: 20px !important; line-height: 0.9;border: 1px solid $primary; border-radius: $br-size !important; text-decoration: none;background-color: $primary; color:white;
+//   &:hover { background-color: white; color:$primary; cursor:pointer;}
+//   &:focus,
+//   &:active { outline:none;}
+// }
+
+.btn {
+	height: 260px;
+	width: 75px;
+	border: 2px solid;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+
+	p {
+		display: none;
+
+		@media (max-width: 1260px) {
+			display: block;
+			writing-mode: vertical-lr;
+			text-transform: uppercase;
+			transform: rotate(180deg);
+			align-self: center;
+			padding: 0;
+		}
+	}
+
+	&:hover {
+		p {
+			display: block;
+			writing-mode: vertical-lr;
+			text-transform: uppercase;
+			transform: rotate(180deg);
+			align-self: center;
+			padding: 0;
+		}
+	}
+
+	&-pink {
+		border-color: $secondary;
+		color: $secondary;
+	}
+
+	&-blue {
+		border-color: $primary;
+		color: $primary;
+	}
+
+	&-white {
+		border-color: white;
+		color: white;
+	}
 }
 
-.btn { display: inline-block; padding: 12px 25px; text-align: center; font-family: 'clan-book'; font-size: 15px; line-height: 0.9;border: 1px solid; border-radius: $br-size; text-decoration: none;
-  &--small { padding: 7px 14px; border-radius: $br-size--small; font-size: 16px;}
+
+.btn.display-mobile {
+	p {
+		display: block;
+		writing-mode: vertical-lr;
+		text-transform: uppercase;
+		transform: rotate(180deg);
+		align-self: center;
+		padding: 0;
+	}
 }
 
-.gform_button { display: inline-block; padding: 12px 25px !important; text-align: center; font-family: 'clan-book'; font-size: 20px !important; line-height: 0.9;border: 1px solid $primary; border-radius: $br-size !important; text-decoration: none;background-color: $primary; color:white;
-  &:hover { background-color: white; color:$primary; cursor:pointer;}
-  &:focus,
-  &:active { outline:none;}
+.btn.btn-link {
+	width: 260px;
+	height: 75px;
+	text-transform: uppercase;
+	font-weight: 800;
+
+	&:hover {
+		border-color: $secondary;
+		background-color: $secondary;
+		color: white !important;
+		text-decoration: none;
+	}
 }

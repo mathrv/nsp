@@ -1,0 +1,30 @@
+.header-rs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 2rem;
+
+	@media(max-width: 1060px) {
+		padding-right: 6rem;
+	}
+
+	a:nth-child(1) {
+		margin-right: 1rem;
+	}
+
+	a {
+		.show-hover {
+			display: none;
+		}
+
+		&:hover {
+			.hide-hover {
+				display: none;
+			}
+
+			.show-hover {
+				display: block;
+			}
+		}
+	}
+}
