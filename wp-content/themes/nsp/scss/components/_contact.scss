@@ -35,9 +35,16 @@
   form {
     display: flex;
     font-family: 'Roboto Slab' !important;
+    @media(max-width: 1260px) {
+      flex-wrap: wrap;
+    }
 
     .gform_body {
       width: 80%;
+
+      @media(max-width: 1260px) {
+        width: 100%;
+      }
 
       ul {
         position: relative;
@@ -48,10 +55,20 @@
         right: 0;
         top: 0;
         width: 45%;
+
+        @media(max-width: 1260px) {
+          position: inherit;
+          width: 100%;
+        }
+
         select {
           width: 100%;
           background-color: $secondary;
           color: white;
+
+          @media (max-width: 1260px) {
+            height: 40px;
+          }
 
           &:focus {
             outline: none;
@@ -64,11 +81,22 @@
         right: 0;
         top: 2rem;
         width: 45%;
+
+        @media(max-width: 1060px) {
+          position: inherit;
+          width: 100%;
+          top: 0;
+        }
       }
     }
 
     .gform_footer {
       width: 20%;
+
+      @media(max-width: 1060px) {
+        width: 100%;
+        margin-top: 2rem;
+      }
     }
 
     input[type=text] {
@@ -103,6 +131,14 @@
       justify-content: center;
       writing-mode: vertical-lr;
       text-transform: uppercase;
+
+      @media(max-width: 1260px) {
+        height: 75px;
+        width: 100%;
+        background-color: $primary;
+        color: white;
+        border: none;
+      }
 
       &:hover {
         background-color: $primary;
