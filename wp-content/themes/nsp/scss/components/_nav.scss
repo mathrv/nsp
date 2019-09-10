@@ -14,6 +14,11 @@
     -moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
     box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
 
+    
+    @media(max-width: 1260px) {
+        height: 65px;
+    }
+
     .menu-title {
         margin-right: 2rem;
         height: 100%;
@@ -25,6 +30,11 @@
           font-size: 1.2rem;
           line-height: 30px;
           font-weight: 800;
+
+
+            @media(max-width: 1260px) {
+                font-size: 1rem;
+            }
         }
 
         a {
@@ -110,25 +120,31 @@
 
 #content {
     margin-top: 68px;
+    @media screen and (max-width: 1260px) {
+        margin-top: 20px;
+    }
 }
 
-@media screen and (max-width: 1025px) {
+@media screen and (max-width: 1260px) {
     #responsive-menu-container {
         width: 100% !important;
-        // top: 45px !important;
         transition: transform 0.5s;
         text-align: left;
         background: $primary !important;
         bottom: inherit !important;
+        height: 100%;
+        opacity: 0.90;
+        padding-top: 2rem !important;
 
         .responsive-menu-item-link {
             background-color: $primary !important;
             border: none !important;
+            text-transform: uppercase;
         }
 
         li.responsive-menu-item,
         .responsive-menu-item-link {
-            text-align: center;
+            // text-align: center;
             font-family: 'Open Sans' !important;
             color: $secondary !important;
             font-size: 1rem !important;
@@ -138,19 +154,29 @@
     button#responsive-menu-button {
         background: transparent !important;
         margin-top: 0.5rem !important;
+        top: 0 !important;
+        right: 0!important;
     }
 
     .responsive-menu-open #responsive-menu-container.slide-top {
-        top: 6rem;
+        top: 4rem;
     }
 
     li.responsive-menu-item a .responsive-menu-subarrow {
-        background-color: transparent !important;
-        border: none !important;
-        left: 55%;
-        height: 31px !important;
-        line-height: 45px !important;
-        color: $secondary !important;
+        // background-color: transparent !important;
+        // border: none !important;
+        // left: 55%;
+        // height: 31px !important;
+        // line-height: 45px !important;
+        // color: $secondary !important;
+        display: none;
+    }
 
+    #responsive-menu-container #responsive-menu ul.responsive-menu-submenu {
+        display: block !important;
+
+        a {
+            text-transform: inherit;
+        }
     }
 }

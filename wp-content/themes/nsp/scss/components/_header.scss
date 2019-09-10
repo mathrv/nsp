@@ -4,12 +4,16 @@
 	justify-content: space-between;
 	padding-right: 2rem;
 
-	@media(max-width: 1060px) {
-		padding-right: 6rem;
+	@media(max-width: 1260px) {
+		padding-right: 3.5rem;
 	}
 
 	a:nth-child(1) {
 		margin-right: 1rem;
+
+		@media(max-width: 1260px) {
+			margin-right: 0.5rem;
+		}
 	}
 
 	a {
@@ -17,6 +21,12 @@
 			display: none;
 		}
 
+		img {
+			@media(max-width: 1260px) {
+				height: 35px;
+				width: 35px;
+			}
+		}
 		&:hover {
 			.hide-hover {
 				display: none;
