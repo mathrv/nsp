@@ -36,7 +36,7 @@
             </div>
             <div class="footer-bottom-links">
               <a href="<?php echo get_the_permalink(136); ?>">Mentions Légales</a>
-              <a href="">Plan du site</a>
+              <a href="<?php echo get_the_permalink(140); ?>">Plan du site</a>
               <a href="<?php echo get_the_permalink(19); ?>">Contact</a>
             </div>
             <div class="footer-bottom-copyright">
