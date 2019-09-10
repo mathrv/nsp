@@ -36,6 +36,13 @@
 	}
 }
 
+.back-top.js-back-top {
+	@media (max-width: 1260px) {
+		display: none !important;
+	}
+}
+
+
 .hide-mobile {
 	@media (max-width: 1260px) {
 		display: none !important;
