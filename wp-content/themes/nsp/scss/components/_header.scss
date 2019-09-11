@@ -28,12 +28,15 @@
 			}
 		}
 		&:hover {
-			.hide-hover {
-				display: none;
-			}
+			@media(min-width: 1260px) {
 
-			.show-hover {
-				display: block;
+				.hide-hover {
+					display: none;
+				}
+
+				.show-hover {
+					display: block;
+				}
 			}
 		}
 	}
