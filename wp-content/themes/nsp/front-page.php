@@ -38,7 +38,7 @@
 				</a>
 			</div>
 			<div class="nsp-home-presentation-participants-texte">
-				<a href="<?php echo get_the_permalink(11); ?>" class="btn btn-pink display-mobile">
+				<a href="<?php echo get_the_permalink(15); ?>" class="btn btn-pink display-mobile">
 					<p class="f-secondary f-bolder f-open">voir tout le monde</p>
 					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
 				</a>
