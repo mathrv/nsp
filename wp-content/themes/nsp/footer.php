@@ -17,7 +17,7 @@
                 <div>
                   <a class="btn btn-link f-secondary" href="<?php echo get_the_permalink(19); ?>">Contact</A>
                   <a class="btn btn-link f-secondary"  href="<?php echo get_the_permalink(23); ?>">Faq</a>
-                  <a class="btn btn-link f-secondary"  href="<?php echo get_the_permalink(21); ?>">Infos pratique</a>
+                  <a class="btn btn-link f-secondary"  href="<?php echo get_the_permalink(21); ?>">Infos pratiques</a>
                 </div>
             </div>
             <div class="footer-questions-img">
