@@ -18,6 +18,11 @@
 		font-weight: 800;
 		text-align: center;
 
+		p {
+			display: flex;
+			justify-content: space-between;
+		}
+
 		@media(max-width: 1060px) {
 			padding: 1rem 0;
 			p {
