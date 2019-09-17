@@ -92,10 +92,11 @@
 		text-transform: uppercase;
 		font-weight: bolder;
 
-		@media(max-width: 1060px) {
+		@media(max-width: 1260px) {
 			text-align: center;
 			margin-top: 7rem;
 			margin-bottom: 5rem;
+			font-size: 2.2rem;
 		}
 
 	}
@@ -150,11 +151,15 @@
 			ul {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-between;
+				// justify-content: space-between;
 				font-family: 'Roboto Slab';
 				text-transform: uppercase;
 				color: $primary;
 				font-weight: 800;
+
+				li {
+					margin-right: 1.5rem;
+				}
 			}
 
 			label {
