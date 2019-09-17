@@ -23,16 +23,16 @@
 			justify-content: space-between;
 		}
 
-		@media(max-width: 1060px) {
+		@media(max-width: 1260px) {
 			padding: 1rem 0;
 			p {
 				display: flex;
 				flex-wrap: wrap;
-				justify-content: space-between;
+				justify-content: center;
 			}
 
 			a {
-				width: 50%;
+				width: inherit;
 
 			}
 		}
