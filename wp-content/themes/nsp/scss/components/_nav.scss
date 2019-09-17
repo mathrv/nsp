@@ -105,6 +105,11 @@
 
                         a {
                             padding: 0 1rem;
+                            border: 2px solid transparent;
+                            -webkit-transition: border-color 180ms ease-in-out;
+                            -moz-transition: border-color 180ms ease-in-out;
+                            -ms-transition: border-color 180ms ease-in-out;
+                            -o-transition: border-color 180ms ease-in-out;
                         }
 
                         a:hover {
