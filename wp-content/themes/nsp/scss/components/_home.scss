@@ -223,7 +223,7 @@
 					a.btn {
 						position: absolute;
 						right: -10rem;
-						top: 7rem;
+						top: 10rem;
 					}
 
 					p {
@@ -272,7 +272,7 @@
 					text-transform: uppercase;
 					font-size: 3.5rem;
 					padding-top: 4rem;
-					margin-left: 20rem;
+					margin-left: 2rem;
 
 					@media (max-width: 1260px) {
 						margin-left: 0;
@@ -359,10 +359,30 @@
 								height: 100%;
 								padding: 2rem 1rem 3rem 1rem;
 								font-size: 1.3rem;
+								border: 2px solid transparent;
 								position: relative;
+								-webkit-transition: border-color 500ms ease-in-out;
+								-moz-transition: border-color 500ms ease-in-out;
+								-ms-transition: border-color 500ms ease-in-out;
+								-o-transition: border-color 500ms ease-in-out;
 
 								.show-hover {
-									display: none;
+									opacity: 0;
+									height: 0;
+									position: absolute;
+									right: 10px;
+									top: 50%;
+									transform: translateY(-50%);
+									width: fit-content;
+									padding: 0;
+									border: none;
+									display: block;
+
+									p {
+										writing-mode: vertical-lr;
+										text-transform: uppercase;
+										transform: rotate(180deg);
+									}
 								}
 
 								&:hover {
@@ -371,20 +391,18 @@
 									color: white;
 
 									.show-hover {
-										display: block;
-										border: none;
-										position: absolute;
-										right: 10px;
-										top: 50%;
-										transform: translateY(-50%);
-										width: fit-content;
-										padding: 0;
+										// display: block;
+										opacity: 1;
+										height: auto;
+										-webkit-transition: height 500ms ease-in-out;
+										-moz-transition: height 500ms ease-in-out;
+									    -ms-transition: height 500ms ease-in-out;
+									    -o-transition: height 500ms ease-in-out;
+										-webkit-transition: opacity 500ms ease-in-out;
+									    -moz-transition: opacity 500ms ease-in-out;
+									    -ms-transition: opacity 500ms ease-in-out;
+									    -o-transition: opacity 500ms ease-in-out;
 
-										p {
-											writing-mode: vertical-lr;
-											text-transform: uppercase;
-											transform: rotate(180deg);
-										}
 									}
 								}
 							}
