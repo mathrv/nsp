@@ -179,6 +179,7 @@
 	.post {
 		display: flex;
 		position: relative;
+		flex-wrap: wrap;
 
 		&-content {
 			width: 50%;
