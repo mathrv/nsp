@@ -25,7 +25,7 @@
         </div>
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
 
-        <!-- <div class="billetterie"><a href="">Billetterie</a></div> -->
+        <div class="billetterie"><a href="https://www.helloasso.com/associations/nantes-beer-club/evenements/nantes-sous-pression" target="_blanck">Billetterie</a></div>
         <div class="header-rs">
           <a href="https://www.facebook.com/NantesSousPression/">
             <img class="hide-hover" src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/facebook-white.png">

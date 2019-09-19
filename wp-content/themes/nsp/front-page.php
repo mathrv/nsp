@@ -17,6 +17,13 @@
 		</div>
 
 		<div class="nsp-home-presentation-asso">
+			<div class="nsp-home-billetterie-mobile">
+				<h2 class="f-light f-primary f-open">Billetterie</h2>
+				<a href="https://www.helloasso.com/associations/nantes-beer-club/evenements/nantes-sous-pression" target="_blank" class="btn btn-blue display-mobile">
+					<p class="f-primary f-open f-bolder">Acheter mon billet</p>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg">
+				</a>
+			</div>
 			<a href="<?php echo get_the_permalink(11); ?>" class="btn btn-white display-mobile">
 				<p class="f-white f-open f-bolder">Voir toute l'histoire</p>
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-white.png">
@@ -99,7 +106,7 @@
 						<div class="yellow"><a href="<?php echo get_the_permalink(109); ?>">Concours<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a></div>
 
 						<div class="yellow">
-						<!-- 	<a href="" target="_blank">Billetterie<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div><div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a> -->
+							<a href="https://www.helloasso.com/associations/nantes-beer-club/evenements/nantes-sous-pression" target="_blank">Billetterie<div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div><div class="show-hover"><p class="f-primary f-open f-bolder">voir</p>  <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-blue.svg""></div></a>
 						</div>
 						<div class="yellow"></div>
 					</div>
