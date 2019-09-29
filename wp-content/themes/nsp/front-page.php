@@ -8,7 +8,7 @@
 		</div>
 		<div class="nsp-home-presentation-texte"> 
 			<div class="f-light f-primary">
-				<span class="f-bolder f-adelle">12—17·11·2019</span>
+				<span class="f-bolder f-open">12—17·11·2019</span>
 				<p class="f-light f-primary f-open">LE RENDEZ-VOUS NANTAIS <br>DE LA BIÈRE ARTISANALE <br></p>
 			</div>
 			<div>

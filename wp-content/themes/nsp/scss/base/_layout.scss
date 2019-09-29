@@ -12,6 +12,8 @@
   .container { padding: 0 20px;}
 }
 
+.noclic {cursor:default !important;}
+
 .flex {
 	display: flex;
 }
@@ -51,8 +53,8 @@
 
 .nsp-background {
 	background-image: url('img/nsp/vague.png');
-	background-size: auto;
-	background-repeat: inherit;
+	background-size: cover;
+	background-repeat: no-repeat;
 	width: 100%;
 	height: auto;
 	display: flex;
@@ -239,7 +241,7 @@
 			}
 
 			img {
-				width: 80%;
+				width: 100%;
 
 				@media(max-width: 1260px) {
 					width: 100%;

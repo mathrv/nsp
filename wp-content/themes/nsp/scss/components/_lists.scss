@@ -26,15 +26,17 @@
 			&:hover {
 				cursor: pointer;
 
-				.nsp-list-element-logo {
-					opacity: 0;
-					margin-left: auto;
-					margin-right: auto;
+				.nsp-list-element-logo-link {
+					// opacity: 0;
 					display: none;
 				}
 
 				.btn {
 					display: none;
+				}
+
+				.nsp-list-element-content {
+					opacity: 1;
 				}
 			}
 		}
@@ -77,10 +79,6 @@
 					box-sizing: border-box;
 					background-color: white;
 					opacity: 1;
-
-					.btn {
-						border: none;
-					}
 
 					p {
 						display: block;
