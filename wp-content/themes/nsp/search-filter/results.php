@@ -43,15 +43,17 @@ if ( $query->have_posts() )
 							echo '</p>';
 						}
 					?>
-					<a href="" class="btn btn-pink">
+					<a href="<?php the_permalink(); ?>" class="btn btn-pink">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
 					</a>
 					<!-- <a href=""> -->
 					<!-- </a> -->
 				</a>
-				<div class="nsp-list-element-content">
-					<p><?php the_title(); ?></p>
-				</div>
+				<a href="<?php the_permalink(); ?>">
+					<div class="nsp-list-element-content">
+						<p><?php the_title(); ?></p>
+					</div>
+				</a>
 			</div>
 		</a>
 			<?php
