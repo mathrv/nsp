@@ -46,8 +46,6 @@ if ( $query->have_posts() )
 					<a href="<?php the_permalink(); ?>" class="btn btn-pink">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
 					</a>
-					<!-- <a href=""> -->
-					<!-- </a> -->
 				</a>
 				<a href="<?php the_permalink(); ?>">
 					<div class="nsp-list-element-content">
@@ -60,14 +58,6 @@ if ( $query->have_posts() )
 		}
 	?>
 	</div>
-<?php
-}
-?>
-
-<?php if ( !$query->have_posts() )
-{
-	?>
-	<div class="no-article f-roboto f-primary">Pas de pression, ça arrive bientôt...</div>
 <?php
 }
 ?>
