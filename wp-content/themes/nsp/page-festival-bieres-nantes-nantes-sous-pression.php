@@ -8,7 +8,7 @@
 		?>
 		<div class="nsp-background-logo">
 			<h1 class="f-primary f-light"><?php echo get_the_title( $page ); ?></h1>
-			<div class="nsp-background-content">
+			<div class="nsp-background-content resume">
 				<?php echo apply_filters( 'the_content', $InfoPost->post_content ); ?>
 			</div>
 		</div>
