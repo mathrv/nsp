@@ -31,7 +31,7 @@ if ( $query->have_posts() )
 		while ($query->have_posts())
 		{
 			$query->the_post();
-			
+			$terms = get_terms('events_jour');
 			?>
 			<div class="nsp-list-element events">
 					<!-- <?php 
@@ -41,8 +41,9 @@ if ( $query->have_posts() )
 							echo '</p>';
 						}
 					?> -->
-					<p class="nsp-list-element-logo"><?php the_title(); ?></p>
-
+					<p class="nsp-list-element-logo"><?php the_title(); ?><br>
+						<span class="events-day"><?php print_r($terms[0]->name) ?></span>
+					</p>
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
 				<a href="<?php the_permalink(); ?>">
 					<div class="nsp-list-element-content">
