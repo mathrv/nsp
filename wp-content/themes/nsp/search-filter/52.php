@@ -31,20 +31,20 @@ if ( $query->have_posts() )
 		while ($query->have_posts())
 		{
 			$query->the_post();
-			$terms = get_terms('events_jour');
+			$terms = get_the_terms(get_the_id(), 'events_jour');
 			?>
 			<div class="nsp-list-element events">
-					<!-- <?php 
-						if ( has_post_thumbnail() ) {
-							echo '<p class="nsp-list-element-logo">';
-							the_post_thumbnail("small");
-							echo '</p>';
-						}
-					?> -->
-					<p class="nsp-list-element-logo"><?php the_title(); ?><br>
-						<span class="events-day"><?php print_r($terms[0]->name) ?></span>
+					<?php 
+						// if ( has_post_thumbnail() ) {
+						// 	echo '<p class="nsp-list-element-logo">';
+						// 	the_post_thumbnail("small");
+						// 	echo '</p>';
+						// }
+					?>
+					<p class="nsp-list-element-logo"><?php the_title(); ?><br />
+						<span class="events-day"><?php echo $terms[0]->name; ?></span>
 					</p>
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
+						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg" />
 				<a href="<?php the_permalink(); ?>">
 					<div class="nsp-list-element-content">
 						<p><?php the_title(); ?></p>
