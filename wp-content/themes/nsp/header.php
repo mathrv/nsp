@@ -18,7 +18,7 @@
 
 <body <?php body_class('js-fixed-header'); ?>>
   <div id="main-wrapper" class="hfeed">
-    <header id="header" class="header js-header-container">
+<!--     <header id="header" class="header js-header-container">
       <div class="container header__wrapper">
       </div>
     </header>
@@ -41,3 +41,4 @@
           </a>
         </div>
       </nav>
+ -->

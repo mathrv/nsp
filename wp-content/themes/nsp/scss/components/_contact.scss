@@ -32,15 +32,20 @@
 }
 
 .gform_wrapper {
+  margin: 0 !important;
+  margin-top: 1rem !important;
+
   form {
     display: flex;
-    font-family: 'Roboto Slab' !important;
+    font-family: 'Open Sans', sans-serif !important;
+    flex-wrap: wrap;
+    
     @media(max-width: 1260px) {
       flex-wrap: wrap;
     }
 
     .gform_body {
-      width: 80%;
+      width: 100%;
 
       @media(max-width: 1260px) {
         width: 100%;
@@ -50,37 +55,119 @@
         position: relative;
       }
 
+      .top_label .gfield_label {
+        font-family: 'Open Sans', sans-serif;
+        color: #4D4D4D;
+        font-weight: normal;
+        font-size: 14px;
+      }
+
+      .gfield {
+        width: calc(45% - 8px);
+
+          @media (max-width: 1260px) {
+            width: inherit;
+          }
+      }
+
       .contact-subject {
         position: absolute;
         right: 0;
         top: 0;
-        width: 45%;
+        width: 75%;
+        margin-top: 0;
 
         @media(max-width: 1260px) {
           position: inherit;
           width: 100%;
+          margin-top: 1rem;
         }
 
         select {
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance: none;
+          appearance: none;
+          outline: 0;
+          box-shadow: none;
+          border: 0 !important;
+          background-image: none;
           width: 100%;
-          background-color: $secondary;
-          color: white;
-
-          @media (max-width: 1260px) {
-            height: 40px;
-          }
-
-          &:focus {
-            outline: none;
-          }
+          padding: 1rem;
+          background-color: transparent;
+          color: $secondary !important;
+          border-bottom: 1px solid $secondary !important;
+          border-radius: 0;
+          padding-left: 0 !important;
+          padding: 0;
+          padding-bottom: 0.5rem !important;
         }
+        /* Remove IE arrow */
+        select::-ms-expand {
+          display: none;
+        }
+        /* Custom Select */
+        .select {
+          position: relative;
+          display: flex;
+          width: 20em;
+          height: 3em;
+          line-height: 3;
+          background: #2c3e50;
+          overflow: hidden;
+          border-radius: .25em;
+        }
+        select {
+          flex: 1;
+          padding: 0 .5em;
+          color: #fff;
+          cursor: pointer;
+        }
+        /* Arrow */
+        .select::after {
+          content: '\25BC';
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding: 0 1em;
+          background: #34495e;
+          cursor: pointer;
+          pointer-events: none;
+          -webkit-transition: .25s all ease;
+          -o-transition: .25s all ease;
+          transition: .25s all ease;
+        }
+        /* Transition */
+        .select:hover::after {
+          color: #f39c12;
+        }
+
+
+        // select {
+        //   width: 100%;
+        //   background-color: $secondary;
+        //   color: white;
+
+        //   @media (max-width: 1260px) {
+        //     height: 40px;
+        //   }
+
+        //   &:focus {
+        //     outline: none;
+        //   }
+        // }
       }
 
       .contact-message {
         position: absolute;
         right: 0;
-        top: 2rem;
-        width: 45%;
+        top: 4rem;
+        width: 75%;
+
+        textarea {
+          border-color: $secondary;
+          height: 277px;
+        }
 
         @media(max-width: 1060px) {
           position: inherit;
@@ -91,29 +178,50 @@
     }
 
     .gform_footer {
-      width: 20%;
+      display: flex;
+      justify-content: flex-end;
 
-      @media(max-width: 1060px) {
+      @media(max-width: 1260px) {
         width: 100%;
         margin-top: 2rem;
+        justify-content: center;
       }
     }
 
     input[type=text] {
       background: transparent;
       border: none;
-      border-bottom: 1px solid $primary;
-      font-family: 'Roboto Slab' !important;
+      border-bottom: 1px solid $secondary;
+      font-family: 'Open Sans' !important;
       color: $primary !important;
+      font-size: 16px;
 
       &:focus {
         outline: none;
+      }
+
+      &::placeholder {
+        color: $secondary;
+        opacity: 0.8;
+      }
+
+      &:-ms-input-placeholder {
+        color: $secondary;
       }
     }
 
     textarea {
       &:focus {
         outline: none;
+      }
+
+      &::placeholder {
+        color: $secondary;
+        opacity: 0.8;
+      }
+
+      &:-ms-input-placeholder {
+        color: $secondary;
       }
     }
 
@@ -122,15 +230,16 @@
     }
 
     .gform_button.button {
-      height: 260px;
-      width: 75px;
-      border: 2px solid;
+      height: 58px;
+      width: 180px !important;
+      border-radius: 8px;
+      background-color: $secondary;
+      color: $primary;
+      font-weight: bold;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      writing-mode: vertical-lr;
-      text-transform: uppercase;
 
       @media(max-width: 1260px) {
         height: 75px;

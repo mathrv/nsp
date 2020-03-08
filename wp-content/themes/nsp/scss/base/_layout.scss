@@ -52,7 +52,7 @@
 }
 
 .nsp-background {
-	background-image: url('img/nsp/vague.png');
+	background-image: url('img/nsp/nsp2019.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	width: 100%;
@@ -65,54 +65,33 @@
 		height: inherit;
 	}
 
-	&-logo {
-		background-image: url('img/nsp/verre.png');
-		background-repeat: no-repeat;
-		width: 70%;
-		position: relative;
-		padding-bottom: 2rem;
-
-		@media(max-width: 1260px) {
-			width: 100%;
-			background-position: center;
-			background-position-y: -5rem;
-		}
-
-		.logo {
-			position: absolute;
-			left: 50%;
-			top: 5rem;
-			transform: translateX(-50%);
-		}
-	}
-
 	h1 {
-		font-size: 3.5rem;
-		margin-top: 5rem;
+		font-size: 32px;
 		margin-bottom: 2rem;
 		font-family: 'Open Sans';
-		text-transform: uppercase;
 		font-weight: bolder;
 
 		@media(max-width: 1260px) {
 			text-align: center;
-			margin-top: 7rem;
-			margin-bottom: 5rem;
 			font-size: 2.2rem;
 		}
 
 	}
 
 	&-content {
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
+		width: 80%;
+		margin: 4rem auto;
 		background-color: white;
-		padding: 5rem;
+		padding: 4rem;
+		border-radius: 8px;
 
 		p {
+			font-family: 'Open Sans' !important;
+			color: black !important;
+			font-size: 18px !important;
 			strong {
 				font-weight: bold !important;
+				color: black !important;
 			}
 		}
 
@@ -121,7 +100,7 @@
 		}
 
 		b{
-			font-weight: 600 !important;
+			font-weight: 800 !important;
 		}
 	}
 
