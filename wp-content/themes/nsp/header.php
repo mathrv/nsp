@@ -6,7 +6,11 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="viewport" content="width=device-width" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <title>Nantes Sous Pression</title>
+  <meta name="description" content="Nantes Beer Club organise Nantes Sous Pression le festival de la bière artisanale à Nantes, du 12 au 17 novembre." />
+  <meta property="og:image" content="https://www.nantes-sous-pression.com/wp-content/themes/nsp/img/nsp/logo.png" />
+  <meta property="og:title" content="Nantes Sous Pression" />
+  <meta property="og:description" content="Nantes Beer Club organise Nantes Sous Pression le festival de la bière artisanale à Nantes, du 12 au 17 novembre.">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <?php wp_head(); ?>
@@ -14,7 +18,7 @@
 
 <body <?php body_class('js-fixed-header'); ?>>
   <div id="main-wrapper" class="hfeed">
-    <header id="header" class="header js-header-container">
+<!--     <header id="header" class="header js-header-container">
       <div class="container header__wrapper">
       </div>
     </header>
@@ -37,3 +41,4 @@
           </a>
         </div>
       </nav>
+ -->

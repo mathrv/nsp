@@ -33,9 +33,7 @@ if ( $query->have_posts() )
 			$query->the_post();
 			
 			?>
-		<a href="<?php the_permalink(); ?>">
 			<div class="nsp-list-element">
-				<a href="<?php the_permalink(); ?>" class="nsp-list-element-logo-link">
 					<?php 
 						if ( has_post_thumbnail() ) {
 							echo '<p class="nsp-list-element-logo">';
@@ -43,29 +41,17 @@ if ( $query->have_posts() )
 							echo '</p>';
 						}
 					?>
-					<a href="" class="btn btn-pink">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
-					</a>
-					<!-- <a href=""> -->
-					<!-- </a> -->
+				<a href="<?php the_permalink(); ?>">
+					<div class="nsp-list-element-content">
+						<p><?php the_title(); ?></p>
+					</div>
 				</a>
-				<div class="nsp-list-element-content">
-					<p><?php the_title(); ?></p>
-				</div>
 			</div>
-		</a>
 			<?php
 		}
 	?>
 	</div>
-<?php
-}
-?>
-
-<?php if ( !$query->have_posts() )
-{
-	?>
-	<div class="no-article f-roboto f-primary">Pas de pression, ça arrive bientôt...</div>
 <?php
 }
 ?>
