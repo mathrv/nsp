@@ -1,0 +1,60 @@
+//##     ## ######## ##       ########  ######## ########   ######
+//##     ## ##       ##       ##     ## ##       ##     ## ##    ##
+//##     ## ##       ##       ##     ## ##       ##     ## ##
+//######### ######   ##       ########  ######   ########   ######
+//##     ## ##       ##       ##        ##       ##   ##         ##
+//##     ## ##       ##       ##        ##       ##    ##  ##    ##
+//##     ## ######## ######## ##        ######## ##     ##  ######
+
+.overflow-visible {overflow: visible !important;}
+
+.clearfix:after {
+    content:" ";
+    display:table;
+    clear:both;
+}
+
+.hide-dektop {display: none !important;}
+
+// Centrage vertical des éléments dans un container flexbox
+.flex-valign-center { align-items: center; }
+
+// ######   ######## ##    ## ######## ########     ###    ##
+//##    ##  ##       ###   ## ##       ##     ##   ## ##   ##
+//##        ##       ####  ## ##       ##     ##  ##   ##  ##
+//##   #### ######   ## ## ## ######   ########  ##     ## ##
+//##    ##  ##       ##  #### ##       ##   ##   ######### ##
+//##    ##  ##       ##   ### ##       ##    ##  ##     ## ##
+// ######   ######## ##    ## ######## ##     ## ##     ## ########
+.back-top { position: fixed; bottom: 100px; right: 0; width: 40px;height: 40px; background: $primary url('img/arrow-up-white.svg') center no-repeat; background-size: 50%; z-index: 100; transform:translateX(0); transition:transform .3s linear;
+  &.hide { transform:translateX(100%);}
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+}
+
+main {
+	width: 100%;
+}
+
+#main-wrapper {
+	max-width: 2265px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+    cursor: pointer !important;
+}
+
+.resume {
+    h2 {
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        color: $primary;
+        text-transform: uppercase;
+
+    }
+}

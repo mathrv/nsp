@@ -1,0 +1,50 @@
+//couleurs du projet
+$primary: #1F2951;
+$primary-light: #47BAEC;
+// $primary-lighter: lighten($primary, 10%);
+// $primary-darker: darken($primary, 10%);
+// $primary-darkest : #007599;
+$secondary: #F6AF95;
+// $secondary-lighter: lighten($secondary, 10%);
+// $secondary-darker: darken($secondary, 10%);
+// $tertiary: #E62D88;
+// $tertiary-lighter: lighten($tertiary, 10%);
+// $tertiary-darker: darken($tertiary, 10%);
+
+$yellow: #FED386;
+
+$green: #8FC78F;
+
+
+$emergency : #E61D48;
+
+$light-bg: #F1F1F1;
+$grey-bg : #D0D2D3;
+$overlay-bg : #939393;
+
+$border-color: #909090;
+
+$text-color: #707070;
+
+$shadow: #303030;
+
+
+// Font sizes
+$fz--h1: 19px;
+$fz--h2: 28px;
+$fz--h3: 18px;
+$fz--h4: 15px;
+$fz--h5: 12px;
+$fz--text: 14px;
+$fz--text--small: 11px;
+$fz--button: 20px;
+
+// Border radius sizes
+$br-size : 14px;
+$br-size--small : 5px;
+
+// Screen sizes
+$large-screen: 1200px;
+$medium-screen: 980px ;
+$small-screen: 768px;
+$x-small-screen: 500px;
