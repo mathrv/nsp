@@ -10,20 +10,3 @@ p{ font-size: $fz--text; line-height: 1.5; font-family: 'verdana'; color:$text-c
   em {font-style: italic;}
   &:last-of-type { padding-bottom: 0;}
 }
-
-
-.f-primary {
-  color: $primary !important;
-}
-
-.f-white {
-	color:  white !important;
-}
-
-.f-secondary {
-	color: $secondary !important;
-}
-
-.f-bolder {
-	font-weight: 600;
-}
