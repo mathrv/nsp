@@ -47,20 +47,14 @@ $shadow-l: 0px 4px 16px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.04);
 $shadow-xl: 0px 12px 24px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.04);
 $shadow-xxl: -12px 6px 24px rgba(0, 0, 0, 0.06), -2px 2px 8px rgba(0, 0, 0, 0.04);
 
-
-
-
-
-
-// Font sizes
-$fz--h1: 19px;
-$fz--h2: 28px;
-$fz--h3: 18px;
-$fz--h4: 15px;
-$fz--h5: 12px;
-$fz--text: 14px;
-$fz--text--small: 11px;
-$fz--button: 20px;
+// taille police
+$fontSize-biggest: 36px;
+$fontSize-bigger: 28px;
+$fontSize-big: 22px;
+$fontSize-normal: 18px;
+$fontSize-small: 16px;
+$fontSize-smaller: 14px;
+$fontSize-smallest: 12px;
 
 // Border radius sizes
 $br-size : 14px;

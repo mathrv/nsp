@@ -4,13 +4,13 @@
   }
   &__parallax-item { display: inline-block; width: 600px; height: 600px; position: absolute; left: 5%; top: 100%; transform:translateY(-50%); opacity:0.5; z-index: 1;}
   &__content { text-align: center;
-    h3 {color:white; font-family: clan-bold; font-size: $fz--h3;}
+    h3 {color:white; font-family: clan-bold; font-size: $fontSize-normal;}
     p { color:white;
       a { color:white;}
     }
   }
   &__content-text { margin-bottom: 20px;
-    p { font-size: $fz--text--small;}
+    p { font-size: $fontSize-smaller;}
   }
   &__wiki-logo { display: inline-block; max-width: 120px; margin: 0 auto; transform: translateY(-50%);}
   &__intro { color:white; margin-bottom: 20px;}
