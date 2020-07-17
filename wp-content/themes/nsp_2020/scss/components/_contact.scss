@@ -1,5 +1,5 @@
 .contact {
-  &__wrapper { background-color: $primary; background-repeat: no-repeat; background-size: 30%; position: relative; overflow: hidden;
+  &__wrapper { background-color: $black; background-repeat: no-repeat; background-size: 30%; position: relative; overflow: hidden;
     .container { position: relative; z-index: 2;}
   }
   &__parallax-item { display: inline-block; width: 600px; height: 600px; position: absolute; left: 5%; top: 100%; transform:translateY(-50%); opacity:0.5; z-index: 1;}
@@ -95,8 +95,8 @@
           width: 100%;
           padding: 1rem;
           background-color: transparent;
-          color: $secondary !important;
-          border-bottom: 1px solid $secondary !important;
+          color: $black !important;
+          border-bottom: 1px solid $black !important;
           border-radius: 0;
           padding-left: 0 !important;
           padding: 0;
@@ -165,7 +165,7 @@
         width: 75%;
 
         textarea {
-          border-color: $secondary;
+          border-color: $black;
           height: 277px;
         }
 
@@ -191,9 +191,9 @@
     input[type=text] {
       background: transparent;
       border: none;
-      border-bottom: 1px solid $secondary;
+      border-bottom: 1px solid $black;
       font-family: 'Open Sans' !important;
-      color: $primary !important;
+      color: $black !important;
       font-size: 16px;
 
       &:focus {
@@ -201,12 +201,12 @@
       }
 
       &::placeholder {
-        color: $secondary;
+        color: $black;
         opacity: 0.8;
       }
 
       &:-ms-input-placeholder {
-        color: $secondary;
+        color: $black;
       }
     }
 
@@ -216,12 +216,12 @@
       }
 
       &::placeholder {
-        color: $secondary;
+        color: $black;
         opacity: 0.8;
       }
 
       &:-ms-input-placeholder {
-        color: $secondary;
+        color: $black;
       }
     }
 
@@ -233,8 +233,8 @@
       height: 58px;
       width: 180px !important;
       border-radius: 8px;
-      background-color: $secondary;
-      color: $primary;
+      background-color: $black;
+      color: $black;
       font-weight: bold;
       display: flex;
       flex-wrap: wrap;
@@ -244,13 +244,13 @@
       @media(max-width: 1260px) {
         height: 75px;
         width: 100%;
-        background-color: $primary;
+        background-color: $black;
         color: white;
         border: none;
       }
 
       &:hover {
-        background-color: $primary;
+        background-color: $black;
         color: white;
       }
     }

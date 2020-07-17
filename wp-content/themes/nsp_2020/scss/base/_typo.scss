@@ -1,12 +1,12 @@
 h1 { line-height: 1.1; font-size: 19px; font-family: clan-bold;
   ~ h3 {
-    font-size: $fz--text; color: $primary;
+    font-size: $fz--text; color: $black;
   }
 }
 
 h3 { line-height: 1.3; }
 
-p{ font-size: $fz--text; line-height: 1.5; font-family: 'verdana'; color:$text-color; padding-bottom: 10px;
+p{ font-size: $fz--text; line-height: 1.5; font-family: 'verdana'; color:$black; padding-bottom: 10px;
   em {font-style: italic;}
   &:last-of-type { padding-bottom: 0;}
 }

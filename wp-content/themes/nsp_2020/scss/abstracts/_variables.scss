@@ -1,33 +1,42 @@
-//couleurs du projet
-$primary: #1F2951;
-$primary-light: #47BAEC;
-// $primary-lighter: lighten($primary, 10%);
-// $primary-darker: darken($primary, 10%);
-// $primary-darkest : #007599;
-$secondary: #F6AF95;
-// $secondary-lighter: lighten($secondary, 10%);
-// $secondary-darker: darken($secondary, 10%);
-// $tertiary: #E62D88;
-// $tertiary-lighter: lighten($tertiary, 10%);
-// $tertiary-darker: darken($tertiary, 10%);
+// Jaune
+$stew-light: #FFD43D;
+$stew: #FFC600;
+$stew-dark: #EBB600;
 
-$yellow: #FED386;
+// Rose
+$amber-light: #FAC2D5;
+$amber: #F8ACC6;
+$amber-dark: #F58Eb1;
 
-$green: #8FC78F;
+// Bleu
+$water-light: #6DB4F8;
+$water: #3D9CF6;
+$water-dark: #0B83F4;
 
+// Turquoise
+$ruyhoDraft-light: #ACDEE2;
+$ruyhoDraft: #85CED4;
+$ruyhoDraft-dark: #61BFC7;
 
-$emergency : #E61D48;
+// vert
+$imperialStout-light: #50A498;
+$imperialStout: #3F8177;
+$imperialStout-dark: #2F6059;
 
-$light-bg: #F1F1F1;
-$grey-bg : #D0D2D3;
-$overlay-bg : #939393;
+// noir
+$black: #121212; 
 
-$border-color: #909090;
-
-$text-color: #707070;
-
-$shadow: #303030;
-
+// gris
+$g50: #F4F7FB;
+$g100: #EAF0F6;
+$g200: #DAE3EC;
+$g300: #CED9E3;
+$g400: #C0CCD8;
+$g500: #A8B8C7;
+$g600: #8B9FB1;
+$g700: #687E92;
+$g800: #4D6174;
+$g900: #2D3E4D;
 
 // Font sizes
 $fz--h1: 19px;
