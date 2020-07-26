@@ -1,0 +1,41 @@
+#menu {
+    display: flex;
+    max-width: 1280px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-menu-1-container {
+    ul {
+        display: flex;
+        justify-content: space-between;
+        font-size: $fontSize-small;
+        line-height: 24px;
+        color: $g900;
+
+        li {
+            padding: 1rem 0;
+            margin-right: 2rem;
+            position: relative;
+
+            &:hover {
+                color: $water-dark;
+
+                &:after {
+                    display: block;
+                    content: '';
+                    background-color: $water;
+                    height: 4px;
+                    width: 100%;
+                    border-radius: 8px 8px 0px 0px;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+}

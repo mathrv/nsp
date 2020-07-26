@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <main id="content">
-	<div class="nsp-background home">
+	<!-- <div class="nsp-background home">
 		<div class="nsp-background-logo">
 	    	<div class="nsp-background-content">
 				<h1>eowifjewifj</h1>
@@ -27,6 +27,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </main>
 <?php get_footer(); ?>
