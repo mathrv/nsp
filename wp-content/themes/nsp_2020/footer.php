@@ -1,6 +1,7 @@
 
 </div>
   <footer id="footer" class="footer">
+    <div class="footer-container">
     <div class="footer-social">
       <a href="" target="_blank">
         <img src="<?php echo get_stylesheet_directory_uri();?>/img/Twitter.png">
@@ -40,6 +41,7 @@
           <a href="">Plan du site</a>
         </div>
       </div>
+    </div>
     </div>
      <?php wp_footer(); ?>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
