@@ -2,30 +2,35 @@ body {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-smaller;
   line-height: 1rem;
+  color: $g700;
 }
 
 h1 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-bigger;
   font-weight: 600;
+  color: $g900;
 }
 
 h2 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-big;
   font-weight: 600;
+  color: $g900;
 }
 
 h3 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-normal;
   font-weight: 600;
+  color: $g900;
 }
 
 h4 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-small;
   font-weight: 600;
+  color: $g900;
 }
 
 h5 {
@@ -33,12 +38,14 @@ h5 {
   font-size: $fontSize-smaller;
   font-weight: 600;
   margin-bottom: 1rem;
+  color: $g900;
 }
 
 h6 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-smallest;
   font-weight: 600;
+  color: $g900;
 }
 
 p {
