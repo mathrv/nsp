@@ -22,7 +22,8 @@
       <nav id="menu" class="active">
         <div class="menu-title">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="Retour à l'accueil">
-            <img src="<?php echo get_stylesheet_directory_uri();?>/img/Logo.png">
+            <img class="hide-mobile" src="<?php echo get_stylesheet_directory_uri();?>/img/Logo.png">
+            <img class="hide-desktop" src="<?php echo get_stylesheet_directory_uri();?>/img/Logo-small.png">
           </a>
         </div>
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>

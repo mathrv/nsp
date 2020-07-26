@@ -6,6 +6,11 @@
     margin-right: auto;
     align-items: center;
     justify-content: space-between;
+
+    @media (max-width: $medium-screen) { 
+        padding: 1rem;
+    }
+
 }
 
 .menu-menu-1-container {

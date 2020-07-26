@@ -10,3 +10,23 @@ a {
 		color: inherit;
 	}
 }
+
+@media (min-width: $medium-screen) {
+	.hide-desktop {
+		display: none !important;
+	}
+
+	.hide-mobile {
+		display: block;
+	}
+}
+
+@media (max-width: $medium-screen) {
+	.hide-desktop {
+		display: block !important;
+	}
+
+	.hide-mobile {
+		display: none;
+	}
+}
