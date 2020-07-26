@@ -1,21 +1,52 @@
 <!--   <a href="#" class="back-top js-back-top hide" aria-label="Retour en haut de page"></a> -->
 </div>
-<!--       <footer id="footer" class="footer">
-        <div class="">
-          <div class="footer-partenaires">
-            <h2 class="f-secondary">Les partenaires</h2>
-            <div class="footer-partenaires-logo">
-              <?php 
-                $Partenairescontent = apply_filters('the_content', get_post_field('post_content', 130));
-                echo $Partenairescontent;
-              ?>              
-            </div>
-          </div>
+  <footer id="footer" class="footer">
+    <div class="footer-social">
+      <a href="" target="_blank">
+        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Twitter.png">
+      </a>
+      <a href="" target="_blank">
+        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Instagram.png">
+      </a>
+      <a href="" target="_blank">
+        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Facebook.png">
+      </a>
+    </div>
+    <div class="footer-links">
+      <div class="footer-block">
+        <h5>Le Festival</h5>
+        <div class="footer-block-link">
+          <a href="<?php echo get_the_permalink(23); ?>">Faq</a>
+          <a href="">Dossier de presse</a>
+        </div>
+      </div>
+      <div class="footer-block">
+        <h5>Renseignements</h5>
+        <div class="footer-block-link">
+          <a href="<?php echo get_the_permalink(19); ?>">Contact</a>
+        </div>
+      </div>
+      <div class="footer-block">
+        <h5>L'association</h5>
+        <div class="footer-block-link">
+          <a href="">A propos</a>
+          <a href="">1ère édition du festival</a>
+        </div>
+      </div>
+      <div class="footer-block">
+        <h5>Conditions générales</h5>
+        <div class="footer-block-link">
+          <a href="">Mentions légales</a>
+          <a href="">Plan du site</a>
+        </div>
+      </div>
+    </div>
+        <!-- <div class="">
           <div class="footer-questions">
             <div class="footer-questions-texte">
                 <h2>Des questions ?</h2>
                 <div>
-                  <a class="btn btn-link f-secondary" href="<?php echo get_the_permalink(19); ?>">Contact</A>
+                  <a class="" href="<?php echo get_the_permalink(19); ?>">Contact</A>
                   <a class="btn btn-link f-secondary"  href="<?php echo get_the_permalink(23); ?>">Faq</a>
                   <a class="btn btn-link f-secondary"  href="<?php echo get_the_permalink(21); ?>">Infos pratiques</a>
                 </div>
@@ -43,8 +74,8 @@
               <p>&copy; <?php echo esc_html( date_i18n( __( 'Y', 'blankslate' ) ) ); ?> -&nbsp;Nantes Beer Club</p>
             </div>            
           </div>
-        </div>
-      </footer> -->
+         </div> -->
+      </footer>
     <!-- </div> -->
     <!-- <?php wp_footer(); ?> -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
