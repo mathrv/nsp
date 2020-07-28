@@ -31,10 +31,21 @@
 .wrapper {
     display: flex;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 main {
-	width: 100%;
+    width: 100%;
+
+    .nsp-background {
+        max-width: 1300px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        background-color: $background;
+        border-radius: 8px;
+        padding: 3rem;
+    }
 }
 
 #main-wrapper {

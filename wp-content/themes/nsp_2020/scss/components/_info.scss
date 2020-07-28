@@ -1,0 +1,39 @@
+.nsp-background.page-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.page-info-block {
+    width: 50%;
+
+    &:first-child {
+        padding-right: 2.5rem;
+        border-right: 1px solid $ruyhoDraft-light;
+    }
+
+    &:last-child {
+        padding-left: 2.5rem;
+
+        h4 {
+            margin-top: 1.5rem;
+        }
+    }
+}
+
+@media (max-width: $large-screen) {
+    .page-info-block {
+        width: 100%;
+
+        &:first-child {
+            border-right: none;
+            padding: 0;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid $ruyhoDraft-light;
+        }
+
+        &:last-child {
+            padding: 0;
+            padding-top: 2rem;
+        }
+    }
+}

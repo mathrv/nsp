@@ -37,7 +37,7 @@
       <div class="footer-block">
         <h5>Conditions générales</h5>
         <div class="footer-block-link">
-          <a href="">Mentions légales</a>
+          <a href="<?php echo get_the_permalink(136); ?>">Mentions légales</a>
           <a href="">Plan du site</a>
         </div>
       </div>

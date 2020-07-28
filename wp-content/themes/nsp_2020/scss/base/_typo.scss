@@ -30,7 +30,8 @@ h4 {
   font-family: 'Work Sans', sans-serif;
   font-size: $fontSize-small;
   font-weight: 600;
-  color: $g900;
+  color: $stew-dark;
+  margin-bottom: 1rem;
 }
 
 h5 {
@@ -50,7 +51,7 @@ h6 {
 
 p {
   font-family: 'Work Sans', sans-serif;
-  font-size: $fontSize-small;
+  font-size: $fontSize-smaller;
 
   &.p-small {
     font-size: $fontSize-smaller;
@@ -73,4 +74,10 @@ caption {
   &.c-smaller {
     font-size: $fontSize-smallest;
   }
+}
+
+.page-title {
+  color: $water-dark;
+  font-size: $fontSize-big;
+  margin-bottom: 1.5rem;
 }
