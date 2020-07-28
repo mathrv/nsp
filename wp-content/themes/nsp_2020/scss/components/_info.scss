@@ -20,6 +20,30 @@
     }
 }
 
+.faq-title {
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.is-expend {
+        img {
+            transform: rotate(90deg);
+        }
+    }
+
+    img {
+        margin-left: 1rem;
+    }
+}
+
+.faq-content {
+    display: none;
+
+    &.is-open {
+        display: block;
+    }
+}
+
 @media (max-width: $large-screen) {
     .page-info-block {
         width: 100%;

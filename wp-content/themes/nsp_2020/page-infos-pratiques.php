@@ -31,8 +31,8 @@
 					<h1 class="page-title">FAQ</h1>
 					<?php foreach ($aFaq as $faq): ?>
 						<div class="faq">
-							<h4 class="f-bold f-secondary"><?= get_the_title($faq->ID); ?></h2>				
-							<p class="f-primary">
+							<h4 class="faq-title"><?= get_the_title($faq->ID); ?> <img src="<?php echo get_stylesheet_directory_uri();?>/img/arrow.png"></h2>				
+							<p class="faq-content">
 								<?= $faq->post_content ?>
 							</p>
 						</div>
@@ -41,4 +41,13 @@
 			<?php endif; ?>
 		</div>
 	</main>
+
+<script>
+    jQuery(document).ready(function($) {
+		$('.faq-title').click(function() {
+			$(this).toggleClass('is-expend');
+			$(this).siblings('.faq-content').toggleClass('is-open');
+		});
+	});
+</script>
 <?php get_footer(); ?>
