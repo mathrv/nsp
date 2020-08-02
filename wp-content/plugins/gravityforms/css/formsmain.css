@@ -2626,10 +2626,6 @@ body .gform_wrapper ul.chosen-results li {
         width: 100%;
     }
 
-    .gform_wrapper.gform_validation_error .gform_body ul li.gfield.gfield_error:not(.gf_left_half):not(.gf_right_half) {
-        max-width: calc(100% - 16px) !important;
-    }
-
     .gform_wrapper .gfield_checkbox li,
     .gform_wrapper .gfield_radio li {
         margin: 0 0 8px 0;

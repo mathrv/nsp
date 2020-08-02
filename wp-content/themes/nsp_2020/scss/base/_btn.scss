@@ -1,0 +1,19 @@
+.button {
+    background: $stew;
+    padding: 8px 24px;
+    height: 40px;
+    border: none;
+    border-radius: 8px !important;
+    font-family: 'Work Sans' !important;
+    color: $g900;
+    font-weight: 600;
+    font-size: $fontSize-small;
+
+    &:hover {
+        background-color: $stew-light;
+    }
+
+    &:focus {
+        box-shadow: inset 0 0 0 1px $stew-light;
+    }
+}

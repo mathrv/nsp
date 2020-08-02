@@ -31,228 +31,104 @@
   }
 }
 
-.gform_wrapper {
-  margin: 0 !important;
-  margin-top: 1rem !important;
+.gform_body {
+  display: flex;
+  justify-content: center;
+}
 
-  form {
-    display: flex;
-    font-family: 'Open Sans', sans-serif !important;
-    flex-wrap: wrap;
-    
-    @media(max-width: 1260px) {
-      flex-wrap: wrap;
+.gform_fields {
+  max-width: 400px;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  border: 1px solid $g200;
+  border-radius: 8px;
+  font-family: 'Work Sans';
+  background-color: white;
+}
+
+.gfield_label {
+  font-family: 'Work Sans' !important;
+  color: $g600 !important;
+}
+
+.gfield, {
+  width: 100%;
+  margin-top: 0 !important;
+  border-bottom: 1px solid $g200;
+  background-color: white;
+  padding: 0.5rem 1rem !important;
+
+  &.gfield_error {
+    max-width: 100% !important;
+    background-color: white !important;
+    width: 100% !important;
+    margin: 0 !important;
+    border-top: 0 !important;
+    border-bottom: 1px solid $g200 !important;
+
+    &:not(.gf_left_half):not(.gf_right_half) {
+      max-width: 100% !important;
+      background-color: red;
     }
+  }
 
-    .gform_body {
+  &:first-child, &:nth-child(2) {
+    width: 50% !important;
+
+    &.gfield_error {
       width: 100%;
-
-      @media(max-width: 1260px) {
-        width: 100%;
-      }
-
-      ul {
-        position: relative;
-      }
-
-      .top_label .gfield_label {
-        font-family: 'Open Sans', sans-serif;
-        color: #4D4D4D;
-        font-weight: normal;
-        font-size: 14px;
-      }
-
-      .gfield {
-        width: calc(45% - 8px);
-
-          @media (max-width: 1260px) {
-            width: inherit;
-          }
-      }
-
-      .contact-subject {
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 75%;
-        margin-top: 0;
-
-        @media(max-width: 1260px) {
-          position: inherit;
-          width: 100%;
-          margin-top: 1rem;
-        }
-
-        select {
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          -ms-appearance: none;
-          appearance: none;
-          outline: 0;
-          box-shadow: none;
-          border: 0 !important;
-          background-image: none;
-          width: 100%;
-          padding: 1rem;
-          background-color: transparent;
-          color: $black !important;
-          border-bottom: 1px solid $black !important;
-          border-radius: 0;
-          padding-left: 0 !important;
-          padding: 0;
-          padding-bottom: 0.5rem !important;
-        }
-        /* Remove IE arrow */
-        select::-ms-expand {
-          display: none;
-        }
-        /* Custom Select */
-        .select {
-          position: relative;
-          display: flex;
-          width: 20em;
-          height: 3em;
-          line-height: 3;
-          background: #2c3e50;
-          overflow: hidden;
-          border-radius: .25em;
-        }
-        select {
-          flex: 1;
-          padding: 0 .5em;
-          color: #fff;
-          cursor: pointer;
-        }
-        /* Arrow */
-        .select::after {
-          content: '\25BC';
-          position: absolute;
-          top: 0;
-          right: 0;
-          padding: 0 1em;
-          background: #34495e;
-          cursor: pointer;
-          pointer-events: none;
-          -webkit-transition: .25s all ease;
-          -o-transition: .25s all ease;
-          transition: .25s all ease;
-        }
-        /* Transition */
-        .select:hover::after {
-          color: #f39c12;
-        }
-
-
-        // select {
-        //   width: 100%;
-        //   background-color: $secondary;
-        //   color: white;
-
-        //   @media (max-width: 1260px) {
-        //     height: 40px;
-        //   }
-
-        //   &:focus {
-        //     outline: none;
-        //   }
-        // }
-      }
-
-      .contact-message {
-        position: absolute;
-        right: 0;
-        top: 4rem;
-        width: 75%;
-
-        textarea {
-          border-color: $black;
-          height: 277px;
-        }
-
-        @media(max-width: 1060px) {
-          position: inherit;
-          width: 100%;
-          top: 0;
-        }
-      }
     }
 
-    .gform_footer {
-      display: flex;
-      justify-content: flex-end;
+    @media (max-width: $medium-screen) {
+      width: 100% !important;
+    }
+  }
 
-      @media(max-width: 1260px) {
-        width: 100%;
-        margin-top: 2rem;
-        justify-content: center;
-      }
+  &:first-child {
+    border-top-left-radius: 8px;
+    border-right: 1px solid $g200;
+  }
+
+  &:nth-child(2) {
+    border-top-right-radius: 8px;
+  }
+
+  input {
+    border: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+
+    &::placeholder {
+      color: $g400 !important;
     }
 
-    input[type=text] {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid $black;
-      font-family: 'Open Sans' !important;
-      color: $black !important;
-      font-size: 16px;
-
-      &:focus {
-        outline: none;
-      }
-
-      &::placeholder {
-        color: $black;
-        opacity: 0.8;
-      }
-
-      &:-ms-input-placeholder {
-        color: $black;
-      }
+    &:focus {
+      outline: 0;
     }
+  }
+}
 
-    textarea {
-      &:focus {
-        outline: none;
-      }
+.gfield_select, .textarea  {
+  border: 0 !important;
+  padding: 0 !important;
 
-      &::placeholder {
-        color: $black;
-        opacity: 0.8;
-      }
+  &::placeholder {
+    color: $g400 !important;
+  }
 
-      &:-ms-input-placeholder {
-        color: $black;
-      }
-    }
+  &:focus {
+    outline: 0;
+  }
+}
 
-    textarea.large {
-      height: 230px;
-    }
+.gform_footer  {
+  margin-top: 0 !important;
+  text-align: right;
+  max-width: 400px;
+  margin-left: auto !important;
+  margin-right: auto  !important;
 
-    .gform_button.button {
-      height: 58px;
-      width: 180px !important;
-      border-radius: 8px;
-      background-color: $black;
-      color: $black;
-      font-weight: bold;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-
-      @media(max-width: 1260px) {
-        height: 75px;
-        width: 100%;
-        background-color: $black;
-        color: white;
-        border: none;
-      }
-
-      &:hover {
-        background-color: $black;
-        color: white;
-      }
-    }
+  input.button {
+    margin-right: 0 !important;
   }
 }
