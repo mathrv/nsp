@@ -93,6 +93,12 @@
     border-top-right-radius: 8px;
   }
 
+  &:last-child {
+    border-bottom: 0;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
   input {
     border: none !important;
     width: 100% !important;
@@ -111,6 +117,7 @@
 .gfield_select, .textarea  {
   border: 0 !important;
   padding: 0 !important;
+  border: none !important;
 
   &::placeholder {
     color: $g400 !important;
@@ -130,5 +137,46 @@
 
   input.button {
     margin-right: 0 !important;
+  }
+}
+
+.gform_wrapper textarea.large {
+  height: 160px !important;
+}
+
+.contact-page {
+  .nsp-background {
+    position: relative;
+  
+    @media (min-width: $medium-screen) {
+      &::after {
+        content: url('img/main-feuille.png');
+        position: absolute;
+        right: -1rem;
+        top: 6rem;
+      }
+
+      &::before {
+        content: url('img/tireuse.png');
+        position: absolute;
+        left: -1rem;
+        bottom: 2rem;
+      }
+    }
+
+    @media (max-width: $medium-screen) {
+      &::before {
+        content: url('img/tireuse.png');
+        position: absolute;
+        left: -1rem;
+        bottom: 2rem;
+      }
+    }
+
+    @media (max-width: $small-screen) {
+      &::before {
+        display: none;
+      }
+    }
   }
 }
