@@ -2,10 +2,8 @@
 	<main id="content">
 	<div class="nsp-background">
 		<div class="nsp-background-logo">
-			<h1 class="f-primary f-light"><?php the_title(); ?></h1>
+			<h1 class="page-title"><?php the_title(); ?></h1>
 			<div class="nsp-background-content">
-		
-
 				<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<div class="entry-content">
@@ -14,7 +12,7 @@
 					<div class="entry-links"><?php wp_link_pages(); ?></div>
 				</div>
 				</article>
-				<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>
+
 				<?php endwhile; endif; ?>
 				</div>
 

@@ -26,25 +26,27 @@ if ( $query->have_posts() )
 {
 	?>
 
-	<div class="nsp-list">
+	<div class="list-participants">
 	<?php
 		while ($query->have_posts())
 		{
 			$query->the_post();
 			
 			?>
-			<div class="nsp-list-element">
+			<div class="list-participants-element">
 					<?php 
 						if ( has_post_thumbnail() ) {
-							echo '<p class="nsp-list-element-logo">';
+							echo '<p class="list-participants-element-logo">';
 							the_post_thumbnail("small");
 							echo '</p>';
 						}
 					?>
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg">
-				<a href="<?php the_permalink(); ?>">
 					<div class="nsp-list-element-content">
-						<p><?php the_title(); ?></p>
+						<?php $participant = get_fields(get_the_ID());   ?>
+						<h5><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/unfold.png"></h5>
+						<?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
+								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
+						<?php endif; ?>
 					</div>
 				</a>
 			</div>
