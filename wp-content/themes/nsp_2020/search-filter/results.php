@@ -42,13 +42,14 @@ if ( $query->have_posts() )
 						}
 					?>
 					<div class="nsp-list-element-content">
-						<?php $participant = get_fields(get_the_ID());   ?>
+						<?php $participant=get_fields(get_the_ID()); ?>
 						<h5><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/unfold.png"></h5>
 						<?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
 								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
+						<?php elseif(isset($participant['attendee_fb']) && !empty($participant['attendee_fb'])): ?>
+								<a href="<?= $participant['attendee_fb']; ?>" class="f-primary"><?= $participant['attendee_fb']; ?></a>
 						<?php endif; ?>
 					</div>
-				</a>
 			</div>
 			<?php
 		}
