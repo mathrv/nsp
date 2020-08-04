@@ -11,6 +11,7 @@
 						<?php echo the_content(); ?>
 
 						<?php $event = get_fields(get_the_ID()); ?>
+						<?php echo $event ?>
 						<?php if(isset($event['event_attendees']) && !empty($event['event_attendees'])): ?>
 							<?php $brasserie = get_fields($event['event_attendees']);?>
 							<p>Avec <b><a href="<?php echo get_the_permalink($event['event_attendees'] ) ?>"> <?php echo get_the_title($event['event_attendees'] ) ?></a></b></p>

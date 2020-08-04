@@ -10,7 +10,7 @@
 				<div class="entry-content">
 				 	<?php echo do_shortcode('[searchandfilter id="52"]'); ?>
 				 	<?php echo do_shortcode('[searchandfilter id="52" show="results"]'); ?>
-					<div class="entry-links"><?php wp_link_pages(); ?></div>
+					<!-- <div class="entry-links"><?php wp_link_pages(); ?></div> -->
 				</div>
 				</article>
 				<?php if ( comments_open() && ! post_password_required() ) { comments_template( '', true ); } ?>

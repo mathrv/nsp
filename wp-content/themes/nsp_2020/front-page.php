@@ -11,6 +11,55 @@
 				<button class="button">Acheter mon billet</button>
 			</div>
 		</div>
+		<div class="section section-third">
+			les participants
+
+			Les brasseries
+			<?php 
+				$args = array( 'cat' => 0,
+								'post_type' => 'participants',
+								'orderby' => 'rand',
+								'post_per_page' => 5);
+				$participants_query = new WP_Query( $args );
+
+				if ( $participants_query->have_posts() ) {
+					while ( $participants_query->have_posts() ) {
+						$participants_query->the_post(); ?>
+
+						<div class="nsp-list-element-content">
+							<h5><?php the_title(); ?></h5>
+							<!-- <?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
+								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
+							<?php endif; ?> -->
+						</div>
+						
+						<!-- <?php echo '<li>' . get_the_title() . '</li>'; ?> -->
+					<?php }
+				} else {
+					// no posts found
+				}
+			 ?>
+		</div>
+
+		<div class="section section-four">
+			les events
+
+			<?php $evenements = array( 'post_type' => 'events', 'events_jourdiv' => 'Mardi 12');
+				$evenements_loop = new WP_Query( $evenements );
+
+				if ( $evenements_loop->have_posts() ) {
+					while ( $evenements_loop->have_posts() ) {
+						$evenements_loop->the_post();
+						echo '<li>' . get_the_title() . '</li>';
+					}
+				} else {
+					// no posts found
+				}
+			 ?>
+			
+			<!-- <?php echo do_shortcode('[searchandfilter id="52"]'); ?>
+			<?php echo do_shortcode('[searchandfilter id="52" show="results" ]'); ?> -->
+		</div>
 	</div>
 	<!-- <div class="nsp-background home">
 		<div class="nsp-background-logo">
