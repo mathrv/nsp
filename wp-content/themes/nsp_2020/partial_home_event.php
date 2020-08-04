@@ -10,6 +10,12 @@
 	$evenements_loop = new WP_Query($evenements);
 	while ( $evenements_loop->have_posts() ) {
 		$evenements_loop->the_post();
-		echo '<li>' . get_the_title() . '</li>';
+		$fields = get_fields(get_the_ID());   
+?>
+	<div>
+		<h5><?= get_the_title() ?></h5>
+		<?= $fields['event_start_hour'] ?> - <?= $fields['event_place'] ?>
+	</div>	
+<?php
 	}
 ?>
