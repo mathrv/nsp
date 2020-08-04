@@ -1,5 +1,17 @@
 <?php get_header(); ?>
 <main id="content">
+	<div class="nsp-background">
+		<div class="section section-first">
+			<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/LogoHome.png">
+			<div>
+				<h1 class="page-title">Le Rendez-vous nantais de la bière artisanale</h1>
+				<p class="bold">Lun. 2 / dim. 8 novembre 2020</p>
+				<p>Final au Solilab les 7 et 8 novembre</p>
+				<p>Suivez-nous sur Facebook, Twitter et Instagram <br> pour les dernières mises à jour.</p>
+				<button class="button">Acheter mon billet</button>
+			</div>
+		</div>
+	</div>
 	<!-- <div class="nsp-background home">
 		<div class="nsp-background-logo">
 	    	<div class="nsp-background-content">

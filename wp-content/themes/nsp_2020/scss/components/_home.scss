@@ -1,0 +1,40 @@
+.section {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(109, 180, 248, 0.2);
+}
+
+.section-first {
+    display: flex;
+    justify-content: space-around;
+
+    img {
+        margin-left: 5rem;
+        width: 300px;
+        height: 129px;
+    }
+
+    div {
+        max-width: 330px;
+        margin-right: 5rem;
+
+        h1 {
+            line-height: 40px;
+            font-size: $fontSize-bigger;
+        }
+
+        button {
+            margin-top: 1.5rem;
+        }
+
+        p {
+            &:first-child, &:nth-child(2) {
+                font-size: $fontSize-normal;
+            }
+
+            &:nth-child(3) {
+                font-size: $fontSize-smaller;
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
