@@ -11,54 +11,70 @@
 				<button class="button">Acheter mon billet</button>
 			</div>
 		</div>
+
 		<div class="section section-third">
-			les participants
+			les events
 
-			Les brasseries
-			<?php 
-				$args = array( 'cat' => 0,
-								'post_type' => 'participants',
-								'orderby' => 'rand',
-								'post_per_page' => 5);
-				$participants_query = new WP_Query( $args );
+			<div>
+				Mardi 12
+				<?php 
+					$slug='tuesday_12'; // to be updated, for slug check 'wp_nsp_terms' table
+					include('partial_home_event.php')
+				?>
+			</div>
 
-				if ( $participants_query->have_posts() ) {
-					while ( $participants_query->have_posts() ) {
-						$participants_query->the_post(); ?>
+			<div>
+				Mercredi 13
+				<?php 
+					$slug='wednesday_13'; // to be updated, for slug check 'wp_nsp_terms' table
+					include('partial_home_event.php')
+				?>
+			</div>
 
-						<div class="nsp-list-element-content">
-							<h5><?php the_title(); ?></h5>
-							<!-- <?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
-								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
-							<?php endif; ?> -->
-						</div>
-						
-						<!-- <?php echo '<li>' . get_the_title() . '</li>'; ?> -->
-					<?php }
-				} else {
-					// no posts found
-				}
-			 ?>
+			<div>
+				Jeudi 14
+				<?php 
+					$slug='thursday_14'; // to be updated, for slug check 'wp_nsp_terms' table
+					include('partial_home_event.php')
+				?>
+			</div>
+			<a href="<?= get_page_link(13); ?>">Voir tous les événements -></a>
 		</div>
 
 		<div class="section section-four">
-			les events
+			Les brasseries
+			<div class="list-participants">
+			<?php 
+				$args = array( 'category_id' => 0,
+												'post_type' => 'participants',
+								        'orderby' => 'rand',
+								        'post_per_page' => 6);
+				$participants_query = new WP_Query( $args );
 
-			<?php $evenements = array( 'post_type' => 'events', 'events_jourdiv' => 'Mardi 12');
-				$evenements_loop = new WP_Query( $evenements );
-
-				if ( $evenements_loop->have_posts() ) {
-					while ( $evenements_loop->have_posts() ) {
-						$evenements_loop->the_post();
-						echo '<li>' . get_the_title() . '</li>';
-					}
-				} else {
-					// no posts found
-				}
-			 ?>
-			
-			<!-- <?php echo do_shortcode('[searchandfilter id="52"]'); ?>
-			<?php echo do_shortcode('[searchandfilter id="52" show="results" ]'); ?> -->
+				while ( $participants_query->have_posts() ) {
+					$participants_query->the_post(); 
+					$participant=get_fields(get_the_ID());
+				?>
+				<div class="list-participants-element">
+					<?php 
+						if ( has_post_thumbnail() ) {
+							echo '<p class="list-participants-element-logo">';
+							the_post_thumbnail("small");
+							echo '</p>';
+						}
+					?>
+					<div class="nsp-list-element-content">
+						<h5><?php the_title(); ?></h5>
+						<?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
+								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
+						<?php elseif(isset($participant['attendee_fb']) && !empty($participant['attendee_fb'])): ?>
+								<a href="<?= $participant['attendee_fb']; ?>" class="f-primary"><?= $participant['attendee_fb']; ?></a>
+						<?php endif; ?>
+					</div>
+				</div>
+			 	<?php } ?>
+			 	<a href="<?= get_page_link(15); ?>">Voir tous les participants -></a>
+			 </div>
 		</div>
 	</div>
 	<!-- <div class="nsp-background home">
