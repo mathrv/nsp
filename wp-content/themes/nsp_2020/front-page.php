@@ -11,38 +11,48 @@
 				<button class="button">Acheter mon billet</button>
 			</div>
 		</div>
+		<div class="breadcrump"></div>
 
 		<div class="section section-third">
-			les events
+		<h3 class="marginTopStandard">Les événements</h3>
 
 			<div>
-				Mardi 12
-				<?php 
-					$slug='tuesday_12'; // to be updated, for slug check 'wp_nsp_terms' table
-					include('partial_home_event.php')
-				?>
+				<h4 class="event-date">Mardi 12</h4>
+				<div class="list-events">
+					<?php 
+						$slug='tuesday_12'; // to be updated, for slug check 'wp_nsp_terms' table
+						include('partial_home_event.php')
+					?>
+				</div>
 			</div>
 
 			<div>
-				Mercredi 13
-				<?php 
-					$slug='wednesday_13'; // to be updated, for slug check 'wp_nsp_terms' table
-					include('partial_home_event.php')
-				?>
+				<h4 class="event-date">Mercredi 13</h4>
+				<div class="list-events">
+					<?php 
+						$slug='wednesday_13'; // to be updated, for slug check 'wp_nsp_terms' table
+						include('partial_home_event.php')
+					?>
+				</div>
 			</div>
 
 			<div>
-				Jeudi 14
-				<?php 
-					$slug='thursday_14'; // to be updated, for slug check 'wp_nsp_terms' table
-					include('partial_home_event.php')
-				?>
+				<h4 class="event-date">Jeudi 14</h4>
+				<div class="list-events">
+					<?php 
+						$slug='thursday_14'; // to be updated, for slug check 'wp_nsp_terms' table
+						include('partial_home_event.php')
+					?>
+				</div>
 			</div>
-			<a href="<?= get_page_link(13); ?>">Voir tous les événements -></a>
+			<a href="<?= get_page_link(13); ?>" class="see-more">Voir tous les événements <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/see-more.png"></a>
+			<button class="button marginTopStandard">Acheter mon billet</button>
 		</div>
 
+		<div class="breadcrump"></div>
+
 		<div class="section section-four">
-			Les brasseries
+			<h3 class="marginTopStandard">Les brasseries</h3>
 			<div class="list-participants">
 			<?php 
 				$args = array( 'category_id' => 0,
@@ -73,8 +83,17 @@
 					</div>
 				</div>
 			 	<?php } ?>
-			 	<a href="<?= get_page_link(15); ?>">Voir tous les participants -></a>
-			 </div>
+			 	<a href="<?= get_page_link(15); ?>" class="see-more">Voir tous les participants <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/see-more.png"></a>
+				<button class="button marginTopStandard">Acheter mon billet</button>
+			</div>
+		</div>
+		<div class="breadcrump"></div>
+		<div class="section section-five">
+			<h3 class="marginTopStandard">Les partenaires</h3>
+			<?php 
+                $Partenairescontent = apply_filters('the_content', get_post_field('post_content', 130));
+                echo $Partenairescontent;
+              ?>
 		</div>
 	</div>
 	<!-- <div class="nsp-background home">

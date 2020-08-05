@@ -57,3 +57,22 @@ main {
 a {
     cursor: pointer !important;
 }
+
+.see-more {
+    color: $water;
+    font-size: $fontSize-smaller;
+    font-weight: 600;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    img {
+        margin-left: 0.5rem;
+    }
+
+    &:hover {
+        text-decoration: underline;
+        color: $water-dark;
+    }
+}

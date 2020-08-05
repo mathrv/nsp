@@ -1,5 +1,5 @@
 <?php 
-	$evenements = array( 'post_type' => 'events');
+	$evenements = array( 'post_type' => 'events', 'post_per_page' => 4);
 	$evenements['tax_query']=array(
 																array('taxonomy'=>'events_jour',
 																			'field' => 'slug',
@@ -12,7 +12,7 @@
 		$evenements_loop->the_post();
 		$fields = get_fields(get_the_ID());   
 ?>
-	<div>
+	<div class="list-events-element">
 		<h5><?= get_the_title() ?></h5>
 		<?= $fields['event_start_hour'] ?> - <?= $fields['event_place'] ?>
 	</div>	
