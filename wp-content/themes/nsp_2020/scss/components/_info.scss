@@ -28,6 +28,7 @@
     &.is-expend {
         img {
             transform: rotate(90deg);
+            transition: all .2s ease-in-out;
         }
     }
 
@@ -37,10 +38,15 @@
 }
 
 .faq-content {
-    display: none;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all .2s ease-in-out;
 
     &.is-open {
-        display: block;
+        opacity: 1;
+        height: auto;
+        // transition: all .2s ease-in-out;
     }
 }
 
