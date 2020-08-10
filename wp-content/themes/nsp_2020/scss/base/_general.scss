@@ -47,6 +47,15 @@ main {
         background-color: $background;
         border-radius: 8px;
         padding: 3rem;
+        position: relative;
+        padding-bottom: 6rem;
+
+        &::after {
+            content: url('img/main-feuille-small.png');
+            position: absolute;
+            bottom: 0;
+            right: -1.5rem;
+        }
     }
 }
 
@@ -58,6 +67,11 @@ main {
 
 a {
     cursor: pointer !important;
+
+    &:hover {
+        text-decoration: underline !important;
+        color: $water;
+    }
 }
 
 .see-more {
