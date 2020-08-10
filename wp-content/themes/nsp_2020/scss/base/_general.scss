@@ -36,6 +36,8 @@
 
 main {
     width: 100%;
+    margin-left: 1rem;
+    margin-right: 1rem;
 
     .nsp-background {
         max-width: 1300px;
@@ -75,4 +77,8 @@ a {
         text-decoration: underline;
         color: $water-dark;
     }
+}
+
+strong {
+    font-weight: 600;
 }
