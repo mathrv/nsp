@@ -17,8 +17,8 @@
       <div class="footer-block">
         <h5>Le Festival</h5>
         <div class="footer-block-link">
-          <a href="<?php echo get_the_permalink(23); ?>">Faq</a>
-          <a href="">Dossier de presse</a>
+          <a href="<?php echo get_the_permalink(21); ?>">Faq</a>
+          <a>Dossier de presse</a>
         </div>
       </div>
       <div class="footer-block">

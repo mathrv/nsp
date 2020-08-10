@@ -15,9 +15,9 @@
     }
 
     &::after {
-        content: url('img/elephant.png');
+        content: url('img/elephant.png') !important;
         position: absolute;
-        bottom: 35rem;
+        bottom: 35rem !important;
         right: -1.5rem;
     }
 }

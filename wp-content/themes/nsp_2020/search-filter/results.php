@@ -49,12 +49,21 @@ if ( $query->have_posts() )
 						<?php elseif(isset($participant['attendee_fb']) && !empty($participant['attendee_fb'])): ?>
 								<a href="<?= $participant['attendee_fb']; ?>" class="f-primary"><?= $participant['attendee_fb']; ?></a>
 						<?php endif; ?>
+						<div class="list-participants-element-description"><?php the_content(); ?></div>
 					</div>
 			</div>
 			<?php
 		}
 	?>
 	</div>
+	<script>
+    jQuery(document).ready(function($) {
+		$('.list-participants-element').click(function() {
+			$(this).toggleClass('is-expend');
+			$(this).find('.list-participants-element-description').toggleClass('is-open');
+		});
+	});
+</script>
 <?php
 }
 ?>

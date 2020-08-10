@@ -87,6 +87,12 @@
     }
 }
 
+.list-participants-element {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .list-events {
     margin-top: 0;
 }
@@ -103,4 +109,22 @@
     margin-bottom: 0;
     font-size: $fontSize-small;
     margin-top: 1rem;
+}
+
+.list-participants-element-description {
+    visibility: hidden;
+    height: 0;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+
+    ul {
+        li {
+            list-style-type: square;
+        }
+    }
+
+    &.is-open {
+        visibility: inherit;
+        height: auto;
+    }
 }
