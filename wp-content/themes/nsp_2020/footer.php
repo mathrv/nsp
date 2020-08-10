@@ -31,7 +31,7 @@
         <h5>L'association</h5>
         <div class="footer-block-link">
           <a href="<?= get_the_permalink(11); ?>">A propos</a>
-          <a href="">1ère édition du festival</a>
+          <a href="<?= get_the_permalink(444); ?>">1ère édition du festival</a>
         </div>
       </div>
       <div class="footer-block">
