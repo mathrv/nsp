@@ -8,7 +8,7 @@
 					<h1 class="page-title">Le Rendez-vous nantais<br>de la bière artisanale</h1>
 					<p class="bold">Lun. 2 / dim. 8 novembre 2020</p>
 					<p>Final au Solilab les 7 et 8 novembre</p>
-					<p>Suivez-nous sur Facebook, Twitter et Instagram <br> pour les dernières mises à jour.</p>
+					<p>Suivez-nous sur <a href="https://www.facebook.com/NantesSousPression/" target="_blank">Facebook</a>, <a href="https://twitter.com/nantesspression" target="_blank">Twitter</a> et <a href="https://www.instagram.com/nantessouspression/" target="_blank">Instagram</a> <br> pour les dernières mises à jour.</p>
 					<button class="button">Acheter mon billet</button>
 				</div>
 			</div>

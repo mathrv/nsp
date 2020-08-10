@@ -3,42 +3,42 @@
   <footer id="footer" class="footer">
     <div class="footer-container">
     <div class="footer-social">
-      <a href="" target="_blank">
-        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Twitter.png">
+      <a href="https://twitter.com/nantesspression" target="_blank">
+        <img src="<?= get_stylesheet_directory_uri();?>/img/Twitter.png">
       </a>
-      <a href="" target="_blank">
-        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Instagram.png">
+      <a href="https://www.instagram.com/nantessouspression/" target="_blank">
+        <img src="<?= get_stylesheet_directory_uri();?>/img/Instagram.png">
       </a>
-      <a href="" target="_blank">
-        <img src="<?php echo get_stylesheet_directory_uri();?>/img/Facebook.png">
+      <a href="https://www.facebook.com/NantesSousPression/" target="_blank">
+        <img src="<?= get_stylesheet_directory_uri();?>/img/Facebook.png">
       </a>
     </div>
     <div class="footer-links">
       <div class="footer-block">
         <h5>Le Festival</h5>
         <div class="footer-block-link">
-          <a href="<?php echo get_the_permalink(21); ?>">Faq</a>
+          <a href="<?= get_the_permalink(21); ?>">Faq</a>
           <a>Dossier de presse</a>
         </div>
       </div>
       <div class="footer-block">
         <h5>Renseignements</h5>
         <div class="footer-block-link">
-          <a href="<?php echo get_the_permalink(19); ?>">Contact</a>
+          <a href="<?= get_the_permalink(19); ?>">Contact</a>
         </div>
       </div>
       <div class="footer-block">
         <h5>L'association</h5>
         <div class="footer-block-link">
-          <a href="">A propos</a>
+          <a href="<?= get_the_permalink(11); ?>">A propos</a>
           <a href="">1ère édition du festival</a>
         </div>
       </div>
       <div class="footer-block">
         <h5>Conditions générales</h5>
         <div class="footer-block-link">
-          <a href="<?php echo get_the_permalink(136); ?>">Mentions légales</a>
-          <a href="">Plan du site</a>
+          <a href="<?= get_the_permalink(136); ?>">Mentions légales</a>
+          <a href="<?= get_the_permalink(140); ?>">Plan du site</a>
         </div>
       </div>
     </div>
