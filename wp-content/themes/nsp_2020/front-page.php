@@ -9,7 +9,7 @@
 					<p class="bold">Lun. 2 / dim. 8 novembre 2020</p>
 					<p>Final au Solilab les 7 et 8 novembre</p>
 					<p>Suivez-nous sur <a href="https://www.facebook.com/NantesSousPression/" target="_blank">Facebook</a>, <a href="https://twitter.com/nantesspression" target="_blank">Twitter</a> et <a href="https://www.instagram.com/nantessouspression/" target="_blank">Instagram</a> <br> pour les dernières mises à jour.</p>
-					<button class="button">Acheter mon billet</button>
+					<?php include('partial_booking_button.php') ?>
 				</div>
 			</div>
 			<div class="breadcrump"></div>
@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<a href="<?= get_page_link(13); ?>" class="see-more">Voir tous les événements <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/see-more.png"></a>
-				<button class="button marginTopStandard">Acheter mon billet</button>
+				<?php include('partial_booking_button.php') ?>
 			</div>
 
 			<div class="breadcrump"></div>
@@ -88,7 +88,7 @@
 					</div>
 					<?php } ?>
 					<a href="<?= get_page_link(15); ?>" class="see-more">Voir tous les participants <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/see-more.png"></a>
-					<button class="button marginTopStandard">Acheter mon billet</button>
+					<?php include('partial_booking_button.php') ?>
 				</div>
 			</div>
 			<div class="breadcrump"></div>

@@ -21,7 +21,7 @@
 				<h1 class="page-title"><?= get_the_title( $page ); ?></h1>
 				<div class="nsp-background-content">
 					<?= apply_filters( 'the_content', $InfoPost->post_content ); ?>
-					<div class="button marginTopStandard">Acheter mon billet</div>
+					<?php include('partial_booking_button.php') ?>
 				</div>
 			</div>
 			<?php
