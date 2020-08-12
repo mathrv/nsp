@@ -34,6 +34,7 @@ if ( $query->have_posts() )
 			
 			?>
 			<div class="list-participants-element">
+				<a href="<?php the_permalink(); ?>">
 					<?php 
 						if ( has_post_thumbnail() ) {
 							echo '<p class="list-participants-element-logo">';
@@ -43,27 +44,17 @@ if ( $query->have_posts() )
 					?>
 					<div class="nsp-list-element-content">
 						<?php $participant=get_fields(get_the_ID()); ?>
-						<h5><?php the_title(); ?><img src="<?php echo get_stylesheet_directory_uri(); ?>/img/unfold.png"></h5>
-						<?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
-								<a href="<?= $participant['attendee_website']; ?>" class="f-primary"><?= $participant['attendee_website']; ?></a>
-						<?php elseif(isset($participant['attendee_fb']) && !empty($participant['attendee_fb'])): ?>
-								<a href="<?= $participant['attendee_fb']; ?>" class="f-primary"><?= $participant['attendee_fb']; ?></a>
+						<h5><?php the_title(); ?></h5>
+						<?php if(isset($participant['attendee_country']) && !empty($participant['attendee_country'])): ?>
+							<?= $participant['attendee_country']; ?>
 						<?php endif; ?>
-						<div class="list-participants-element-description"><?php the_content(); ?></div>
 					</div>
+				</a>
 			</div>
 			<?php
 		}
 	?>
 	</div>
-	<script>
-    jQuery(document).ready(function($) {
-		$('.list-participants-element').click(function() {
-			$(this).toggleClass('is-expend');
-			$(this).find('.list-participants-element-description').toggleClass('is-open');
-		});
-	});
-</script>
 <?php
 }
 ?>

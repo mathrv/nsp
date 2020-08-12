@@ -105,6 +105,14 @@
     }
 }
 
+.list-participants-element {
+    a {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+}
+
 .list-participants-element-logo {
     margin-right: 1rem;
     img {
