@@ -1,5 +1,5 @@
 <?php 
-	$evenements = array( 'post_type' => 'events', 'post_per_page' => 4);
+	$evenements = array('post_type' => 'events', 'posts_per_page' => 4, 'orderby' => 'rand');
 	$evenements['tax_query']=array(
 																array('taxonomy'=>'events_jour',
 																			'field' => 'slug',
