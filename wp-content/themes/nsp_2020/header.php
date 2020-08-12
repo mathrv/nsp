@@ -3,6 +3,11 @@
 
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>" />
+  <?php 
+    if ($_SERVER['SERVER_NAME'] != 'www.nantes-sous-pression.com') {
+      echo "<meta name=\"robots\" content=\"noindex\">";
+    }
+  ?>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="viewport" content="width=device-width" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
