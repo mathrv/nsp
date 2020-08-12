@@ -26,28 +26,20 @@ if ( $query->have_posts() )
 {
 	?>
 
-	<div class="nsp-list">
+	<div class="list-events">
 	<?php
 		while ($query->have_posts())
 		{
 			$query->the_post();
-			$terms = get_the_terms(get_the_id(), 'events_jour');
+			$jours = get_the_terms(get_the_id(), 'events_jour')[0];
+			$cat = get_the_terms(get_the_id(), 'event_cat')[0];
 			?>
-			<div class="nsp-list-element events">
-					<?php 
-						// if ( has_post_thumbnail() ) {
-						// 	echo '<p class="nsp-list-element-logo">';
-						// 	the_post_thumbnail("small");
-						// 	echo '</p>';
-						// }
-					?>
-					<p class="nsp-list-element-logo"><?php the_title(); ?><br />
-						<span class="events-day"><?php echo $terms[0]->name; ?></span>
-					</p>
-						<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/nsp/arrow-pink.svg" />
+			<div class="list-events-element page-events">
 				<a href="<?php the_permalink(); ?>">
-					<div class="nsp-list-element-content">
-						<p><?php the_title(); ?></p>
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/img/<?= $cat->name ?>.png">
+					<div>
+						<p class="list-events-element-title"><?php the_title(); ?></p>
+						<p class="events-day"><?php echo $jours->name; ?></p>
 					</div>
 				</a>
 			</div>

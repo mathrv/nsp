@@ -9,7 +9,7 @@
     }
 
 
-    li.sf-field-taxonomy-participants_cat {
+    li.sf-field-taxonomy-participants_cat, li.sf-field-taxonomy-events_jour {
         li {
             padding-left: inherit !important;
             padding: 8px 12px !important;
@@ -63,6 +63,32 @@
         display: flex;
         border-bottom: 1px solid #CED9E3;
         padding: 1rem 0;
+
+        &.page-events {
+            width: 32%;
+            padding-bottom: 0.5rem;
+
+            @media (max-width: $large-screen) {
+                width: 100%;
+            }
+
+            img {
+                width: 40px;
+                height: 40px;
+                margin-right: 1rem;
+            }
+
+            a {
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                .list-events-element-title {
+                    font-weight: 600;
+                    color: $g900;
+                }
+            }
+        }
 
         @media (max-width: $medium-screen) {
             width: 100%;
