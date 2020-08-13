@@ -79,10 +79,8 @@
 						?>
 						<div class="nsp-list-element-content">
 							<h5><?php the_title(); ?></h5>
-							<?php if(isset($participant['attendee_website']) && !empty($participant['attendee_website'])): ?>
-									<a href="<?= $participant['attendee_website']; ?>" class="f-primary">leur site</a>
-							<?php elseif(isset($participant['attendee_fb']) && !empty($participant['attendee_fb'])): ?>
-									<a href="<?= $participant['attendee_fb']; ?>" class="f-primary">leur site</a>
+							<?php if(isset($participant['attendee_country']) && !empty($participant['attendee_country'])): ?>
+								<?= $participant['attendee_country']; ?>
 							<?php endif; ?>
 						</div>
 					</div>
