@@ -19,7 +19,7 @@
 
 <body <?php body_class('js-fixed-header'); ?>>
   <div id="main-wrapper" class="hfeed">
-    <header id="header" class="header js-header-container">
+    <header id="header" class="header">
       <div class="container header__wrapper">
       </div>
     </header>
@@ -33,3 +33,17 @@
         </div>
         <?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
       </nav>
+
+      <script>
+        jQuery(document).ready(function($) {
+        $(window).scroll(function(){
+            if ($(window).scrollTop() >= 56) {
+                $('nav').addClass('fixed-header');
+            }
+            else {
+                $('nav').removeClass('fixed-header');
+            }
+        });
+      });
+
+      </script>

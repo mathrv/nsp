@@ -1,6 +1,6 @@
 #menu {
     display: flex;
-    max-width: 1280px;
+    max-width: 1300px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -43,4 +43,12 @@
             }
         }
     }
+}
+
+.fixed-header {
+    position: fixed;
+    z-index: 2;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
 }
