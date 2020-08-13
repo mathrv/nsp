@@ -12,7 +12,6 @@
 					<div class="entry-links"><?php wp_link_pages(); ?></div>
 				</div>
 				</article>
-
 				<?php endwhile; endif; ?>
 				</div>
 
