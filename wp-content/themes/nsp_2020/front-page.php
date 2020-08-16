@@ -19,36 +19,26 @@
 			<div class="breadcrump"></div>
 			<div class="section section-third">
 			<h3 class="marginTopStandard">Les événements</h3>
-
 				<div>
-					<h4 class="event-date">Mardi 12</h4>
 					<div class="list-events">
-						<?php 
-							$slug='tuesday_12'; // to be updated, for slug check 'wp_nsp_terms' table
-							include('partial_home_event.php')
-						?>
+
+<?php
+	$evenements = array('post_type' => 'events', 'posts_per_page' => 6, 'orderby' => 'rand');
+	$evenements_loop = new WP_Query($evenements);
+	while ( $evenements_loop->have_posts() ) {
+		$evenements_loop->the_post();
+		$fields = get_fields(get_the_ID());
+?>
+						<div class="list-events-element">
+							<h5><?= get_the_title() ?></h5>
+							<?= $fields['event_start_hour'] ?> - <?= $fields['event_place'] ?>
+						</div>
+<?php
+	}
+?>
 					</div>
 				</div>
-
-				<div>
-					<h4 class="event-date">Mercredi 13</h4>
-					<div class="list-events">
-						<?php 
-							$slug='wednesday_13'; // to be updated, for slug check 'wp_nsp_terms' table
-							include('partial_home_event.php')
-						?>
-					</div>
-				</div>
-
-				<div>
-					<h4 class="event-date">Jeudi 14</h4>
-					<div class="list-events">
-						<?php 
-							$slug='thursday_14'; // to be updated, for slug check 'wp_nsp_terms' table
-							include('partial_home_event.php')
-						?>
-					</div>
-				</div>
+					
 				<a href="<?= get_page_link(13); ?>" class="see-more">Voir tous les événements <img src="<?php echo get_stylesheet_directory_uri(); ?>/img/see-more.png"></a>
 				<?php include('partial_booking_button.php') ?>
 			</div>
