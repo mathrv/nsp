@@ -56,8 +56,8 @@ function assets_enqueue() {
   * Add JavaScript.
   * wp_enqueue_script($handle, $src, $deps, $ver, $in_footer);
   */
-  wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper.min.js', array(), '4.5.0', true);
-  wp_enqueue_script('featherlight', get_stylesheet_directory_uri() . '/assets/js/featherlight.min.js', array(), '1.7.13', true);
+  // wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper.min.js', array(), '4.5.0', true);
+  // wp_enqueue_script('featherlight', get_stylesheet_directory_uri() . '/assets/js/featherlight.min.js', array(), '1.7.13', true);
   wp_enqueue_script('nsp', get_stylesheet_directory_uri() . '/script.js', array(), '1.0', true);
   // wp_enqueue_script('asset',  get_stylesheet_directory_uri() . '/assets/js/asset.js', array(), '1.0', true);
   /*
